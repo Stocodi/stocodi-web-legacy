@@ -1,0 +1,36 @@
+@import "./variables.scss";
+
+@mixin layout {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0px auto;
+}
+
+@mixin horizontal-center {
+    display: flex;
+    justify-content: center;
+}
+
+@mixin vertical-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@mixin place-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin mobile {
+    @media screen and (max-width: $break-point-mobile) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and (max-width: $break-point-tablet) {
+        @content;
+    }
+}
