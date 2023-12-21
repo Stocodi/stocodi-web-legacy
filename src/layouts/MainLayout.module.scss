@@ -1,0 +1,6 @@
+@import "@/styles/utils.scss";
+
+.main {
+    @include layout;
+    margin-top: $nav-height;
+}
