@@ -1,0 +1,136 @@
+@import "@/styles/utils.scss";
+
+@mixin absolute-contain {
+    position: absolute;
+    object-fit: contain;
+}
+
+.landing-page__image-container {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+
+    width: 100%;
+    // 상단 스토코디 실선 로고
+    .landing-page__image-brace-stroke-top {
+        @include absolute-contain;
+        @include set-size(800px, auto);
+        top: -50px;
+        right: -150px;
+    }
+    // 하단 스토코디 실선 로고
+    .landing-page__image-brace-stroke-bottom {
+        @include absolute-contain;
+        @include set-size(1000px, auto);
+        top: 900px;
+        right: 0px;
+    }
+    // 좌측 중괄호 }
+    .landing-page__image-brace-right {
+        @include absolute-contain;
+        @include set-size(300px, 500px);
+        top: 1200px;
+        left: -50px;
+    }
+    // 우측 중괄호 {
+    .landing-page__image-brace-right-bottom {
+        @include absolute-contain;
+        @include set-size(200px, 500px);
+        top: 1600px;
+        right: 0px;
+    }
+    // 맥북 목업
+    .landing-page__image-mockup {
+        @include absolute-contain;
+        @include set-size(800px, 800px);
+        top: 800px;
+        left: -200px;
+    }
+    // 아이폰 목업
+    .landing-page__image-mockup-phone-bottom {
+        @include absolute-contain;
+        @include set-size(700px, 400px);
+        top: 1400px;
+        right: -350px;
+
+        clip-path: inset(0 0 0 350px);
+        overflow: hidden;
+        transform: scaleX(-1);
+    }
+}
+
+@include tablet {
+    .landing-page__image-container {
+        // 상단 스토코디 실선 로고
+        .landing-page__image-brace-stroke-top {
+            @include set-size(600px, auto);
+        }
+        // 하단 스토코디 실선 로고
+        .landing-page__image-brace-stroke-bottom {
+            @include absolute-contain;
+            @include set-size(600px, auto);
+            top: 900px;
+            right: 0px;
+        }
+        // 좌측 중괄호 }
+        .landing-page__image-brace-left {
+            @include set-size(300px, 800px);
+        }
+        // 좌측 중괄호 }
+        .landing-page__image-brace-right {
+            @include set-size(150px, 500px);
+        }
+        // 맥북 목업
+        .landing-page__image-mockup {
+            opacity: 0;
+        }
+        // 우측 중괄호 {
+        .landing-page__image-brace-right-bottom {
+            @include set-size(220px, 420px);
+            top: 1600px;
+            right: -50px;
+        }
+        // 아이폰 목업
+        .landing-page__image-mockup-phone-bottom {
+            @include set-size(700px, 400px);
+            top: 1400px;
+            right: -350px;
+        }
+    }
+}
+
+@include mobile {
+    .landing-page__image-container {
+        // 상단 스토코디 실선 로고
+        .landing-page__image-brace-stroke-top {
+            @include set-size(500px, auto);
+        }
+        // 하단 스토코디 실선 로고
+        .landing-page__image-brace-stroke-bottom {
+            @include absolute-contain;
+            @include set-size(400px, auto);
+            top: 900px;
+            right: 0px;
+        }
+        // 좌측 중괄호 }
+        .landing-page__image-brace-right {
+            @include set-size(150px, 400px);
+        }
+        // 맥북 목업
+        .landing-page__image-mockup {
+            opacity: 0;
+        }
+        // 우측 중괄호 {
+        .landing-page__image-brace-right-bottom {
+            @include set-size(200px, 350px);
+            top: 1600px;
+            right: -50px;
+        }
+        // 아이폰 목업
+        .landing-page__image-mockup-phone-bottom {
+            @include set-size(700px, 400px);
+            top: 1400px;
+            right: -350px;
+        }
+    }
+}
