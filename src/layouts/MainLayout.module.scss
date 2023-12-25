@@ -1,5 +1,10 @@
 @import "@/styles/utils.scss";
 
+.header {
+    width: 100vw;
+    overflow: hidden;
+}
+
 .main {
     @include layout;
     margin-top: $nav-height;

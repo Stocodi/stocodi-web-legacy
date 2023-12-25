@@ -1,0 +1,172 @@
+@import "@/styles/utils.scss";
+
+.landing-page__title {
+	display: block;
+	margin: 200px 0px 80px 0px;
+	padding: 0px 100px;
+	h3 {
+		padding: 20px 0px;
+		color: #0ecb81;
+	}
+	h1 {
+		color: #424242;
+		font-size: 2.2rem;
+	}
+	p {
+		padding: 20px 0px;
+		color: #2e2e2e;
+	}
+}
+
+.landing-page__mockup-wrapper {
+	padding: 100px;
+
+	.landing-page__mockup-container {
+		display: flex;
+		justify-content: center;
+
+		.landing-page__mockup-item {
+			display: block;
+			width: 50%;
+			img {
+				display: block;
+
+				max-height: 1000px;
+				margin: 0px auto;
+
+				object-fit: contain;
+			}
+			p {
+				display: block;
+				width: 80%;
+				margin: 0px auto;
+				padding: 40px 0px;
+
+				font-size: 1.2rem;
+
+				color: #2e2e2e;
+			}
+			&:last-child {
+				position: relative;
+				top: -100px;
+			}
+		}
+
+		.landing-page__mockup-portfolio {
+			position: relative;
+			width: 60%;
+
+			img {
+				display: block;
+
+				max-height: 1000px;
+				margin: 0px auto;
+
+				object-fit: contain;
+			}
+		}
+	}
+}
+
+.landing-page__service-wrapper {
+	width: 100%;
+
+	.landing-page__service-container {
+		display: flex;
+		width: 80%;
+
+		margin: 50px auto;
+
+		.landing-page__service-item {
+			display: block;
+			width: 50%;
+			margin: 0px auto;
+			padding: 20px 40px;
+			h4 {
+				color: #0ecb81;
+			}
+			h2 {
+				font-size: 1.8rem;
+				color: #2e2e2e;
+			}
+			p {
+				padding: 20px 0px;
+				color: #949494;
+			}
+			img {
+				box-sizing: border-box;
+				display: block;
+				width: 100%;
+				max-width: 500px;
+				margin: 0px auto;
+				object-fit: contain;
+				object-position: center center;
+			}
+
+			.landing-page__service-text {
+				width: 400px;
+				margin: 0px auto;
+				padding: 40px 0px;
+			}
+		}
+	}
+}
+
+@include tablet {
+	.landing-page__mockup-wrapper {
+		padding: 50px;
+		.landing-page__mockup-container {
+			.landing-page__mockup-item {
+				img {
+					max-height: 600px;
+				}
+			}
+
+			&:last-child {
+				justify-content: center;
+			}
+
+			.landing-page__mockup-portfolio {
+				left: -100px;
+				img {
+					max-height: 600px;
+				}
+			}
+		}
+	}
+	.landing-page__service-wrapper {
+		width: 100%;
+
+		.landing-page__service-container {
+			display: flex;
+			width: 80%;
+
+			margin: 30px auto;
+
+			.landing-page__service-item {
+				padding: 10px 20px;
+				h4 {
+					font-size: 1rem;
+				}
+				h2 {
+					font-size: 1.2rem;
+				}
+				p {
+					font-size: 0.8rem;
+					padding: 10px 0px;
+				}
+				img {
+					max-width: 350px;
+					object-fit: contain;
+					object-position: center center;
+				}
+
+				.landing-page__service-text {
+					width: 100%;
+					margin: 0px auto;
+					padding: 40px 0px;
+				}
+			}
+		}
+	}
+}

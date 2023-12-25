@@ -7,8 +7,11 @@ import styles from "./MainLayout.module.scss";
 export const MainLayout: React.FC = () => {
     return (
         <>
-            <NavTop />
-            <NavAside />
+            <header className={styles.header}>
+                <NavTop />
+                <NavAside />
+            </header>
+
             <main className={styles.main}>
                 <Outlet />
             </main>

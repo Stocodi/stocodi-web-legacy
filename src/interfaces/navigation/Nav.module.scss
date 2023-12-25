@@ -19,9 +19,9 @@
     display: flex;
     gap: 50px;
 
+    width: 90%;
     height: 100%;
     margin: 0px auto;
-    padding: 0px 40px;
 }
 
 .nav_head {
@@ -48,12 +48,16 @@
 }
 
 @include mobile {
+    .nav_head {
+        img {
+            height: 40px;
+        }
+    }
     .nav_item {
         display: none;
     }
     .nav_toggle_btn {
-        display: flex;
-        align-items: center;
+        @include place-center;
     }
 }
 
@@ -62,7 +66,6 @@
         display: none;
     }
     .nav_toggle_btn {
-        display: flex;
-        align-items: center;
+        @include place-center;
     }
 }

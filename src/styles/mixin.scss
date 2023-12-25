@@ -1,5 +1,14 @@
 @import "./variables.scss";
 
+@mixin debug {
+    border: 3px solid red;
+}
+
+@mixin set-size($width, $height) {
+    width: $width;
+    height: $height;
+}
+
 @mixin layout {
     width: 100%;
     max-width: 1440px;
