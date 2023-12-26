@@ -38,6 +38,8 @@ export const NavTop: React.FC = () => {
                     );
                 })}
 
+                {<NavItem to="/auth/signin">로그인/회원가입</NavItem>}
+
                 <li className={styles.nav_toggle_btn} onClick={onNavToggle}>
                     <FontAwesomeIcon icon={faBars} />
                 </li>
