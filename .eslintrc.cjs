@@ -21,6 +21,7 @@ module.exports = {
     ignorePatterns: [".eslintrc.cjs", "vite.config.ts"],
     rules: {
         "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
+        "@typescript-eslint/no-explicit-any": "warn",
         "@typescript-eslint/no-non-null-assertion": "off",
     },
 };
