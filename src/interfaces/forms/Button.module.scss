@@ -1,0 +1,16 @@
+@import "@/styles/utils.scss";
+
+.btn_default {
+    display: block;
+
+    border-radius: 10px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.btn_primary_filled {
+    color: #fff;
+    background-color: $color-primary;
+}
