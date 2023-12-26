@@ -11,7 +11,7 @@ import { NavMenu } from "../../constants/NavMenu";
 import { NavLinkStyle } from "../../utils/NavLinkStyle";
 
 import styles from "./Nav.module.scss";
-import { UserInterfaceActions } from "../../store/UserInterfaceSlice";
+import { UserInterfaceActions } from "../../store/user-interface-slice";
 
 export interface INavItem {
     to: string;

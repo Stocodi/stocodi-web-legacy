@@ -1,16 +1,15 @@
 // 랜딩페이지
-import { useObserver } from "../hooks/useObserver";
+import { useObserver } from "../../hooks/useObserver";
 
 import "./HomePage.scss";
 // import "./HomePage.tablet.scss";
 // import "./HomePage.mobile.scss";
 
-import BackgroundSection from "../components/home-page/BackgroundSection";
-
-import HeadingSection from "../components/home-page/HeadingSection";
-import { FeatureExperiment, FeaturePortfolio, FeaturePractice, FeatureLecture } from "../components/home-page/FeatureSection";
-import ContentSection from "../components/home-page/ContentSection";
-import FooterSection from "../components/home-page/FooterSection";
+import BackgroundSection from "../../components/home-page/BackgroundSection";
+import HeadingSection from "../../components/home-page/HeadingSection";
+import ContentSection from "../../components/home-page/ContentSection";
+import FooterSection from "../../components/home-page/FooterSection";
+import { FeatureExperiment, FeaturePortfolio, FeaturePractice, FeatureLecture } from "../../components/home-page/FeatureSection";
 
 export default function HomePage() {
     // 스크롤 애니메이션
