@@ -1,13 +1,17 @@
 {
+    // "eslint.alwaysShowStatus": true,
+    // "eslint.console": "integratedTerminal",
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },
+    "eslint.validate": ["javascript"],
     "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "workbench.settings.useSplitJSON": true
+    "workbench.settings.useSplitJSON": true,
+    "eslint.run": "onSave"
 }
