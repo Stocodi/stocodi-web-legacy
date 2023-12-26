@@ -11,7 +11,12 @@ export interface IContentSection {
 }
 
 export default function ContentSection({ title, subtitle1, subtitle2, description, imgSrc }: IContentSection) {
-    useObserver(".landing-page__content:nth-child(0)", 0, { before: "animate-fromleft-before", after: "animate-fromleft-after" }, { duration: "1s", delay: "0s" });
+    useObserver(
+        ".landing-page__content:nth-child(0)",
+        0,
+        { before: "animate-fromleft-before", after: "animate-fromleft-after" },
+        { duration: "1s", delay: "0s" },
+    );
 
     return (
         <div className="landing-page__content-wrapper">

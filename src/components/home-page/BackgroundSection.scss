@@ -94,7 +94,6 @@
         .landing-page__image-mockup-phone-bottom {
             @include set-size(700px, 400px);
             top: 1400px;
-            right: -350px;
         }
     }
 }
@@ -109,12 +108,13 @@
         .landing-page__image-brace-stroke-bottom {
             @include absolute-contain;
             @include set-size(400px, auto);
-            top: 900px;
+            top: 600px;
             right: 0px;
         }
         // 좌측 중괄호 }
         .landing-page__image-brace-right {
             @include set-size(150px, 400px);
+            top: 800px;
         }
         // 맥북 목업
         .landing-page__image-mockup {
@@ -123,14 +123,13 @@
         // 우측 중괄호 {
         .landing-page__image-brace-right-bottom {
             @include set-size(200px, 350px);
-            top: 1600px;
+            top: 1200px;
             right: -50px;
         }
         // 아이폰 목업
         .landing-page__image-mockup-phone-bottom {
             @include set-size(700px, 400px);
-            top: 1400px;
-            right: -350px;
+            top: 1000px;
         }
     }
 }

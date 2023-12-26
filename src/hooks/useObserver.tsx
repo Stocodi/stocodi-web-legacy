@@ -1,11 +1,18 @@
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useMemo } from "react";
 
-export const useObserver = (selector: string, threshold: number, className: { before: string; after: string }, transition: { duration: string; delay: string }) => {
-    const thresholds: number[] = [];
+export const useObserver = (
+    selector: string,
+    threshold: number,
+    className: { before: string; after: string },
+    transition: { duration: string; delay: string },
+) => {
+    const thresholds: number[] = useMemo(() => {
+        return [];
+    }, []);
     for (let t = 0; t <= 1.0; t += 0.01) thresholds.push(t);
 
     useLayoutEffect(() => {
-        const elements = document.querySelectorAll(selector);
+        const elements = document.querySelectorAll<HTMLElement>(selector);
 
         const observers: IntersectionObserver[] = [];
         const observerOptions = {
@@ -56,5 +63,5 @@ export const useObserver = (selector: string, threshold: number, className: { be
                 observers[idx].unobserve(elements[idx]);
             }
         };
-    }, [selector, threshold, className]);
+    }, [selector, threshold, thresholds, className, transition]);
 };
