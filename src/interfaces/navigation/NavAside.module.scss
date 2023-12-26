@@ -1,10 +1,28 @@
 @import "@/styles/utils.scss";
 
+.nav_aside {
+    position: fixed;
+    inset: 0;
+    z-index: $nav-aside-z-idx;
+}
+
+.nav_aside_background {
+    position: absolute;
+    inset: 0;
+
+    width: 100vw;
+    height: 100vw;
+
+    background-color: rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(2px);
+}
+
 .nav_aside_wrapper {
+    position: absolute;
+    inset: 0;
+
     display: none;
 
-    position: fixed;
-    top: 0;
     z-index: $nav-aside-z-idx;
 
     width: 100vw;

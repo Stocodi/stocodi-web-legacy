@@ -1,0 +1,207 @@
+@import "@/styles/utils.scss";
+
+.landing-page__feature-title-wrapper {
+    width: 100%;
+    margin: 400px auto;
+
+    .landing-page__feature-title-container {
+        width: 100%;
+
+        display: flex;
+        padding: 0px 80px;
+        .landing-page__feature-title {
+            width: 50%;
+            color: #424242;
+        }
+        .landing-page__feature-subtitle {
+            width: 30%;
+            margin: 0px auto;
+            color: #949494;
+        }
+    }
+}
+
+.landing-page__feature-icon-container {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-evenly;
+
+    .landing-page__feature-icon-item {
+        width: 30%;
+        max-width: 300px;
+
+        text-align: center;
+        img {
+            display: block;
+            width: 100%;
+            max-width: 250px;
+            margin: 0px auto;
+        }
+        h1 {
+            padding: 10px 0px;
+            color: #00a968;
+        }
+        p {
+            color: #424242;
+        }
+        &:nth-child(1) {
+            transform: translateY(0px);
+        }
+        &:nth-child(2) {
+            transform: translateY(100px);
+        }
+        &:nth-child(3) {
+            transform: translateY(250px);
+        }
+    }
+}
+
+.landing-page__feature-group {
+    display: block;
+    margin: 0px auto;
+
+    width: 75%;
+    max-width: 1200px;
+}
+
+.landing-page__footer {
+    display: block;
+
+    margin: 100px 0px;
+
+    img {
+        display: block;
+        margin: 0px auto;
+    }
+    p {
+        padding: 80px 0px;
+
+        font-size: 1.2rem;
+        color: #a3a3a3;
+        text-align: center;
+    }
+}
+
+@include tablet {
+    .landing-page__feature-icon-container {
+        width: 100%;
+
+        display: flex;
+        justify-content: space-evenly;
+
+        .landing-page__feature-icon-item {
+            width: 30%;
+            max-width: 300px;
+
+            text-align: center;
+            img {
+                max-width: 180px;
+            }
+            h1 {
+                font-size: 1.4rem;
+            }
+            p {
+                font-size: 0.9rem;
+            }
+        }
+    }
+    .landing-page__feature-group {
+        position: relative;
+        top: 100px;
+
+        display: block;
+        margin: 0px auto;
+
+        width: 75%;
+        max-width: 1000px;
+    }
+
+    .landing-page__footer {
+        display: block;
+
+        margin: 100px 0px;
+
+        img {
+            display: block;
+            width: 500px;
+            margin: 0px auto;
+        }
+        p {
+            padding: 80px 0px;
+
+            font-size: 1.2rem;
+            color: #a3a3a3;
+            text-align: center;
+        }
+    }
+}
+
+@include mobile {
+    .landing-page__feature-title-wrapper {
+        .landing-page__feature-title-container {
+            flex-direction: column;
+            padding: 30px;
+            .landing-page__feature-title {
+                width: 100%;
+                color: #424242;
+            }
+            .landing-page__feature-subtitle {
+                width: 100%;
+                margin: 20px auto;
+                color: #949494;
+            }
+        }
+    }
+
+    .landing-page__feature-icon-container {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+        align-items: center;
+
+        .landing-page__feature-icon-item {
+            width: 60%;
+            max-width: 300px;
+
+            text-align: center;
+            img {
+                max-width: 200px;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+        }
+    }
+    .landing-page__feature-group {
+        position: relative;
+        top: 100px;
+
+        opacity: 0;
+        margin: 0px auto;
+
+        width: 75%;
+        max-width: 1000px;
+    }
+
+    .landing-page__footer {
+        display: block;
+
+        margin: 100px 0px;
+
+        img {
+            display: block;
+            width: 250px;
+            margin: 0px auto;
+        }
+        p {
+            padding: 20px 0px;
+            font-size: 1rem;
+        }
+    }
+}

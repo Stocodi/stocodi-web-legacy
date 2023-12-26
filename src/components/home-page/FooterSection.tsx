@@ -1,3 +1,5 @@
+import "./FooterSection.scss";
+
 export default function FooterSection() {
     return (
         <>

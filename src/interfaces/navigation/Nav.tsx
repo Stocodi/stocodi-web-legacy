@@ -23,7 +23,7 @@ export const NavTop: React.FC = () => {
 
     const onNavToggle = useCallback(() => {
         dispatch(UserInterfaceActions.toggleNav());
-    }, []);
+    }, [dispatch]);
 
     return (
         <nav className={styles.nav_wrapper}>
