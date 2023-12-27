@@ -8,4 +8,6 @@
 .main {
     @include layout;
     margin-top: $nav-height;
+    position: relative;
+    z-index: 0;
 }

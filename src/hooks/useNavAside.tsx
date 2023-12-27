@@ -22,7 +22,7 @@ export const useNavAside: UseNavAside = (asideRef, asideBgRef, navRef) => {
             if (!isNavOpen) {
                 asideBgRef.current.style.display = `none`;
                 asideRef.current.style.transform = `translateX(300px)`;
-                timeout = setTimeout(() => navRef.current && (navRef.current.style.zIndex = `0`), 500);
+                timeout = setTimeout(() => navRef.current && (navRef.current.style.zIndex = `-1`), 500);
             }
         }
         return () => {
