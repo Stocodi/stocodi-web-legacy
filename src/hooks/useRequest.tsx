@@ -13,9 +13,9 @@ export enum STATUS {
  * @param token Access Token
  * @returns {status, data, error}
  */
-export const useGetRequest = <Data,>(url: string, token?: string) => {
+export const useGetRequest = <ResponseData,>(url: string, token?: string) => {
     const [status, setStatus] = useState<STATUS>(STATUS.IDLE);
-    const [data, setData] = useState<Data | null>(null);
+    const [data, setData] = useState<ResponseData | null>(null);
     const [error, setError] = useState<string | unknown>(null);
 
     const request = useCallback(async () => {
@@ -28,7 +28,7 @@ export const useGetRequest = <Data,>(url: string, token?: string) => {
             });
             if (!response.ok) throw new Error(response.statusText);
             setStatus(STATUS.SUCCESS);
-            setData(response.json() as Data);
+            setData(response.json() as ResponseData);
         } catch (err) {
             setStatus(STATUS.ERROR);
             setData(null);
@@ -50,9 +50,9 @@ export const useGetRequest = <Data,>(url: string, token?: string) => {
  * @param token Access Token
  * @returns {status, data, error}
  */
-export const usePostRequest = <Data, Body>(url: string, body: Body, token?: string) => {
+export const usePostRequest = <ResponseData, RequestBody>(url: string, body: RequestBody, token?: string) => {
     const [status, setStatus] = useState<STATUS>(STATUS.IDLE);
-    const [data, setData] = useState<Data | null>(null);
+    const [data, setData] = useState<ResponseData | null>(null);
     const [error, setError] = useState<string | unknown>(null);
 
     const request = useCallback(async () => {
@@ -64,11 +64,11 @@ export const usePostRequest = <Data, Body>(url: string, body: Body, token?: stri
             const response = await fetch(API_BASE_URL + url, {
                 method: "POST",
                 headers: headers,
-                body: body as BodyInit,
+                body: JSON.stringify(body),
             });
             if (!response.ok) throw new Error(response.statusText);
             setStatus(STATUS.SUCCESS);
-            setData(response.json() as Data);
+            setData(response.json() as ResponseData);
         } catch (err) {
             setStatus(STATUS.ERROR);
             setData(null);
