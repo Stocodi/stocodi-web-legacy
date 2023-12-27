@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { API_BASE_URL } from "../constants/API";
+import { API_BASE_URL } from "../constants/env";
 
 export enum STATUS {
     IDLE,

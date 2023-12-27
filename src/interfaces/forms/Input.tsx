@@ -5,7 +5,7 @@ export interface IInput {
     type?: string;
     width?: string;
     height?: string;
-    rest?: any;
+    rest?: unknown;
 }
 
 export interface IInputContainer extends IInput {

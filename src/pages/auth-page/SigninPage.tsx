@@ -8,7 +8,7 @@ import styles from "./SigninPage.module.scss";
 import { Button } from "../../interfaces/forms/Button";
 import { InputContainer } from "../../interfaces/forms/Input";
 
-import { handleLogin } from "../../utils/AuthToken";
+import { handleLogin } from "../../utils/Authentication";
 
 // import { SocialLoginProviders } from "../../constants/SocialLogin";
 
@@ -18,6 +18,7 @@ export default function SigninPage() {
     const pwRef = useRef<HTMLInputElement>(null);
 
     const onLoginBtnClick = async () => {
+        // 로그인 요청 & 쿠키 저장
         try {
             await handleLogin(idRef.current?.value as string, pwRef.current?.value as string);
             naviagte("/");
