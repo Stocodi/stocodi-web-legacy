@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 
 import { MainLayout } from "./layouts/MainLayout";
+import { AuthLayout } from "./layouts/AuthLayout";
 
 import HomePage from "./pages/home-page/HomePage";
 import SigninPage from "./pages/auth-page/SigninPage";
@@ -20,8 +21,10 @@ export default function App() {
                     <Route path="*" element={<PageNotFound />} />
                 </Route>
 
-                <Route path="/auth/signin" element={<SigninPage />} />
-                <Route path="/auth/signup" element={<SignupPage />} />
+                <Route path="/auth" element={<AuthLayout />}>
+                    <Route path="signin" element={<SigninPage />} />
+                    <Route path="signup" element={<SignupPage />} />
+                </Route>
             </Routes>
         </Provider>
     );
