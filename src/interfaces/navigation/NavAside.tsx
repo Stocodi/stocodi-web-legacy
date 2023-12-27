@@ -6,8 +6,10 @@ import { NavLinkStyle } from "../../utils/NavLinkStyle";
 
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import { useNavAside } from "../../hooks/useNavAside";
 
 import styles from "./NavAside.module.scss";
+import { GetAccessToken, GetNickName } from "../../utils/Authentication";
 
 export interface INavAsideItem {
     to: string;
@@ -15,30 +17,11 @@ export interface INavAsideItem {
 }
 
 export const NavAside = () => {
-    const { isNavOpen } = useSelector((state: RootState) => state.UserInterface);
-
     const navRef = useRef<HTMLDivElement>(null);
     const asideRef = useRef<HTMLDivElement>(null);
     const asideBgRef = useRef<HTMLDivElement>(null);
 
-    useLayoutEffect(() => {
-        let timeout: ReturnType<typeof setTimeout> | null = null;
-        if (asideRef.current && asideBgRef.current && navRef.current) {
-            if (isNavOpen) {
-                navRef.current.style.zIndex = `1`;
-                asideBgRef.current.style.display = `block`;
-                asideRef.current.style.transform = `translateX(0px)`;
-            }
-            if (!isNavOpen) {
-                asideBgRef.current.style.display = `none`;
-                asideRef.current.style.transform = `translateX(300px)`;
-                timeout = setTimeout(() => navRef.current && (navRef.current.style.zIndex = `0`), 500);
-            }
-        }
-        return () => {
-            if (timeout != null) clearTimeout(timeout);
-        };
-    }, [isNavOpen]);
+    useNavAside(asideRef, asideBgRef, navRef);
 
     return (
         <div ref={navRef} className={styles.nav_aside}>
@@ -53,7 +36,17 @@ export const NavAside = () => {
                         );
                     })}
 
-                    <NavAsideItem to="/auth/signin">로그인/회원가입</NavAsideItem>
+                    {!GetAccessToken() ? (
+                        <NavAsideItem to="/auth/signin">로그인/회원가입</NavAsideItem>
+                    ) : (
+                        <div className={styles.nav_aside_user_items}>
+                            <div>{GetNickName()} 님</div>
+                            <div>내 정보 변경</div>
+                            <div>FAQ</div>
+                            <div>내 정보 변경</div>
+                            <div>로그아웃</div>
+                        </div>
+                    )}
                 </aside>
             </div>
         </div>
