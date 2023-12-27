@@ -1,8 +1,8 @@
 import styles from "./Title.module.scss";
 
 export interface ITitle {
-    title: string;
-    subtitle: string;
+    title?: string;
+    subtitle?: string;
 }
 
 export const Title: React.FC<ITitle> = ({ title, subtitle }) => {

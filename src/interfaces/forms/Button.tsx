@@ -2,7 +2,7 @@ import { MouseEventHandler } from "react";
 import styles from "./Button.module.scss";
 
 export interface IButton {
-    type: "primary-filled" | "primary-stoke";
+    type: "primary-filled" | "primary-stroke";
     width?: string;
     height?: string;
     children?: React.ReactNode;
@@ -14,6 +14,18 @@ export const Button: React.FC<IButton> = ({ type, width, height, children, onCli
         return (
             <button
                 className={`${styles.btn_default} ${styles.btn_primary_filled}`}
+                style={{ width: width, height: height }}
+                onClick={onClick}
+                {...rest}
+            >
+                {children}
+            </button>
+        );
+    }
+    if (type === "primary-stroke") {
+        return (
+            <button
+                className={`${styles.btn_default} ${styles.btn_primary_stroke}`}
                 style={{ width: width, height: height }}
                 onClick={onClick}
                 {...rest}

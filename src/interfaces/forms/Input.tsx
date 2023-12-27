@@ -6,6 +6,7 @@ export interface IInput {
     width?: string;
     height?: string;
     rest?: unknown;
+    placeholder?: string;
 }
 
 export interface IInputContainer extends IInput {
