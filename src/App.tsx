@@ -9,6 +9,12 @@ import { AuthLayout } from "./layouts/AuthLayout";
 import HomePage from "./pages/home-page/HomePage";
 import SigninPage from "./pages/auth-page/SigninPage";
 import SignupPage from "./pages/auth-page/SignupPage";
+
+import LecturePage from "./pages/lecture-page/LecturePage";
+import LectureSearchResultPage from "./pages/lecture-page/LectureSearchResultPage";
+import LectureViewPage from "./pages/lecture-page/LectureViewPage";
+import LectureUploadPage from "./pages/lecture-page/LectureUploadPage";
+
 import PageNotFound from "./pages/PageNotFound";
 
 export default function App() {
@@ -17,6 +23,11 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<MainLayout />}>
                     <Route path="/" element={<HomePage />} />
+
+                    <Route path="lectures" element={<LecturePage />} />
+                    <Route path="lectures/search" element={<LectureSearchResultPage />} />
+                    <Route path="lectures/view" element={<LectureViewPage />} />
+                    <Route path="lectures/upload" element={<LectureUploadPage />} />
 
                     <Route path="*" element={<PageNotFound />} />
                 </Route>
