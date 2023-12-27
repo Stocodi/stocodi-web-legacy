@@ -5,15 +5,15 @@ export interface ISocialLoginProvider {
 
 export const SocialLoginProviders: ISocialLoginProvider[] = [
     {
-        icon: "./icons/icon-google.png",
+        icon: "./icons/social/icon-google.png",
         text: "구글 계정으로 시작",
     },
     {
-        icon: "./icons/icon-naver.png",
+        icon: "./icons/social/icon-naver.png",
         text: "네이버 계정으로 시작",
     },
     {
-        icon: "./icons/icon-kakao.png",
+        icon: "./icons/social/icon-kakao.png",
         text: "카카오 계정으로 시작",
     },
 ];
