@@ -8,7 +8,7 @@ import { Button } from "../../interfaces/forms/Button";
 import { InputContainer } from "../../interfaces/forms/Input";
 import { Title } from "../../components/auth-page/Title";
 
-import { handleLogin } from "../../utils/Authentication";
+import { handleLogin } from "../../api/Authentication";
 
 // import { SocialLoginProviders } from "../../constants/SocialLogin";
 

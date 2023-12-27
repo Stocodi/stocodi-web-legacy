@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
-import { GetNickName, handleLogout } from "../../utils/Authentication";
+import { GetNickName, handleLogout } from "../../api/Authentication";
 import styles from "./NavDropDown.module.scss";
 
 export const NavDropDown: React.FC = () => {

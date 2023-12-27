@@ -13,7 +13,7 @@ import { useRef } from "react";
 import { Dispatch } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { UserSignupActions } from "../../store/user-signup-slice";
-import { handleSignup } from "../../utils/Authentication";
+import { handleSignup } from "../../api/Authentication";
 import { RootState } from "../../store/store";
 
 const SignupPage = {

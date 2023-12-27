@@ -7,8 +7,8 @@ import { NavLinkStyle } from "../../utils/NavLinkStyle";
 import { useNavAside } from "../../hooks/useNavAside";
 
 import styles from "./NavAside.module.scss";
-import { GetAccessToken, GetNickName } from "../../utils/Authentication";
-import { handleLogout } from "../../utils/Authentication";
+import { GetAccessToken, GetNickName } from "../../api/Authentication";
+import { handleLogout } from "../../api/Authentication";
 
 export interface INavAsideItem {
     to: string;

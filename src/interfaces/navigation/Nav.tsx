@@ -11,7 +11,7 @@ import { UserInterfaceActions } from "../../store/user-interface-slice";
 import { NavDropDown } from "../../components/auth-page/NavDropDown";
 import { NavMenu } from "../../constants/NavMenu";
 import { NavLinkStyle } from "../../utils/NavLinkStyle";
-import { GetAccessToken } from "../../utils/Authentication";
+import { GetAccessToken } from "../../api/Authentication";
 
 import styles from "./Nav.module.scss";
 

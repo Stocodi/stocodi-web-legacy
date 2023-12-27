@@ -1,4 +1,4 @@
-import { API_BASE_URL, COOKIE_ACCESS, COOKIE_NICKNAME, COOKIE_REFRESH } from "../constants/env";
+import { API_BASE_URL, COOKIE_ACCESS, COOKIE_NICKNAME, COOKIE_REFRESH } from "./env";
 import { Cookies } from "react-cookie";
 import { IUserSignup } from "../store/user-signup-slice";
 
