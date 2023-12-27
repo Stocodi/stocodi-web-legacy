@@ -1,13 +1,18 @@
 import { API_BASE_URL, COOKIE_ACCESS, COOKIE_NICKNAME, COOKIE_REFRESH } from "../constants/env";
 import { Cookies } from "react-cookie";
+import { IUserSignup } from "../store/user-signup-slice";
 
-export interface ILoginResponse {
+export interface ILoginResponseBody {
     response: {
         member_id: number;
         member_nickname: string;
         access_token: string;
         refresh_token: string;
     };
+}
+
+export interface ISignupRequestBody extends Omit<IUserSignup, "interest_categories"> {
+    interest_categories: string[];
 }
 
 export const cookies = new Cookies();
@@ -60,7 +65,7 @@ export async function handleLogin(email: string, password: string) {
             }),
         });
         if (!response.ok) throw new Error("아이디 혹은 비밀번호가 일치하지 않습니다");
-        const data = (await response.json()) as ILoginResponse;
+        const data = (await response.json()) as ILoginResponseBody;
 
         cookies.set(COOKIE_NICKNAME, data.response.member_nickname, cookieOptions);
         cookies.set(COOKIE_ACCESS, data.response.access_token, cookieOptions);
@@ -82,6 +87,20 @@ export async function handleLogout() {
         cookies.remove(COOKIE_NICKNAME, cookieOptions);
         cookies.remove(COOKIE_ACCESS, cookieOptions);
         cookies.remove(COOKIE_REFRESH, cookieOptions);
+    };
+    await request();
+}
+
+export async function handleSignup(body: ISignupRequestBody) {
+    const request = async () => {
+        const response = await fetch(API_BASE_URL + "/auth/members", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+        });
+        if (!response.ok) throw new Error("회원가입에 실패하였습니다");
     };
     await request();
 }
