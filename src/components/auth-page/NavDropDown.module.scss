@@ -48,3 +48,15 @@
         cursor: pointer;
     }
 }
+
+@include tablet {
+    .nav_dropdown_wrapper {
+        display: none;
+    }
+}
+
+@include mobile {
+    .nav_dropdown_wrapper {
+        display: none;
+    }
+}

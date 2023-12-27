@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 import { UserInterfaceActions } from "../../store/user-interface-slice";
 
-import { NavDropDown } from "./NavDropDown";
+import { NavDropDown } from "../../components/auth-page/NavDropDown";
 import { NavMenu } from "../../constants/NavMenu";
 import { NavLinkStyle } from "../../utils/NavLinkStyle";
 import { GetAccessToken } from "../../utils/Authentication";

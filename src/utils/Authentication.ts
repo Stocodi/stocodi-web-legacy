@@ -72,7 +72,7 @@ export async function handleLogin(email: string, password: string) {
 /**
  * 로그아웃 요청 후 쿠키 삭제
  */
-export async function hanldeLogout() {
+export async function handleLogout() {
     const request = async () => {
         const response = await fetch(API_BASE_URL + "/auth/logout", {
             method: "GET",

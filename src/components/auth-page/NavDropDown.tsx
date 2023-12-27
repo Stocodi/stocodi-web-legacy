@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
-import { GetNickName, hanldeLogout } from "../../utils/Authentication";
+import { GetNickName, handleLogout } from "../../utils/Authentication";
 import styles from "./NavDropDown.module.scss";
 
 export const NavDropDown: React.FC = () => {
@@ -14,7 +14,7 @@ export const NavDropDown: React.FC = () => {
 
     const onLogout = async () => {
         try {
-            await hanldeLogout();
+            await handleLogout();
             alert("로그아웃 되었습니다");
             window.location.href = "/";
         } catch (err) {

@@ -1,15 +1,14 @@
-import { useLayoutEffect, useRef } from "react";
+import { useRef } from "react";
 
 import { NavMenu } from "../../constants/NavMenu";
 import { NavLink } from "react-router-dom";
 import { NavLinkStyle } from "../../utils/NavLinkStyle";
 
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
 import { useNavAside } from "../../hooks/useNavAside";
 
 import styles from "./NavAside.module.scss";
 import { GetAccessToken, GetNickName } from "../../utils/Authentication";
+import { handleLogout } from "../../utils/Authentication";
 
 export interface INavAsideItem {
     to: string;
@@ -22,6 +21,16 @@ export const NavAside = () => {
     const asideBgRef = useRef<HTMLDivElement>(null);
 
     useNavAside(asideRef, asideBgRef, navRef);
+
+    const onLogout = async () => {
+        try {
+            await handleLogout();
+            alert("로그아웃 되었습니다");
+            window.location.href = "/";
+        } catch (err) {
+            alert("로그아웃에 실패하였습니다. 시스템 관리자에게 문의주세요");
+        }
+    };
 
     return (
         <div ref={navRef} className={styles.nav_aside}>
@@ -44,7 +53,7 @@ export const NavAside = () => {
                             <div>내 정보 변경</div>
                             <div>FAQ</div>
                             <div>내 정보 변경</div>
-                            <div>로그아웃</div>
+                            <div onClick={onLogout}>로그아웃</div>
                         </div>
                     )}
                 </aside>
