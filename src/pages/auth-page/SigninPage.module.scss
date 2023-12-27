@@ -1,0 +1,38 @@
+@import "@/styles/utils.scss";
+
+.signin_container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: min(100%, 700px);
+}
+
+.signin_seperator {
+    display: flex;
+    width: min(100%, 700px);
+    height: 20px;
+    span {
+        display: block;
+        width: 100px;
+        color: #767676;
+        text-align: center;
+    }
+    div {
+        position: relative;
+        top: -10px;
+        width: 100%;
+        border-bottom: 1px solid #bdbdbd;
+    }
+}
+
+.signup_link {
+    text-align: center;
+    a {
+        margin: 0px 10px;
+        color: $color-primary;
+        font-weight: bold;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

@@ -1,13 +1,14 @@
-import { useLayoutEffect, useRef } from "react";
+import { useRef } from "react";
 
 import { NavMenu } from "../../constants/NavMenu";
 import { NavLink } from "react-router-dom";
 import { NavLinkStyle } from "../../utils/NavLinkStyle";
 
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import { useNavAside } from "../../hooks/useNavAside";
 
 import styles from "./NavAside.module.scss";
+import { GetAccessToken, GetNickName } from "../../utils/Authentication";
+import { handleLogout } from "../../utils/Authentication";
 
 export interface INavAsideItem {
     to: string;
@@ -15,26 +16,24 @@ export interface INavAsideItem {
 }
 
 export const NavAside = () => {
-    const { isNavOpen } = useSelector((state: RootState) => state.UserInterface);
-
+    const navRef = useRef<HTMLDivElement>(null);
     const asideRef = useRef<HTMLDivElement>(null);
     const asideBgRef = useRef<HTMLDivElement>(null);
 
-    useLayoutEffect(() => {
-        if (asideRef.current && asideBgRef.current) {
-            if (isNavOpen) {
-                asideBgRef.current.style.display = `block`;
-                asideRef.current.style.transform = `translateX(0px)`;
-            }
-            if (!isNavOpen) {
-                asideBgRef.current.style.display = `none`;
-                asideRef.current.style.transform = `translateX(300px)`;
-            }
+    useNavAside(asideRef, asideBgRef, navRef);
+
+    const onLogout = async () => {
+        try {
+            await handleLogout();
+            alert("로그아웃 되었습니다");
+            window.location.href = "/";
+        } catch (err) {
+            alert("로그아웃에 실패하였습니다. 시스템 관리자에게 문의주세요");
         }
-    }, [isNavOpen]);
+    };
 
     return (
-        <div className={styles.nav_aside}>
+        <div ref={navRef} className={styles.nav_aside}>
             <div ref={asideBgRef} className={styles.nav_aside_background}></div>
             <div ref={asideRef} className={styles.nav_aside_wrapper}>
                 <aside className={styles.nav_aside_container}>
@@ -45,6 +44,18 @@ export const NavAside = () => {
                             </NavAsideItem>
                         );
                     })}
+
+                    {!GetAccessToken() ? (
+                        <NavAsideItem to="/auth/signin">로그인/회원가입</NavAsideItem>
+                    ) : (
+                        <div className={styles.nav_aside_user_items}>
+                            <div>{GetNickName()} 님</div>
+                            <div>내 정보 변경</div>
+                            <div>FAQ</div>
+                            <div>내 정보 변경</div>
+                            <div onClick={onLogout}>로그아웃</div>
+                        </div>
+                    )}
                 </aside>
             </div>
         </div>
