@@ -52,6 +52,8 @@ export const NavAside = () => {
                             </NavAsideItem>
                         );
                     })}
+
+                    <NavAsideItem to="/auth/signin">로그인/회원가입</NavAsideItem>
                 </aside>
             </div>
         </div>
