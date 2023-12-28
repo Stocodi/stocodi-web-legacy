@@ -41,6 +41,13 @@ export default function LectureViewPage() {
                     <YouTube
                         className={styles.video_player_container}
                         iframeClassName={styles.video_player}
+                        opts={{
+                            playerVars: {
+                                autoplay: 1, //자동 재생 여부
+                                modestbranding: 0, //컨트롤 바에 유튜브 로고 표시 여부
+                                loop: 0, //반복 재생
+                            },
+                        }}
                         videoId={ParseVideoId(data?.response.video_link as string)}
                     ></YouTube>
 
