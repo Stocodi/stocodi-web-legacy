@@ -52,7 +52,7 @@ export default function LectureUploadPage() {
         // 필드값 비어있는 경우 예외처리
         if (!(titleRef.current?.value && videolinkRef.current?.value)) {
             alert("제목을 입력해주세요!");
-        } else if (videolinkRef.current.value.startsWith("https://www.youtube.com/watch?v=")) {
+        } else if (!videolinkRef.current.value.startsWith("https://www.youtube.com/watch?v=")) {
             alert("잘못된 유튜브 링크 형식입니다");
         } else {
             try {

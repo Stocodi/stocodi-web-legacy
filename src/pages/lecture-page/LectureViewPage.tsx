@@ -32,19 +32,17 @@ export default function LectureViewPage() {
         }
     }, [status, data?.response.id]);
 
+    if (status !== STATUS.SUCCESS) return <Loader></Loader>;
+
     return (
         <>
             <div className={styles.player_wrapper}>
                 <div className={styles.player_section}>
-                    {status !== STATUS.SUCCESS ? (
-                        <Loader></Loader>
-                    ) : (
-                        <YouTube
-                            className={styles.video_player_container}
-                            iframeClassName={styles.video_player}
-                            videoId={ParseVideoId(data?.response.video_link as string)}
-                        ></YouTube>
-                    )}
+                    <YouTube
+                        className={styles.video_player_container}
+                        iframeClassName={styles.video_player}
+                        videoId={ParseVideoId(data?.response.video_link as string)}
+                    ></YouTube>
 
                     <div className={styles.video_info}>
                         <h2>{data?.response.title}</h2>
