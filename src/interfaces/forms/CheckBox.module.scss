@@ -1,0 +1,20 @@
+@import "@/styles/utils.scss";
+
+.checkbox_container {
+    display: flex;
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin: 5px;
+    }
+}
+
+.checkbox {
+    width: 18px;
+    height: 18px;
+
+    margin: 5px;
+
+    accent-color: $color-primary;
+}
