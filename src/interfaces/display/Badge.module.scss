@@ -1,8 +1,10 @@
 @import "@/styles/utils.scss";
 
 .badge {
-    display: inline;
+    display: inline-block;
+    height: 40px;
 
+    margin: 5px;
     padding: 10px;
     border-radius: 15px;
 
