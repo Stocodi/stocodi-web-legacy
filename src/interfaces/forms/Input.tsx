@@ -8,6 +8,7 @@ export interface IInput {
     height?: string;
     rest?: unknown;
     placeholder?: string;
+    disabled?: boolean;
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -32,8 +33,8 @@ export interface IInputButtonContainer extends IInputContainer {
     onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
-export const Input = forwardRef<HTMLInputElement, IInput>(({ width, height, onChange, ...rest }, ref) => {
-    return <input ref={ref} className={styles.input} style={{ width: width, height: height }} onChange={onChange} {...rest} />;
+export const Input = forwardRef<HTMLInputElement, IInput>(({ width, height, onChange, disabled, ...rest }, ref) => {
+    return <input ref={ref} disabled={disabled} className={styles.input} style={{ width: width, height: height }} onChange={onChange} {...rest} />;
 });
 
 export const InputContainer = forwardRef<HTMLInputElement, IInputContainer>(({ width, height, label, ...rest }, ref) => {
