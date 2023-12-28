@@ -10,6 +10,8 @@ import HomePage from "./pages/home-page/HomePage";
 import SigninPage from "./pages/auth-page/SigninPage";
 import SignupPage from "./pages/auth-page/SignupPage";
 import PageNotFound from "./pages/PageNotFound";
+import TestPage from "./pages/test-page/TestPage";
+import QuestionPage from "./pages/test-page/QuestionPage";
 
 export default function App() {
     return (
@@ -18,6 +20,8 @@ export default function App() {
                 <Route path="/" element={<MainLayout />}>
                     <Route path="/" element={<HomePage />} />
 
+                    <Route path="/test" element={<TestPage />} />
+                    <Route path="/test/:id" element={<QuestionPage />} />
                     <Route path="*" element={<PageNotFound />} />
                 </Route>
 
