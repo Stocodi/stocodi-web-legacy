@@ -20,6 +20,9 @@
         border-top-left-radius: inherit;
         border-top-right-radius: inherit;
     }
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .lecture_card_body {
@@ -29,10 +32,12 @@
     padding: 15px;
 
     h3 {
+        @include text-overflow(elipsis);
         margin: 5px 0px;
         font-size: 1.2rem;
     }
     p {
+        @include text-overflow(elipsis);
         margin: 5px 0px;
         color: #767676;
     }

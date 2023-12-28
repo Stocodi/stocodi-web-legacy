@@ -49,7 +49,12 @@ export default function LectureUploadPage() {
     };
 
     const onLectureUploadClicked = async () => {
-        if (titleRef.current?.value && videolinkRef.current?.value) {
+        // 필드값 비어있는 경우 예외처리
+        if (!(titleRef.current?.value && videolinkRef.current?.value)) {
+            alert("제목을 입력해주세요!");
+        } else if (videolinkRef.current.value.startsWith("https://www.youtube.com/watch?v=")) {
+            alert("잘못된 유튜브 링크 형식입니다");
+        } else {
             try {
                 await PostRequest(
                     "/lectures",
@@ -67,8 +72,6 @@ export default function LectureUploadPage() {
                 alert("영상 업로드에 실패하였습니다");
             }
         }
-        // 필드값 비어있는 경우 예외처리
-        alert("제목을 입력해주세요!");
     };
 
     return (
@@ -103,7 +106,13 @@ export default function LectureUploadPage() {
                     <UploadPlaceholder width="100%" height="300px" label="미리보기 이미지 업로드" onClick={onThumbnailUploadClicked} />
 
                     <CheckBox ref={checkboxRef} label="유튜브 링크로 업로드" onClick={onCheckBoxClicked}></CheckBox>
-                    <Input ref={videolinkRef} disabled placeholder="유튜브 링크를 입력해주세요" width="100%" height="50px"></Input>
+                    <Input
+                        ref={videolinkRef}
+                        disabled
+                        placeholder="https://www.youtube.com/watch?v= 형식의 링크를 입력해주세요"
+                        width="100%"
+                        height="50px"
+                    ></Input>
 
                     <Button type="primary-stroke" width="100%" height="50px" onClick={onVideoFileUploadClicked}>
                         영상파일 업로드

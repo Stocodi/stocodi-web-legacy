@@ -12,8 +12,11 @@ export interface IButton {
 }
 
 export interface IButtonCircle {
-    type: "left" | "right";
+    type: "left" | "right" | "custom";
+    width?: string;
+    height?: string;
     className?: string;
+    children?: React.ReactNode;
     onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -44,11 +47,12 @@ export const Button: React.FC<IButton> = ({ type, width, height, children, onCli
     }
 };
 
-export const ButtonCircle: React.FC<IButtonCircle> = ({ type, className, onClick, ...rest }) => {
+export const ButtonCircle: React.FC<IButtonCircle> = ({ type, width, height, className, children, onClick, ...rest }) => {
     return (
-        <button className={`${styles.btn_circle} ${className ?? ""}`} onClick={onClick} {...rest}>
+        <button className={`${styles.btn_circle} ${className ?? ""}`} style={{ width: width, height: height }} onClick={onClick} {...rest}>
             {type === "left" && <FontAwesomeIcon size="xl" icon={faChevronLeft} />}
             {type === "right" && <FontAwesomeIcon size="xl" icon={faChevronRight} />}
+            {type === "custom" && children}
         </button>
     );
 };

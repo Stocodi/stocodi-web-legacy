@@ -26,7 +26,7 @@ export default function App() {
 
                     <Route path="lectures" element={<LecturePage />} />
                     <Route path="lectures/search" element={<LectureSearchResultPage />} />
-                    <Route path="lectures/view" element={<LectureViewPage />} />
+                    <Route path="lectures/view/:id" element={<LectureViewPage />} />
                     <Route path="lectures/upload" element={<LectureUploadPage />} />
 
                     <Route path="*" element={<PageNotFound />} />
