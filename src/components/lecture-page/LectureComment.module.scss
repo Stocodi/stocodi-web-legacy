@@ -1,0 +1,42 @@
+@import "@/styles/utils.scss";
+
+.comment_wrapper {
+    width: 100%;
+    height: 100%;
+
+    border: 1px solid #ebebeb;
+    padding: 20px;
+
+    overflow: scroll;
+
+    input[type="text"] {
+        width: 100%;
+        height: 40px;
+
+        border-bottom: 1px solid #bbbbbb;
+
+        &:focus {
+            outline: none;
+            border-bottom: 2px solid $color-primary;
+        }
+    }
+    input[type="submit"] {
+        visibility: hidden;
+    }
+}
+
+.comment_container {
+}
+
+.comment_item {
+    margin: 10px 0px;
+
+    span:first-child {
+        margin-right: 5px;
+        font-weight: bold;
+    }
+    span:last-child {
+        margin-left: 5px;
+        font-weight: normal;
+    }
+}

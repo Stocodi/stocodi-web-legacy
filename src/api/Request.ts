@@ -7,7 +7,7 @@ export const GetRequest = async <ResponseBody>(url: string, token?: string): Pro
         headers: headers,
     });
     if (!repsonse.ok) throw new Error(`GET Request Failed ${url}`);
-    return repsonse.json() as ResponseBody;
+    return repsonse.json() as Promise<ResponseBody>;
 };
 
 export const PostRequest = async <RequestBody, ResponseBody>(url: string, body: RequestBody, token?: string): Promise<ResponseBody> => {
@@ -20,7 +20,7 @@ export const PostRequest = async <RequestBody, ResponseBody>(url: string, body: 
         body: JSON.stringify(body),
     });
     if (!response.ok) throw new Error(`POST Request Failed ${url}`);
-    return response.json() as ResponseBody;
+    return (await response.json()) as Promise<ResponseBody>;
 };
 
 export const PutRequest = async <RequestBody, ResponseBody>(url: string, body: RequestBody, token?: string): Promise<ResponseBody> => {
@@ -33,5 +33,5 @@ export const PutRequest = async <RequestBody, ResponseBody>(url: string, body: R
         body: JSON.stringify(body),
     });
     if (!response.ok) throw new Error(`PUT Request Failed ${url}`);
-    return response.json() as ResponseBody;
+    return (await response.json()) as Promise<ResponseBody>;
 };

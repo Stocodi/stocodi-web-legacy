@@ -1,17 +1,18 @@
 import YouTube from "react-youtube";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import { Loader } from "../../interfaces/feedback/Loader";
+import { Badge } from "../../interfaces/display/Badge";
 import { LectureProvider } from "../../components/lecture-page/LectureProvider";
 
 import { STATUS, useGetRequest } from "../../hooks/useRequest";
 import { IGetLectureByIdResponse } from "../../api/ResponseTypes";
 import { ParseVideoId } from "../../utils/YoutubeLinks";
 
-import styles from "./LectureViewPage.module.scss";
-import { Badge } from "../../interfaces/display/Badge";
-import { useEffect } from "react";
 import { PutRequest } from "../../api/Request";
+import styles from "./LectureViewPage.module.scss";
+import { LectureCommentContainer } from "../../components/lecture-page/LectureComment";
 
 export default function LectureViewPage() {
     const { id } = useParams();
@@ -43,13 +44,13 @@ export default function LectureViewPage() {
                         iframeClassName={styles.video_player}
                         opts={{
                             playerVars: {
-                                autoplay: 1, //자동 재생 여부
+                                autoplay: 0, //자동 재생 여부
                                 modestbranding: 0, //컨트롤 바에 유튜브 로고 표시 여부
                                 loop: 0, //반복 재생
                             },
                         }}
                         videoId={ParseVideoId(data?.response.video_link as string)}
-                    ></YouTube>
+                    />
 
                     <div className={styles.video_info}>
                         <h2>{data?.response.title}</h2>
@@ -80,8 +81,7 @@ export default function LectureViewPage() {
                 </div>
 
                 <div className={styles.comment_section}>
-                    <div>댓글</div>
-                    <div>추가영상</div>
+                    <LectureCommentContainer lectureId={data?.response.id as number} />
                 </div>
             </div>
         </>
