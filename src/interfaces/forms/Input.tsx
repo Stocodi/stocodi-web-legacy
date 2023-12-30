@@ -4,8 +4,8 @@ import styles from "./Input.module.scss";
 
 export interface IInput {
     type?: string;
-    width?: string;
-    height?: string;
+    width: string;
+    height: string;
     rest?: unknown;
     placeholder?: string;
     disabled?: boolean;

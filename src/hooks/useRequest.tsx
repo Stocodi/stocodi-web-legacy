@@ -54,6 +54,7 @@ export const useGetRequest = <ResponseBody,>(url: string, token?: string) => {
 export const usePostRequest = <ResponseBody, RequestBody>(url: string, body: RequestBody, token?: string) => {
     const [status, setStatus] = useState<STATUS>(STATUS.IDLE);
     const [data, setData] = useState<ResponseBody | null>(null);
+
     const [error, setError] = useState<string | unknown>(null);
 
     const request = useCallback(async () => {
