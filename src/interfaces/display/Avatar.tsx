@@ -1,17 +1,18 @@
 import styles from "./Avatar.module.scss";
 
 export interface IAvatar {
+    className?: string;
     width?: string;
     height?: string;
     imgSrc: string;
     children?: React.ReactNode;
 }
 
-export const Avatar: React.FC<IAvatar> = ({ width, height, imgSrc, children }) => {
+export const Avatar: React.FC<IAvatar> = ({ className, width, height, imgSrc, children }) => {
     return (
-        <div className={styles.avatar} style={{ width: width, height: height }}>
+        <div className={`${styles.avatar} ${className ?? ""}`} style={{ width: width, height: height }}>
             <img src={imgSrc} alt="profile" />
-            {children}
+            <div>{children}</div>
         </div>
     );
 };

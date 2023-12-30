@@ -23,14 +23,14 @@ export default function LecturePage() {
 
     const onSearchBtnClick = () => {
         if (typeof searchRef.current?.value === "string") {
-            navigate(`/lectures/search?query=${searchRef.current?.value}`);
+            navigate(`/lectures/search?key=${searchRef.current?.value}`);
         }
     };
 
     return (
         <>
             <div className={styles.search_section}>
-                <Search ref={searchRef} onClick={onSearchBtnClick}></Search>
+                <Search ref={searchRef} onClick={onSearchBtnClick} placeholder="원하는 강좌를 검색해보세요!"></Search>
 
                 <div className={styles.badge_container}>
                     <span>인기태그👉</span>
