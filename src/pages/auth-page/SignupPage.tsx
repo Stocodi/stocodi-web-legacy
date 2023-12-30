@@ -3,36 +3,57 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 import { Button } from "../../interfaces/forms/Button";
-import { InputContainer } from "../../interfaces/forms/Input";
+import { InputContainer, InputButtonContainer } from "../../interfaces/forms/Input";
 import { Title } from "../../components/auth-page/Title";
 import { CategoryGrid } from "../../components/auth-page/CategoryGrid";
 import { Categories } from "../../constants/Categories";
 
-import styles from "./SignupPage.module.scss";
 import { useRef } from "react";
 import { Dispatch } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { UserSignupActions } from "../../store/user-signup-slice";
-import { handleSignup } from "../../api/Authentication";
+import { handleSignup, verifyEmail, verifyNickName } from "../../api/Authentication";
 import { RootState } from "../../store/store";
+
+import styles from "./SignupPage.module.scss";
 
 const SignupPage = {
     One: () => {
         const navigate = useNavigate();
         const dispatch: Dispatch = useDispatch();
+        const { isEmailVerified } = useSelector((state: RootState) => state.UserSignup);
 
         const nameRef = useRef<HTMLInputElement>(null);
         const emailRef = useRef<HTMLInputElement>(null);
         const passwordRef = useRef<HTMLInputElement>(null);
 
+        const onEmailVerificationClick = async () => {
+            try {
+                await verifyEmail(emailRef.current?.value as string);
+                dispatch(UserSignupActions.verifyEmail());
+                alert("사용가능한 이메일 입니다");
+            } catch (err) {
+                alert("해당 이메일은 사용할 수 없습니다");
+            }
+        };
+
+        const onEmailChange = () => {
+            // 이메일 변경시 재검사 필요
+            dispatch(UserSignupActions.unVerifyEmail());
+        };
+
         const onPrevBtnClick = () => {
             navigate("/auth/signin");
         };
         const onNextBtnClick = () => {
-            dispatch(UserSignupActions.setName(nameRef.current?.value as string));
-            dispatch(UserSignupActions.setEmail(emailRef.current?.value as string));
-            dispatch(UserSignupActions.setPassword(passwordRef.current?.value as string));
-            navigate("/auth/signup/step2");
+            if (isEmailVerified) {
+                dispatch(UserSignupActions.setName(nameRef.current?.value as string));
+                dispatch(UserSignupActions.setEmail(emailRef.current?.value as string));
+                dispatch(UserSignupActions.setPassword(passwordRef.current?.value as string));
+                navigate("/auth/signup/step2");
+            } else {
+                alert("이메일 중복검사를 해주세요");
+            }
         };
 
         return (
@@ -40,7 +61,17 @@ const SignupPage = {
                 <Title title="Stocodi 에 오신걸 환영해요!" />
 
                 <InputContainer ref={nameRef} label="이름" type="text" width="100%" height="50px"></InputContainer>
-                <InputContainer ref={emailRef} label="이메일 주소(아이디)" type="text" width="100%" height="50px"></InputContainer>
+                <InputButtonContainer
+                    ref={emailRef}
+                    label="이메일 주소(아이디)"
+                    type="text"
+                    width="100%"
+                    height="50px"
+                    btnWidth="100px"
+                    btnLabel="중복확인"
+                    onChange={onEmailChange}
+                    onClick={onEmailVerificationClick}
+                ></InputButtonContainer>
                 <InputContainer ref={passwordRef} label="비밀번호" type="password" width="100%" height="50px"></InputContainer>
 
                 <div className={styles.btn_group}>
@@ -59,22 +90,52 @@ const SignupPage = {
     Two: () => {
         const navigate = useNavigate();
         const dispatch: Dispatch = useDispatch();
+        const { isNickNameVerified } = useSelector((state: RootState) => state.UserSignup);
 
         const nicknameRef = useRef<HTMLInputElement>(null);
         const phoneRef = useRef<HTMLInputElement>(null);
         const birthRef = useRef<HTMLInputElement>(null);
 
+        const onNicknameVerificationClick = async () => {
+            try {
+                await verifyNickName(nicknameRef.current?.value as string);
+                dispatch(UserSignupActions.verifyNickName());
+                alert("사용가능한 닉네임 입니다");
+            } catch (err) {
+                alert("해당 닉네임은 사용할 수 없습니다");
+            }
+        };
+
+        const onNickNameChange = () => {
+            // 닉네임 변경시 재검사 필요
+            dispatch(UserSignupActions.unVerifyNickName());
+        };
+
         const onNextBtnClick = () => {
-            dispatch(UserSignupActions.setNickName(nicknameRef.current?.value as string));
-            dispatch(UserSignupActions.setBirthDate(birthRef.current?.value as string));
-            navigate("/auth/signup/step3");
+            if (isNickNameVerified) {
+                dispatch(UserSignupActions.setNickName(nicknameRef.current?.value as string));
+                dispatch(UserSignupActions.setBirthDate(birthRef.current?.value as string));
+                navigate("/auth/signup/step3");
+            } else {
+                alert("닉네임 중복확인을 해주세요");
+            }
         };
 
         return (
             <>
                 <Title title="Stocodi 에 오신걸 환영해요!" />
 
-                <InputContainer ref={nicknameRef} label="닉네임" type="text" width="100%" height="50px"></InputContainer>
+                <InputButtonContainer
+                    ref={nicknameRef}
+                    label="닉네임"
+                    type="text"
+                    width="100%"
+                    height="50px"
+                    btnWidth="100px"
+                    btnLabel="중복확인"
+                    onChange={onNickNameChange}
+                    onClick={onNicknameVerificationClick}
+                ></InputButtonContainer>
                 <InputContainer
                     ref={phoneRef}
                     label="휴대폰 번호"

@@ -19,3 +19,14 @@
         font-weight: bold;
     }
 }
+
+.input_btn_wrapper {
+    p {
+        margin: 5px 0px;
+        font-weight: bold;
+    }
+    .input_btn_container {
+        display: flex;
+        gap: 10px;
+    }
+}
