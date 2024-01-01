@@ -12,16 +12,15 @@ import SignupPage from "./pages/auth-page/SignupPage";
 import PageNotFound from "./pages/PageNotFound";
 import TestPage from "./pages/test-page/TestPage";
 import QuestionPage from "./pages/test-page/QuestionPage";
+import TestLayout from "./layouts/TestLayout";
 
 export default function App() {
     return (
         <Provider store={store}>
             <Routes>
                 <Route path="/" element={<MainLayout />}>
-                    <Route path="/" element={<HomePage />} />
+                    <Route index element={<HomePage />} />
 
-                    <Route path="/test" element={<TestPage />} />
-                    <Route path="/test/:id" element={<QuestionPage />} />
                     <Route path="*" element={<PageNotFound />} />
                 </Route>
 
@@ -30,6 +29,11 @@ export default function App() {
                     <Route path="signup/step1" element={<SignupPage.One />} />
                     <Route path="signup/step2" element={<SignupPage.Two />} />
                     <Route path="signup/step3" element={<SignupPage.Three />} />
+                </Route>
+
+                <Route path="/test" element={<TestLayout />}>
+                    <Route index element={<TestPage />} />
+                    <Route path=":id" element={<QuestionPage />} />
                 </Route>
             </Routes>
         </Provider>
