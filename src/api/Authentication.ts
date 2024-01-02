@@ -1,4 +1,4 @@
-import { API_BASE_URL, COOKIE_ACCESS, COOKIE_NICKNAME, COOKIE_REFRESH } from "./env";
+import { API_BASE_URL, COOKIE_ACCESS, COOKIE_DOMAIN, COOKIE_NICKNAME, COOKIE_PATH, COOKIE_REFRESH } from "./env";
 import { Cookies } from "react-cookie";
 import { IUserSignup } from "../store/user-signup-slice";
 
@@ -17,8 +17,8 @@ export interface ISignupRequestBody extends Omit<IUserSignup, "interest_categori
 
 export const cookies = new Cookies();
 export const cookieOptions = {
-    path: "/",
-    domain: ".localhost",
+    path: COOKIE_PATH,
+    domain: COOKIE_DOMAIN,
 };
 
 export function GetNickName(): string | undefined {
