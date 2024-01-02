@@ -7,6 +7,8 @@ production_env_vars=(
   "VITE_PRODUCTION_COOKIE_NICKNAME=stocodi-nickname"
   "VITE_PRODUCTION_COOKIE_ACCESS=member_access_token"
   "VITE_PRODUCTION_COOKIE_REFRESH=member_refresh_token"
+  "VITE_PRODUCTION_COOKIE_PATH=/"
+  "VITE_PRODUCTION_COOKIE_DOMAIN=stocodi.com"
 )
 
 if [ ! -e "$env_file" ]; then
