@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Category } from "../constants/Categories";
 
 export interface IUserSignup {
     isEmailVerified: boolean;
