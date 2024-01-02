@@ -6,10 +6,6 @@ services:
         container_name: stocodi-web
         environment:
             NODE_ENV: production
-            VITE_PRODUCTION_API_BASE_URL: http://localhost:53001/api/v1
-            VITE_PRODUCTION_COOKIE_NICKNAME: stocodi-nickname
-            VITE_PRODUCTION_COOKIE_ACCESS: member_access_token
-            VITE_PRODUCTION_COOKIE_REFRESH: member_refresh_token
             PORT: 53000
         ports:
             - "53000:3000"
