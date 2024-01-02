@@ -1,21 +1,27 @@
+# 서버환경 배포 스크립트
+
 env_file=".env"
 
-# 추가할 환경 변수 및 값 설정
-new_env_var="VITE_PRODUCTION_API_BASE_URL = https://stocodi.com/api/v1"
+production_env_vars=(
+  "VITE_PRODUCTION_API_BASE_URL=https://stocodi.com/api/v1"
+  "VITE_PRODUCTION_COOKIE_NICKNAME=stocodi-nickname"
+  "VITE_PRODUCTION_COOKIE_ACCESS=member_access_token"
+  "VITE_PRODUCTION_COOKIE_REFRESH=member_refresh_token"
+)
 
-# .env 파일이 존재하는지 확인하고 없으면 생성
 if [ ! -e "$env_file" ]; then
   touch "$env_file"
 fi
 
-# .env 파일에 환경 변수 추가 또는 업데이트
-if grep -q "VITE_PRODUCTION_API_BASE_URL" "$env_file"; then
-  sed -i "s|^VITE_PRODUCTION_API_BASE_URL=.*|$new_env_var|" "$env_file"
-else
-  echo "$new_env_var" >> "$env_file"
-fi
-
-echo "환경 변수가 .env 파일에 추가되었습니다: $new_env_var"
-
+# .env 파일에 환경 변수들 추가 또는 업데이트
+for production_env_var in "${production_env_vars[@]}"; do
+  env_var_name="${production_env_var%%=*}"
+  if grep -q "^$production_env_var=" "$env_file"; then
+    sed -i "s|^$env_var_name=.*|$production_env_var|" "$env_file"
+  else
+    echo "$production_env_var" >> "$env_file"
+  fi
+  echo "환경 변수가 .env 파일에 추가되었습니다: $production_env_var"
+done
 
 sudo docker-compose up -d --build
