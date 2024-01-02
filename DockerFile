@@ -1,0 +1,13 @@
+FROM node:20-alpine3.18
+
+RUN mkdir /stocodi-web
+WORKDIR /stocodi-web
+COPY . /stocodi-web
+ENV PATH /stocodi-web/node_modules/.bin:$PATH
+
+RUN npm install --silent
+
+USER root
+RUN npm install -g serve --save
+RUN npm run build
+CMD ["npm", "run", "start"]
