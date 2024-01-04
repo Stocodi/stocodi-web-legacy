@@ -6,7 +6,7 @@ import { store } from "./store/store";
 import { MainLayout } from "./layouts/MainLayout";
 import { AuthLayout } from "./layouts/AuthLayout";
 
-import HomePage from "./pages/home-page/HomePage";
+import AboutPage from "./pages/about-page/AboutPage";
 import SigninPage from "./pages/auth-page/SigninPage";
 import SignupPage from "./pages/auth-page/SignupPage";
 
@@ -22,13 +22,12 @@ export default function App() {
         <Provider store={store}>
             <Routes>
                 <Route path="/" element={<MainLayout />}>
-                    <Route path="/" element={<HomePage />} />
-
-                    <Route path="lectures" element={<LecturePage />} />
+                    <Route index element={<LecturePage />} />
                     <Route path="lectures/search" element={<LectureSearchResultPage />} />
                     <Route path="lectures/view/:id" element={<LectureViewPage />} />
                     <Route path="lectures/upload" element={<LectureUploadPage />} />
 
+                    <Route path="/about" element={<AboutPage />} />
                     <Route path="*" element={<PageNotFound />} />
                 </Route>
 

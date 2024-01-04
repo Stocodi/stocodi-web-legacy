@@ -1,17 +1,15 @@
 // 랜딩페이지
 import { useObserver } from "../../hooks/useObserver";
 
-import "./HomePage.scss";
-// import "./HomePage.tablet.scss";
-// import "./HomePage.mobile.scss";
+import "./AboutPage.scss";
 
-import BackgroundSection from "../../components/home-page/BackgroundSection";
-import HeadingSection from "../../components/home-page/HeadingSection";
-import ContentSection from "../../components/home-page/ContentSection";
-import FooterSection from "../../components/home-page/FooterSection";
-import { FeatureExperiment, FeaturePortfolio, FeaturePractice, FeatureLecture } from "../../components/home-page/FeatureSection";
+import BackgroundSection from "../../components/about-page/BackgroundSection";
+import HeadingSection from "../../components/about-page/HeadingSection";
+import ContentSection from "../../components/about-page/ContentSection";
+import FooterSection from "../../components/about-page/FooterSection";
+import { FeatureExperiment, FeaturePortfolio, FeaturePractice, FeatureLecture } from "../../components/about-page/FeatureSection";
 
-export default function HomePage() {
+export default function AboutPage() {
     // 스크롤 애니메이션
     useObserver(".landing-page__title", 0, { before: "animate-fromleft-before", after: "animate-fromleft-after" }, { duration: "1s", delay: "0s" });
 
