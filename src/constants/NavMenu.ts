@@ -12,21 +12,16 @@ export const NavMenu: INavMenu[] = [
     },
     {
         key: 2,
-        to: "/lectures",
-        text: "강의",
-    },
-    {
-        key: 3,
         to: "/column",
         text: "칼럼",
     },
     {
-        key: 4,
+        key: 3,
         to: "/community",
         text: "커뮤니티",
     },
     {
-        key: 5,
+        key: 4,
         to: "/mypage/portfolio",
         text: "마이페이지",
     },
