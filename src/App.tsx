@@ -2,6 +2,7 @@ import "@/styles/globals.scss";
 import { Route, Routes } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+import { CookiesProvider } from "react-cookie";
 
 import { MainLayout } from "./layouts/MainLayout";
 import { AuthLayout } from "./layouts/AuthLayout";
@@ -19,25 +20,27 @@ import PageNotFound from "./pages/PageNotFound";
 
 export default function App() {
     return (
-        <Provider store={store}>
-            <Routes>
-                <Route path="/" element={<MainLayout />}>
-                    <Route index element={<LecturePage />} />
-                    <Route path="lectures/search" element={<LectureSearchResultPage />} />
-                    <Route path="lectures/view/:id" element={<LectureViewPage />} />
-                    <Route path="lectures/upload" element={<LectureUploadPage />} />
+        <CookiesProvider>
+            <Provider store={store}>
+                <Routes>
+                    <Route path="/" element={<MainLayout />}>
+                        <Route index element={<LecturePage />} />
+                        <Route path="lectures/search" element={<LectureSearchResultPage />} />
+                        <Route path="lectures/view/:id" element={<LectureViewPage />} />
+                        <Route path="lectures/upload" element={<LectureUploadPage />} />
 
-                    <Route path="/about" element={<AboutPage />} />
-                    <Route path="*" element={<PageNotFound />} />
-                </Route>
+                        <Route path="/about" element={<AboutPage />} />
+                        <Route path="*" element={<PageNotFound />} />
+                    </Route>
 
-                <Route path="/auth" element={<AuthLayout />}>
-                    <Route path="signin" element={<SigninPage />} />
-                    <Route path="signup/step1" element={<SignupPage.One />} />
-                    <Route path="signup/step2" element={<SignupPage.Two />} />
-                    <Route path="signup/step3" element={<SignupPage.Three />} />
-                </Route>
-            </Routes>
-        </Provider>
+                    <Route path="/auth" element={<AuthLayout />}>
+                        <Route path="signin" element={<SigninPage />} />
+                        <Route path="signup/step1" element={<SignupPage.One />} />
+                        <Route path="signup/step2" element={<SignupPage.Two />} />
+                        <Route path="signup/step3" element={<SignupPage.Three />} />
+                    </Route>
+                </Routes>
+            </Provider>
+        </CookiesProvider>
     );
 }
