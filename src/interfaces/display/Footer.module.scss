@@ -1,0 +1,60 @@
+@import "@/styles/utils.scss";
+
+footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+
+    padding: 50px;
+    color: #878787;
+    background-color: #707070;
+
+    li {
+        margin: 5px 0px;
+    }
+}
+
+.links {
+    padding: 0;
+    list-style: none;
+
+    a {
+        color: #878787;
+        &:visited {
+            color: #878787;
+        }
+    }
+}
+
+.info {
+    padding: 0;
+    list-style: none;
+
+    li {
+        color: #878787;
+    }
+}
+
+.sns {
+    display: flex;
+    img {
+        display: block;
+        margin: 0px 5px;
+    }
+}
+
+@include tablet {
+    footer {
+        flex-direction: column;
+        gap: 20px;
+        padding: 40px;
+    }
+}
+
+@include mobile {
+    footer {
+        flex-direction: column;
+        gap: 20px;
+        padding: 30px;
+    }
+}
