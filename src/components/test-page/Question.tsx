@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Question.module.scss";
 
 export interface IQuestion {
@@ -14,14 +14,18 @@ export interface IQuestionOption {
 }
 
 export const Question: React.FC<IQuestion> = ({ index, question, answer, comment, children }) => {
+    const [viewComment, setViewComment] = useState<boolean>(false);
+
     useEffect(() => {
         const options = document.querySelectorAll(`.${styles.question_opt}`);
         for (let idx = 0; idx < options.length; idx++) {
             options[idx].addEventListener("click", () => {
                 if (idx === answer) {
                     // 정답
+                    setViewComment(true);
                 } else {
                     // 오답
+                    setViewComment(true);
                 }
             });
         }
@@ -34,6 +38,8 @@ export const Question: React.FC<IQuestion> = ({ index, question, answer, comment
             </h1>
 
             <div className={styles.options}>{children}</div>
+
+            {viewComment && <div>{comment}</div>}
         </div>
     );
 };
