@@ -1,1 +1,36 @@
 @import "@/styles/utils.scss";
+
+.question {
+    text-align: center;
+
+    h1 {
+        margin: 20px 0px;
+    }
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.question_opt {
+    @include place-center;
+
+    width: 450px;
+    height: 60px;
+
+    margin: 5px 0px;
+    border-radius: 15px;
+
+    background-color: #efefef;
+
+    font-family: "SCDream";
+    font-size: 1.5rem;
+
+    transition: background-color 1s ease-in-out;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
