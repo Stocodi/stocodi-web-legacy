@@ -27,3 +27,6 @@ jobs:
 
             - name: Code Linting
               run: npm run lint
+
+            - name: Code Prettier
+              run: npm run prettier

@@ -17,7 +17,7 @@ module.exports = {
         project: true,
         tsconfigRootDir: __dirname,
     },
-    plugins: ["react-refresh", "@typescript-eslint", "*.js"],
+    plugins: ["react-refresh", "@typescript-eslint"],
     ignorePatterns: [".eslintrc.cjs", "vite.config.ts"],
     rules: {
         "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
