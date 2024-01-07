@@ -52,7 +52,7 @@ export const InputButtonContainer = forwardRef<HTMLInputElement, IInputButtonCon
             <div className={styles.input_btn_wrapper} style={{ width: width }}>
                 <p>{label}</p>
                 <div className={styles.input_btn_container}>
-                    <Input ref={ref} width={`calc(${width as string} - ${btnWidth})`} height={height} {...rest} />
+                    <Input ref={ref} width={`calc(${width} - ${btnWidth})`} height={height} {...rest} />
                     <Button type="primary-stroke" width={btnWidth} onClick={onClick}>
                         {btnLabel}
                     </Button>

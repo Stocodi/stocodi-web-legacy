@@ -28,7 +28,6 @@ export default function LectureViewPage() {
     useEffect(() => {
         // 조회수 올리기
         if (status === STATUS.SUCCESS) {
-            // eslint-disable-next-line @typescript-eslint/no-floating-promises
             PutRequest(`/lectures/views/${data?.response.id.toString() as string}`, {});
         }
     }, [status, data?.response.id]);

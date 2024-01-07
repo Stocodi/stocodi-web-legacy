@@ -38,7 +38,6 @@ export const useGetRequest = <ResponseBody,>(url: string, token?: string) => {
     }, [url, token]);
 
     useEffect(() => {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         request();
     }, [request]);
 
@@ -80,7 +79,6 @@ export const usePostRequest = <ResponseBody, RequestBody>(url: string, body: Req
     }, [url, token, body]);
 
     useEffect(() => {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         request();
     }, [request]);
 

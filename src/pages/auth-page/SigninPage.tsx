@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
