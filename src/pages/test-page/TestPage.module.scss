@@ -39,7 +39,7 @@
     flex-direction: column;
     justify-content: center;
 
-    width: 90%;
+    width: 95%;
     max-width: 600px;
     aspect-ratio: 1/1;
 
@@ -99,6 +99,35 @@
             z-index: 0;
 
             width: 90%;
+        }
+    }
+}
+
+@include mobile {
+    .banner {
+        padding: 20px 0px;
+
+        h2 {
+            font-family: "Tendra";
+            font-size: 1.2rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-family: "SCDream";
+        }
+    }
+    .grid {
+        width: auto;
+        height: auto;
+        gap: 0px;
+        div {
+            width: 90%;
+            height: 90%;
+            font-size: 3rem;
+        }
+        .img_grid {
+            width: 90%;
+            height: 90%;
         }
     }
 }

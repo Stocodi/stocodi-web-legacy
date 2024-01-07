@@ -5,6 +5,7 @@ import { store } from "./store/store";
 
 import { MainLayout } from "./layouts/MainLayout";
 import { AuthLayout } from "./layouts/AuthLayout";
+import { TestLayout } from "./layouts/TestLayout";
 
 import HomePage from "./pages/home-page/HomePage";
 import SigninPage from "./pages/auth-page/SigninPage";
@@ -12,7 +13,7 @@ import SignupPage from "./pages/auth-page/SignupPage";
 import PageNotFound from "./pages/PageNotFound";
 import TestPage from "./pages/test-page/TestPage";
 import QuestionPage from "./pages/test-page/QuestionPage";
-import TestLayout from "./layouts/TestLayout";
+import ResultPage from "./pages/test-page/ResultPage";
 
 export default function App() {
     return (
@@ -34,6 +35,7 @@ export default function App() {
                 <Route path="/test" element={<TestLayout />}>
                     <Route index element={<TestPage />} />
                     <Route path=":id" element={<QuestionPage />} />
+                    <Route path="result" element={<ResultPage />}></Route>
                 </Route>
             </Routes>
         </Provider>
