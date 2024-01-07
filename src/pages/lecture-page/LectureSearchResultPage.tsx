@@ -8,6 +8,7 @@ import { IGetAllLectureResponse } from "../../api/ResponseTypes";
 import { STATUS, useGetRequest } from "../../hooks/useRequest";
 
 import { GetSearchParams } from "../../utils/SearchParams";
+import { ParseVideoId } from "../../utils/YoutubeLinks";
 import { Loader } from "../../interfaces/feedback/Loader";
 
 import styles from "./LectureSearchResultPage.module.scss";
@@ -41,7 +42,7 @@ export default function LectureSearchResultPage() {
                                 author={element.description}
                                 views={element.views}
                                 likes={element.likes}
-                                imgSrc="/img/test-thumbnail.webp"
+                                imgSrc={`https://img.youtube.com/vi/${ParseVideoId(element.video_link)}/0.jpg`}
                                 avatarImgSrc="/icons/profile.png"
                                 tags={element.tags}
                             />

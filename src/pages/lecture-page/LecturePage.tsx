@@ -3,17 +3,19 @@ import { useNavigate } from "react-router-dom";
 
 import { Search } from "../../interfaces/forms/Search";
 import { Badge } from "../../interfaces/display/Badge";
+import { Loader } from "../../interfaces/feedback/Loader";
 
 import { LectureSection } from "../../components/lecture-page/LectureSection";
 import { LectureCard } from "../../components/lecture-page/LectureCard";
+
+import { STATUS, useGetRequest } from "../../hooks/useRequest";
+import { IGetAllLectureResponse } from "../../api/ResponseTypes";
 
 import styles from "./LecturePage.module.scss";
 
 //test
 import { LectureData } from "../../constants/__test__/Lecture";
-import { STATUS, useGetRequest } from "../../hooks/useRequest";
-import { Loader } from "../../interfaces/feedback/Loader";
-import { IGetAllLectureResponse } from "../../api/ResponseTypes";
+import { ParseVideoId } from "../../utils/YoutubeLinks";
 
 export default function LecturePage() {
     const navigate = useNavigate();
@@ -54,7 +56,7 @@ export default function LecturePage() {
                                     key={index}
                                     title={element.title}
                                     publisher={element.description}
-                                    imgSrc={"/img/test-thumbnail.webp"}
+                                    imgSrc={`https://img.youtube.com/vi/${ParseVideoId(element.video_link)}/0.jpg`}
                                     tags={element.tags}
                                     onClick={() => navigate(`/lectures/view/${element.id}`)}
                                 />
