@@ -6,6 +6,7 @@ import { CookiesProvider } from "react-cookie";
 
 import { MainLayout } from "./layouts/MainLayout";
 import { AuthLayout } from "./layouts/AuthLayout";
+import { TestLayout } from "./layouts/TestLayout";
 
 import AboutPage from "./pages/about-page/AboutPage";
 import SigninPage from "./pages/auth-page/SigninPage";
@@ -17,6 +18,9 @@ import LectureViewPage from "./pages/lecture-page/LectureViewPage";
 import LectureUploadPage from "./pages/lecture-page/LectureUploadPage";
 
 import PageNotFound from "./pages/PageNotFound";
+import TestPage from "./pages/test-page/TestPage";
+import QuestionPage from "./pages/test-page/QuestionPage";
+import ResultPage from "./pages/test-page/ResultPage";
 
 export default function App() {
     return (
@@ -38,6 +42,12 @@ export default function App() {
                         <Route path="signup/step1" element={<SignupPage.One />} />
                         <Route path="signup/step2" element={<SignupPage.Two />} />
                         <Route path="signup/step3" element={<SignupPage.Three />} />
+                    </Route>
+
+                    <Route path="/test" element={<TestLayout />}>
+                        <Route index element={<TestPage />} />
+                        <Route path=":id" element={<QuestionPage />} />
+                        <Route path="result" element={<ResultPage />}></Route>
                     </Route>
                 </Routes>
             </Provider>

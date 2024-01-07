@@ -1,0 +1,83 @@
+@import "@/styles/utils";
+
+.breadcrumb {
+    @include horizontal-center;
+
+    margin: 50px 0px;
+}
+
+.breadcrumb_container {
+    @include horizontal-center;
+
+    width: auto;
+
+    margin: 10px;
+    padding: 25px;
+
+    border: 2px solid #0eca80;
+    font-size: 1.5rem;
+    font-family: "SCDream";
+
+    span {
+        margin: 0px 10px;
+        color: #bdbdbd;
+    }
+
+    span > svg {
+        color: #bdbdbd;
+    }
+}
+
+// .breadcrumb_item {
+// }
+
+.current {
+    color: #000 !important;
+}
+
+@include tablet {
+    .breadcrumb {
+        margin: 0px;
+    }
+
+    .breadcrumb_container {
+        flex-direction: row;
+        padding: 15px;
+
+        text-align: center;
+    }
+
+    .breadcrumb_item {
+        span:first-child {
+            font-size: 1.5rem;
+        }
+        span:last-child {
+            display: none;
+        }
+    }
+}
+
+@include mobile {
+    .breadcrumb {
+        margin: 0px;
+    }
+
+    .breadcrumb_container {
+        flex-direction: column;
+        padding: 15px;
+
+        text-align: center;
+    }
+
+    .breadcrumb_item {
+        span:first-child {
+            font-size: 1.2rem;
+        }
+        span:last-child {
+            display: none;
+        }
+        span:not(.current) {
+            display: none;
+        }
+    }
+}
