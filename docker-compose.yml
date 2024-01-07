@@ -1,0 +1,12 @@
+services:
+    stocodi-web:
+        build:
+            context: .
+            dockerfile: DockerFile
+        container_name: stocodi-web
+        environment:
+            NODE_ENV: production
+            PORT: 53000
+        ports:
+            - "53000:3000"
+        restart: always

@@ -1,0 +1,20 @@
+@import "@/styles/utils.scss";
+
+.avatar {
+    display: flex;
+
+    height: 40px;
+
+    img {
+        display: block;
+        aspect-ratio: 1/1;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: contain;
+    }
+
+    div {
+        margin: 0px 5px;
+        @include vertical-center;
+    }
+}

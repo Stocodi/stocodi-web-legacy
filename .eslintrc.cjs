@@ -17,12 +17,13 @@ module.exports = {
         project: true,
         tsconfigRootDir: __dirname,
     },
-    plugins: ["react-refresh", "@typescript-eslint"],
+    plugins: ["react-refresh", "@typescript-eslint", "*.js"],
     ignorePatterns: [".eslintrc.cjs", "vite.config.ts"],
     rules: {
         "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
         "@typescript-eslint/no-explicit-any": "warn",
-        "@typescript-eslint/no-misused-promises": "warn",
+        "@typescript-eslint/no-misused-promises": "off",
+        "@typescript-eslint/no-floating-promises": "off",
         "@typescript-eslint/no-non-null-assertion": "off",
     },
 };

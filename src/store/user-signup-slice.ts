@@ -1,7 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Category } from "../constants/Categories";
 
 export interface IUserSignup {
+    isEmailVerified: boolean;
+    isNickNameVerified: boolean;
+
     email: string;
     password: string;
     name: string;
@@ -12,6 +14,9 @@ export interface IUserSignup {
 }
 
 export const initialState: IUserSignup = {
+    isEmailVerified: false,
+    isNickNameVerified: false,
+
     email: "",
     password: "",
     name: "",
@@ -27,6 +32,19 @@ export const UserSignupSlice = createSlice({
     initialState: initialState,
 
     reducers: {
+        verifyEmail: (state) => {
+            state.isEmailVerified = true;
+        },
+        verifyNickName: (state) => {
+            state.isNickNameVerified = true;
+        },
+        unVerifyEmail: (state) => {
+            state.isEmailVerified = false;
+        },
+        unVerifyNickName: (state) => {
+            state.isNickNameVerified = false;
+        },
+
         setEmail: (state, action: PayloadAction<string>) => {
             state.email = action.payload;
         },

@@ -1,4 +1,4 @@
-import { API_BASE_URL, COOKIE_ACCESS, COOKIE_NICKNAME, COOKIE_REFRESH } from "./env";
+import { API_BASE_URL, COOKIE_ACCESS, COOKIE_DOMAIN, COOKIE_NICKNAME, COOKIE_PATH, COOKIE_REFRESH } from "./env";
 import { Cookies } from "react-cookie";
 import { IUserSignup } from "../store/user-signup-slice";
 
@@ -11,14 +11,14 @@ export interface ILoginResponseBody {
     };
 }
 
-export interface ISignupRequestBody extends Omit<IUserSignup, "interest_categories"> {
+export interface ISignupRequestBody extends Omit<IUserSignup, "interest_categories" | "isEmailVerified" | "isNickNameVerified"> {
     interest_categories: string[];
 }
 
 export const cookies = new Cookies();
 export const cookieOptions = {
-    path: "/",
-    domain: ".localhost",
+    path: COOKIE_PATH,
+    domain: COOKIE_DOMAIN,
 };
 
 export function GetNickName(): string | undefined {
@@ -101,6 +101,22 @@ export async function handleSignup(body: ISignupRequestBody) {
             body: JSON.stringify(body),
         });
         if (!response.ok) throw new Error("회원가입에 실패하였습니다");
+    };
+    await request();
+}
+
+export async function verifyEmail(email: string) {
+    const request = async () => {
+        const response = await fetch(API_BASE_URL + `/auth/email?email=${email}`);
+        if (!response.ok) throw new Error("해당 이메일은 사용할 수 없습니다");
+    };
+    await request();
+}
+
+export async function verifyNickName(nickname: string) {
+    const request = async () => {
+        const response = await fetch(API_BASE_URL + `/auth/nicknames?nickname=${nickname}`);
+        if (!response.ok) throw new Error("해당 닉네임은 사용할 수 없습니다");
     };
     await request();
 }

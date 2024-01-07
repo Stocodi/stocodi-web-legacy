@@ -1,0 +1,45 @@
+@import "@/styles/utils.scss";
+
+.search_container {
+    position: relative;
+
+    width: min(100%, 700px);
+    height: 50px;
+
+    margin: 0px auto;
+
+    input {
+        position: absolute;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        padding: 0px 20px;
+        border: 1px solid #dedede;
+        border-radius: 100px;
+
+        &:focus {
+            outline: 2px solid $color-primary;
+            box-shadow: 0px 0px 0px 4px rgba(0, 169, 105, 0.2);
+        }
+    }
+
+    button {
+        position: absolute;
+        right: 0;
+
+        aspect-ratio: 1/1;
+        height: 100%;
+
+        border-radius: 50%;
+
+        font-weight: bold;
+        color: #fff;
+        background-color: #0ecb81;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

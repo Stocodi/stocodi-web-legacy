@@ -1,0 +1,27 @@
+@import "@/styles/utils.scss";
+
+.badge {
+    display: inline-block;
+    height: 40px;
+
+    margin: 5px;
+    padding: 10px;
+    border-radius: 15px;
+
+    svg {
+        margin: 0px 5px;
+    }
+    span {
+        margin: 0px 5px;
+    }
+}
+
+.primary_stroke {
+    border: 1px solid #0ecb81;
+    color: #0ecb81;
+}
+
+.primary_light {
+    color: #0ecb81;
+    background-color: #edffef;
+}
