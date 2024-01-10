@@ -7,7 +7,7 @@ import { Loader } from "../../interfaces/feedback/Loader";
 
 import { LectureSection } from "../../components/lecture-page/LectureSection";
 import { LectureCard } from "../../components/lecture-page/LectureCard";
-
+import { Carousel } from "../../components/lecture-page/Carousel";
 import { STATUS, useGetRequest } from "../../hooks/useRequest";
 import { IGetAllLectureResponse } from "../../api/ResponseTypes";
 
@@ -29,9 +29,16 @@ export default function LecturePage() {
         }
     };
 
+    const CAROUSEL_LINK = [
+        "https://img.freepik.com/free-vector/hand-drawn-collage-design_23-2149543516.jpg?w=1800&t=st=1704845048~exp=1704845648~hmac=90a735e8f1f6ac7b1877466412724360ea3405a5b66610507ef5308ce8c69a1b",
+        "https://img.freepik.com/premium-vector/abstract-pastel-color-background-with-pink-purple-gradient-effect-graphic-design-decoration_120819-463.jpg",
+        "https://img.freepik.com/premium-vector/hand-painted-background-violet-orange-colours_23-2148427578.jpg",
+    ];
+
     return (
         <>
             <div className={styles.search_section}>
+                <Carousel carouselList={CAROUSEL_LINK}></Carousel>
                 <Search ref={searchRef} onClick={onSearchBtnClick} placeholder="원하는 강좌를 검색해보세요!"></Search>
 
                 <div className={styles.badge_container}>
