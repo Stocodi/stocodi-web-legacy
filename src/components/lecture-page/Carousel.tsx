@@ -11,17 +11,14 @@ export const Carousel = ({ carouselList }: Props) => {
 
     const carouselRef = useRef<HTMLUListElement>(null);
 
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //         const newIndex = (currIndex % carouselList.length) + 1;
-
-    //         moveToNthSlide(newIndex);
-    //     }, 5000);
-
-    //     return () => {
-    //         clearInterval(interval);
-    //     };
-    // }, [currIndex, carouselList]);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            handleSwipe(1);
+        }, 5000);
+        return () => {
+            clearInterval(interval);
+        };
+    });
 
     useEffect(() => {
         if (carouselList.length !== 0) {
