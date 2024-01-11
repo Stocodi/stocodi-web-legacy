@@ -37,8 +37,12 @@ export default function LecturePage() {
 
     return (
         <>
+            <Carousel carouselList={CAROUSEL_LINK}></Carousel>
             <div className={styles.search_section}>
-                <Carousel carouselList={CAROUSEL_LINK}></Carousel>
+                <div className={styles.logo_container}>
+                    <img src="/icons/stocodi-letter.png" alt="stocodi-letter" />
+                </div>
+
                 <Search ref={searchRef} onClick={onSearchBtnClick} placeholder="원하는 강좌를 검색해보세요!"></Search>
 
                 <div className={styles.badge_container}>
