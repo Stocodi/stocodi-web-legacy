@@ -67,7 +67,7 @@ export default function LectureUploadPage() {
                     GetAccessToken(),
                 );
                 alert("영상 업로드 완료!");
-                navigate("/lectures");
+                navigate("/");
             } catch (err) {
                 alert("영상 업로드에 실패하였습니다");
             }
