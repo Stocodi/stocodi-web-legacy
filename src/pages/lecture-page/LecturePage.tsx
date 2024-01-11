@@ -77,16 +77,10 @@ export default function LecturePage() {
                 </>
             )}
 
-            <LectureSection title="지금 시청중인 강의">
+            <LectureSection title="실시간 인기강의">
                 {LectureData.map((element, index) => {
                     return (
-                        <LectureCard.Default
-                            key={index}
-                            title={element.title}
-                            publisher={element.publisher}
-                            imgSrc={element.imgSrc}
-                            tags={element.tags}
-                        />
+                        <LectureCard.Rank key={index} rank={index + 1} title={element.title} publisher={element.publisher} imgSrc={element.imgSrc} />
                     );
                 })}
             </LectureSection>
