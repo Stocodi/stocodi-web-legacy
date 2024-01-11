@@ -63,12 +63,11 @@ export default function LecturePage() {
                     <LectureSection title="Recently Uploaded">
                         {data?.response.map((element, index) => {
                             return (
-                                <LectureCard.Default
+                                <LectureCard.Light
                                     key={index}
                                     title={element.title}
                                     publisher={element.description}
                                     imgSrc={`https://img.youtube.com/vi/${ParseVideoId(element.video_link)}/0.jpg`}
-                                    tags={element.tags}
                                     onClick={() => navigate(`/lectures/view/${element.id}`)}
                                 />
                             );
@@ -87,15 +86,7 @@ export default function LecturePage() {
 
             <LectureSection title="실시간 인기강의">
                 {LectureData.map((element, index) => {
-                    return (
-                        <LectureCard.Default
-                            key={index}
-                            title={element.title}
-                            publisher={element.publisher}
-                            imgSrc={element.imgSrc}
-                            tags={element.tags}
-                        />
-                    );
+                    return <LectureCard.Light key={index} title={element.title} publisher={element.publisher} imgSrc={element.imgSrc} />;
                 })}
             </LectureSection>
         </>

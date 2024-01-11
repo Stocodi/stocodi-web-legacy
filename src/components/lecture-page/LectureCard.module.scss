@@ -4,7 +4,6 @@
     flex-shrink: 0;
 
     width: 300px;
-    height: 300px;
 
     margin: 10px;
     border-radius: 20px;
@@ -22,6 +21,8 @@
 
 .lecture_card_default {
     @include card-default;
+
+    height: 300px;
 
     background-color: #fff;
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
@@ -71,6 +72,22 @@
 
             font-size: 2rem;
             font-weight: bold;
+        }
+    }
+}
+
+// lecture_card_light
+.lecture_card_light {
+    @include card-default;
+
+    img {
+        border-radius: inherit;
+    }
+    .lecture_card_light_body {
+        margin: 5px 10px;
+
+        h3 {
+            @include text-overflow("-");
         }
     }
 }
