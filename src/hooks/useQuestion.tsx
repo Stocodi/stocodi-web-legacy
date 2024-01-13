@@ -52,8 +52,8 @@ export const useQuestion = (answer: string, questionOptClassName: string) => {
 
             // 언마운트 이전 다음 문제에 대해
             // isCorrect null, isCommentVisible false 로 설정
-            // setIsCorrect(null);
-            // setIsCommentVisible(false);
+            setIsCorrect(null);
+            setIsCommentVisible(false);
         };
     }, [onChooseOptions, questionOptClassName]);
 
