@@ -28,4 +28,4 @@ jobs:
                       cd stocodi-web
                       git checkout release
                       git pull origin release
-                      sudo ./deploy.sh
+                      echo ${{secrets.DEPLOY_SERVER_PASSWORD}} | sudo -S ./deploy.sh
