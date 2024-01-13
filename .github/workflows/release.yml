@@ -29,4 +29,4 @@ jobs:
                       git checkout release
                       git pull origin release
                       chmod +x ./deploy.sh
-                      echo ${{secrets.DEPLOY_SERVER_PASSWORD}} | sudo -S ./deploy.sh
+                      echo ${{secrets.DEPLOY_SERVER_PASSWORD}} | sudo -S bash ./deploy.sh
