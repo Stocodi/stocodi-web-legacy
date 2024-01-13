@@ -7,19 +7,19 @@ on:
         branches:
             - release
 
-    jobs:
-        deployment:
-            runs-on: ubuntu-latest
+jobs:
+    deployment:
+        runs-on: ubuntu-latest
 
-            steps:
-                - name: Connecting SSH & Pull Release Branch
-                  uses: appleboy/ssh-action@v1.0.3
-                  with:
-                      host: ${{secrets.DEPLOY_SERVER_HOST}}
-                      password: ${{secrets.DEPLOY_SERVER_PASSWORD}}
-                      port: ${{secrets.DEPLOY_SERVER_PORT}}
-                      script: |
-                          cd stocodi-web
-                          git fetch
-                          git pull origin release
-                          ${{secrets.DEPLOY_SERVER_PASSWORD}} | sudo ./deploy.sh
+        steps:
+            - name: Connecting SSH & Pull Release Branch
+                uses: appleboy/ssh-action@v1.0.3
+                with:
+                    host: ${{secrets.DEPLOY_SERVER_HOST}}
+                    password: ${{secrets.DEPLOY_SERVER_PASSWORD}}
+                    port: ${{secrets.DEPLOY_SERVER_PORT}}
+                    script: |
+                        cd stocodi-web
+                        git fetch
+                        git pull origin release
+                        ${{secrets.DEPLOY_SERVER_PASSWORD}} | sudo ./deploy.sh
