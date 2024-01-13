@@ -1,0 +1,19 @@
+@import "@/styles/utils";
+
+.comment {
+    margin: 20px;
+    padding: 20px;
+
+    border-radius: 20px;
+    border: 2px solid $color-primary;
+}
+
+.ans {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 200px;
+    height: 200px;
+}
