@@ -1,0 +1,32 @@
+on:
+    pull_request:
+        branches: [release]
+        types: [closed]
+
+jobs:
+    build:
+        if: ${{ github.event.pull_request.merged }}
+        name: synchronization between local and remote repository
+        runs-on: ubuntu-latest
+
+        # 경고 무시
+        env:
+            CI: false
+
+        steps:
+            - name: checkout
+              uses: actions/checkout@v1
+
+            - name: executing remote ssh commands with ssh key
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.DEPLOY_SERVER_HOST }}
+                  username: ${{ secrets.DEPLOY_SERVER_USERNAME }}
+                  password: ${{ secrets.DEPLOY_SERVER_PASSWORD }}
+                  port: ${{ secrets.DEPLOY_SERVER_PORT }}
+                  script: |
+                      cd stocodi-web
+                      git checkout release
+                      git pull origin release
+                      chmod +x ./deploy.sh
+                      echo ${{secrets.DEPLOY_SERVER_PASSWORD}} | sudo -S bash ./deploy.sh
