@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Comment, IsCorrect } from "./Comment";
 
 import styles from "./Question.module.scss";
