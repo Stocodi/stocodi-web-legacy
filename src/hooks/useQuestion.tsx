@@ -10,6 +10,7 @@ export const useQuestion = (answer: string, questionOptClassName: string) => {
     const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
     const [isCommentVisible, setIsCommentVisible] = useState<boolean>(false);
 
+
     useEffect(() => {
         let timeout: ReturnType<typeof setTimeout> | undefined = undefined;
 
@@ -32,6 +33,17 @@ export const useQuestion = (answer: string, questionOptClassName: string) => {
             };
         };
 
+        },
+        [answer],
+    );
+
+    useEffect(() => {
+        /*
+            ❗️❗️❗️
+            금융역량테스트 해설 / 채점 뱃지 언마운트 안되는 현상
+            Issue #40
+            ❗️❗️❗️
+        */
         const $options = document.querySelectorAll(`.${questionOptClassName}`);
 
         for (let index = 0; index < $options.length; index++) {
@@ -50,6 +62,7 @@ export const useQuestion = (answer: string, questionOptClassName: string) => {
             setIsCommentVisible(false);
         };
     }, [answer, questionOptClassName]);
+
 
     return { isCorrect, isCommentVisible };
 };

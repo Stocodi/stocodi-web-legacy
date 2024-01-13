@@ -11,6 +11,12 @@ export interface ILectureCardDefault {
     onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
+export interface ILectureCardRank extends Omit<ILectureCardDefault, "tags"> {
+    rank: number;
+}
+
+export type ILectureCardLight = Omit<ILectureCardDefault, "tags">;
+
 export const LectureCard = {
     Default: ({ title, imgSrc, publisher, tags, onClick }: ILectureCardDefault) => {
         return (
@@ -28,6 +34,33 @@ export const LectureCard = {
                             );
                         })}
                     </div>
+                </div>
+            </div>
+        );
+    },
+
+    Rank: ({ rank, title, imgSrc, publisher, onClick }: ILectureCardRank) => {
+        return (
+            <div className={styles.lecture_card_rank} onClick={onClick}>
+                <img src={imgSrc} alt="lecture-card-img" />
+                <div className={styles.lecture_card_rank_body}>
+                    <div>{rank}</div>
+                    <div>
+                        <h3>{title}</h3>
+                        <p>{publisher}</p>
+                    </div>
+                </div>
+            </div>
+        );
+    },
+
+    Light: ({ title, imgSrc, publisher, onClick }: ILectureCardLight) => {
+        return (
+            <div className={styles.lecture_card_light} onClick={onClick}>
+                <img src={imgSrc} alt="lecture-card-img" />
+                <div className={styles.lecture_card_light_body}>
+                    <h3>{title}</h3>
+                    <p>{publisher}</p>
                 </div>
             </div>
         );

@@ -39,10 +39,8 @@ export const LectureSection: React.FC<ILectureSection> = ({ title, children }) =
                 {children}
             </div>
 
-            <div className={styles.section_controller}>
-                <ButtonCircle type="left" onClick={onLeftBtnClick} />
-                <ButtonCircle type="right" onClick={onRightBtnClick} />
-            </div>
+            <ButtonCircle type="left" onClick={onLeftBtnClick} />
+            <ButtonCircle type="right" onClick={onRightBtnClick} />
         </div>
     );
 };
