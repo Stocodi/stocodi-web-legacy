@@ -12,7 +12,7 @@ def parse_data(file_path):
         elif line.startswith("- **"):
             parts = line.split(" ")
             question = " ".join(parts[1:-1]).strip() 
-            answer = 0 if parts[-1].strip() == "(O)" else 1
+            answer = "O" if parts[-1].strip() == "(O)" else "X"
             comment = next((lines[lines.index(line) + 1].split(": ", 1)[1].strip() for l in lines if line in l), "") 
             data.append({
                 "subject": current_subject,
