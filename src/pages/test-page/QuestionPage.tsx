@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { Question, QuestionOption } from "../../components/test-page/Question";
-import { Problems } from "../../constants/Problems";
+import { questions } from "../../constants/Questions";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
@@ -12,13 +12,13 @@ export default function QuestionPage() {
     const location = useLocation();
 
     const index = location.pathname.split("/").at(-1) as string;
-    const problem = Problems[+index - 1];
+    const problem = questions[+index - 1];
 
     const onPrevClick = () => {
         navigate(index === "1" ? `/test` : `/test/${+index - 1}`);
     };
     const onNextClick = () => {
-        navigate(index === Problems.length.toString() ? `/test/result` : `/test/${+index + 1}`);
+        navigate(index === questions.length.toString() ? `/test/result` : `/test/${+index + 1}`);
     };
 
     return (
@@ -37,7 +37,7 @@ export default function QuestionPage() {
                 </button>
 
                 <span>
-                    ( {index} / {Problems.length} )
+                    ( {index} / {questions.length} )
                 </span>
 
                 <button onClick={onNextClick}>

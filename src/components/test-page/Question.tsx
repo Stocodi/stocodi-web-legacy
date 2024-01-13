@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { Comment, IsCorrect } from "./Comment";
+
 import styles from "./Question.module.scss";
+import { useQuestion } from "../../hooks/useQuestion";
 
 export interface IQuestion {
     index: string;
     question: string;
     children: React.ReactNode;
-    answer: number;
+    answer: string;
     comment: string;
 }
 
@@ -14,22 +16,7 @@ export interface IQuestionOption {
 }
 
 export const Question: React.FC<IQuestion> = ({ index, question, answer, comment, children }) => {
-    const [viewComment, setViewComment] = useState<boolean>(false);
-
-    useEffect(() => {
-        const options = document.querySelectorAll(`.${styles.question_opt}`);
-        for (let idx = 0; idx < options.length; idx++) {
-            options[idx].addEventListener("click", () => {
-                if (idx === answer) {
-                    // 정답
-                    setViewComment(true);
-                } else {
-                    // 오답
-                    setViewComment(true);
-                }
-            });
-        }
-    }, [answer]);
+    const { isCorrect, isCommentVisible } = useQuestion(answer, styles.question_opt);
 
     return (
         <div className={styles.question}>
@@ -39,7 +26,8 @@ export const Question: React.FC<IQuestion> = ({ index, question, answer, comment
 
             <div className={styles.options}>{children}</div>
 
-            {viewComment && <div>{comment}</div>}
+            <IsCorrect value={isCorrect} />
+            <Comment isVisible={isCommentVisible}>{comment}</Comment>
         </div>
     );
 };

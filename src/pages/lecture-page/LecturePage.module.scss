@@ -1,7 +1,21 @@
 @import "@/styles/utils.scss";
 
 .search_section {
-    //padding: 50px 15px;
+    padding-top: 30px;
+    padding-bottom: 50px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.logo_container {
+    width: 100%;
+
+    img {
+        display: block;
+        height: 200px;
+
+        margin: 0px auto;
+    }
 }
 
 .badge_container {
@@ -19,5 +33,21 @@
 
         font-size: 1.2rem;
         font-weight: bold;
+    }
+}
+
+@include tablet {
+    .logo_container {
+        img {
+            height: 150px;
+        }
+    }
+}
+
+@include mobile {
+    .logo_container {
+        img {
+            height: 100px;
+        }
     }
 }
