@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
 /**
  * 금융역량테스트 정답 채점 Hook
@@ -10,8 +10,10 @@ export const useQuestion = (answer: string, questionOptClassName: string) => {
     const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
     const [isCommentVisible, setIsCommentVisible] = useState<boolean>(false);
 
-    const onChooseOptions = useCallback(
-        (index: number) => {
+    useEffect(() => {
+        let timeout: ReturnType<typeof setTimeout> | undefined = undefined;
+
+        const onChooseOptions = (index: number) => {
             let selectedAnswer = "";
             if (index === 0) selectedAnswer = "O";
             else if (index === 1) selectedAnswer = "X";
@@ -23,22 +25,13 @@ export const useQuestion = (answer: string, questionOptClassName: string) => {
                 } else {
                     setIsCorrect(false);
                 }
-                setTimeout(() => {
+                timeout = setTimeout(() => {
                     setIsCorrect(null);
                     setIsCommentVisible(true);
                 }, 2000);
             };
-        },
-        [answer],
-    );
+        };
 
-    useEffect(() => {
-        /*
-            ❗️❗️❗️
-            금융역량테스트 해설 / 채점 뱃지 언마운트 안되는 현상
-            Issue #40
-            ❗️❗️❗️
-        */
         const $options = document.querySelectorAll(`.${questionOptClassName}`);
 
         for (let index = 0; index < $options.length; index++) {
@@ -52,10 +45,11 @@ export const useQuestion = (answer: string, questionOptClassName: string) => {
 
             // 언마운트 이전 다음 문제에 대해
             // isCorrect null, isCommentVisible false 로 설정
+            if (timeout !== undefined) clearTimeout(timeout);
             setIsCorrect(null);
             setIsCommentVisible(false);
         };
-    }, [onChooseOptions, questionOptClassName]);
+    }, [answer, questionOptClassName]);
 
     return { isCorrect, isCommentVisible };
 };
