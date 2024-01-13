@@ -5,6 +5,18 @@
 
     width: min(90%, 1400px);
     margin: 50px auto;
+
+    button {
+        position: absolute;
+        top: 50%;
+    }
+
+    button:first-child {
+        left: 0;
+    }
+    button:last-child {
+        right: 0;
+    }
 }
 
 .section_title {
@@ -23,7 +35,7 @@
 
 .section_container {
     width: 100%;
-    height: 340px;
+    height: auto;
 
     display: flex;
     flex-shrink: 1;
@@ -35,13 +47,4 @@
     &::-webkit-scrollbar {
         display: none;
     }
-}
-
-.section_controller {
-    position: absolute;
-    top: 170px;
-
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
 }
