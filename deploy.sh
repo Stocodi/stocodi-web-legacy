@@ -1,5 +1,4 @@
 # 서버환경 배포 스크립트
-
 env_file=".env"
 
 production_env_vars=(
