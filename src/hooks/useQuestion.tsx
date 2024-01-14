@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 /**
  * 금융역량테스트 정답 채점 Hook
@@ -6,50 +6,42 @@ import { useState, useEffect } from "react";
  * @param questionOptClassName QuestionOption 의 className Selector
  * @returns
  */
-export const useQuestion = (answer: string, questionOptClassName: string) => {
+export const useQuestion = (question: string, answer: string, questionOptClassName: string) => {
     const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
     const [isCommentVisible, setIsCommentVisible] = useState<boolean>(false);
+    const timeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+    // useEffect(() => console.log("[State Changed] : isCorrect Changed"), [isCorrect]);
+    // useEffect(() => console.log("[State Changed] : isCommentVisible Changed"), [isCommentVisible]);
 
     useEffect(() => {
-        let timeout: ReturnType<typeof setTimeout> | undefined = undefined;
+        setIsCorrect(null);
+        setIsCommentVisible(false);
 
-        const onChooseOptions = (index: number) => {
-            let selectedAnswer = "";
-            if (index === 0) selectedAnswer = "O";
-            else if (index === 1) selectedAnswer = "X";
-            else selectedAnswer = "";
-
-            return () => {
-                if (selectedAnswer === answer) {
-                    setIsCorrect(true);
-                } else {
-                    setIsCorrect(false);
-                }
-                timeout = setTimeout(() => {
-                    setIsCorrect(null);
-                    setIsCommentVisible(true);
-                }, 2000);
-            };
+        const onChooseOptions = (e: Event) => {
+            setIsCorrect(e.target?.innerHTML === answer);
+            timeout.current = setTimeout(() => {
+                setIsCommentVisible(true);
+            }, 2000);
         };
 
         const $options = document.querySelectorAll(`.${questionOptClassName}`);
 
         for (let index = 0; index < $options.length; index++) {
-            $options[index].addEventListener("click", onChooseOptions(index));
+            $options[index].addEventListener("click", onChooseOptions);
         }
 
         return () => {
             for (let index = 0; index < $options.length; index++) {
-                $options[index].removeEventListener("click", onChooseOptions(index));
+                $options[index].removeEventListener("click", onChooseOptions);
             }
 
-            // 언마운트 이전 다음 문제에 대해
-            // isCorrect null, isCommentVisible false 로 설정
-            if (timeout !== undefined) clearTimeout(timeout);
-            setIsCorrect(null);
-            setIsCommentVisible(false);
+            if (timeout.current !== undefined) {
+                clearTimeout(timeout.current);
+            }
+            console.log("---- unmount ----");
         };
-    }, [answer, questionOptClassName]);
+    }, [question, answer, questionOptClassName]);
 
     return { isCorrect, isCommentVisible };
 };
