@@ -16,7 +16,8 @@ export interface IQuestionOption {
 }
 
 export const Question: React.FC<IQuestion> = ({ index, question, answer, comment, children }) => {
-    const { isCorrect, isCommentVisible } = useQuestion(answer, styles.question_opt);
+    const { isCorrect, isCommentVisible } = useQuestion(question, answer, styles.question_opt);
+    console.log("isCorrect", isCorrect);
 
     return (
         <div className={styles.question}>
