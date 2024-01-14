@@ -11,9 +11,6 @@ export const useQuestion = (question: string, answer: string, questionOptClassNa
     const [isCommentVisible, setIsCommentVisible] = useState<boolean>(false);
     const timeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
-    // useEffect(() => console.log("[State Changed] : isCorrect Changed"), [isCorrect]);
-    // useEffect(() => console.log("[State Changed] : isCommentVisible Changed"), [isCommentVisible]);
-
     useEffect(() => {
         setIsCorrect(null);
         setIsCommentVisible(false);
@@ -39,7 +36,6 @@ export const useQuestion = (question: string, answer: string, questionOptClassNa
             if (timeout.current !== undefined) {
                 clearTimeout(timeout.current);
             }
-            console.log("---- unmount ----");
         };
     }, [question, answer, questionOptClassName]);
 
