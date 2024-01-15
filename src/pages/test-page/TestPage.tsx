@@ -30,7 +30,7 @@ export default function TestPage() {
                 </div>
             </div>
 
-            <Button type="primary-stroke" width="250px" height="50px" onClick={() => navigate("/test/1")}>
+            <Button type="primary-stroke" width="250px" height="50px" onClick={() => navigate("/test/question")}>
                 <span>테스트 시작하기</span>
             </Button>
         </div>

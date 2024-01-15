@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Question, QuestionOption } from "../../components/test-page/Question";
-import { questions } from "../../constants/Questions";
+import { BreadCrumb } from "../../components/test-page/BreadCrumb";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
+import { questions } from "../../constants/Questions";
 import styles from "./QuestionPage.module.scss";
 
 export default function QuestionPage() {
@@ -23,6 +24,16 @@ export default function QuestionPage() {
 
     return (
         <div className={styles.question_page}>
+            <div className={styles.title}>
+                <h1>금융역량테스트</h1>
+                <h3>
+                    <span>총 {questions.length}문항으로, </span>
+                    <span>전 문항 객관식으로 구성되어 있습니다</span>
+                </h3>
+            </div>
+
+            <BreadCrumb cursor={Math.trunc((index - 1) / 5)} items={["경제기초", "은행상품", "카드와 신용", "세금", "보험", "투자"]} />
+
             {
                 <Question
                     index={index}

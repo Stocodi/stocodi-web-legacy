@@ -1,6 +1,22 @@
 @import "@/styles/utils";
 
 .question_page {
+    .title {
+        text-align: center;
+        h1 {
+            margin: 10px 0px;
+            font-size: 3.5rem;
+            font-family: "Tendra";
+            font-weight: bold;
+        }
+        h3 {
+            margin: 10px 0px;
+            font-size: 1.5rem;
+            font-weight: normal;
+            font-family: "SCDream";
+        }
+    }
+
     .controller {
         @include place-center;
 
@@ -23,6 +39,20 @@
 
             &:hover {
                 cursor: pointer;
+            }
+        }
+    }
+}
+
+@include mobile {
+    .question_page {
+        .title {
+            padding: 15px;
+            h1 {
+                font-size: 2.5rem;
+            }
+            h3 {
+                font-size: 1.2rem;
             }
         }
     }

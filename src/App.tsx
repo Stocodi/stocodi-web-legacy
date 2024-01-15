@@ -46,7 +46,7 @@ export default function App() {
 
                     <Route path="/test" element={<TestLayout />}>
                         <Route index element={<TestPage />} />
-                        <Route path=":id" element={<QuestionPage />} />
+                        <Route path="question" element={<QuestionPage />} />
                         <Route path="result" element={<ResultPage />}></Route>
                     </Route>
                 </Routes>
