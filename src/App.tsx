@@ -17,10 +17,12 @@ import LectureSearchResultPage from "./pages/lecture-page/LectureSearchResultPag
 import LectureViewPage from "./pages/lecture-page/LectureViewPage";
 import LectureUploadPage from "./pages/lecture-page/LectureUploadPage";
 
-import PageNotFound from "./pages/PageNotFound";
 import TestPage from "./pages/test-page/TestPage";
 import QuestionPage from "./pages/test-page/QuestionPage";
 import ResultPage from "./pages/test-page/ResultPage";
+
+import PageNotFound from "./pages/PageNotFound";
+import ServiceNotAvailablePage from "./pages/ServiceNotAvailable";
 
 export default function App() {
     return (
@@ -32,6 +34,11 @@ export default function App() {
                         <Route path="lectures/search" element={<LectureSearchResultPage />} />
                         <Route path="lectures/view/:id" element={<LectureViewPage />} />
                         <Route path="lectures/upload" element={<LectureUploadPage />} />
+
+                        <Route path="/experiment" element={<ServiceNotAvailablePage />} />
+                        <Route path="/community" element={<ServiceNotAvailablePage />} />
+                        <Route path="/mypage/*" element={<ServiceNotAvailablePage />} />
+                        <Route path="/column" element={<ServiceNotAvailablePage />} />
 
                         <Route path="/about" element={<AboutPage />} />
                         <Route path="*" element={<PageNotFound />} />

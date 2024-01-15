@@ -1,0 +1,53 @@
+@import "@/styles/utils";
+
+.page_wrapper {
+    width: 100%;
+    height: calc(100vh - $nav-height);
+
+    margin: 200px auto;
+
+    text-align: center;
+
+    img {
+        display: block;
+
+        width: 150px;
+        margin: 0px auto;
+    }
+    h1 {
+        padding: 0px 20px;
+
+        font-size: 5rem;
+        font-family: "Chillax";
+        font-weight: bold;
+        color: $color-primary;
+    }
+    p {
+        font-size: 1rem;
+    }
+    button {
+        margin: 30px auto;
+    }
+}
+
+@include tablet {
+    .page_wrapper {
+        img {
+            width: 100px;
+        }
+        h1 {
+            font-size: 4rem;
+        }
+    }
+}
+
+@include mobile {
+    .page_wrapper {
+        img {
+            width: 100px;
+        }
+        h1 {
+            font-size: 3rem;
+        }
+    }
+}
