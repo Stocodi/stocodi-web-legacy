@@ -1,5 +1,6 @@
 import "@/styles/globals.scss";
-import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { CookiesProvider } from "react-cookie";
@@ -23,6 +24,12 @@ import QuestionPage from "./pages/test-page/QuestionPage";
 import ResultPage from "./pages/test-page/ResultPage";
 
 export default function App() {
+    const pathname = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+
     return (
         <CookiesProvider>
             <Provider store={store}>

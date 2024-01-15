@@ -54,7 +54,7 @@ export const NavHeadItem: React.FC = () => {
     return (
         <li className={styles.nav_head}>
             <Link to="/">
-                <img src="/icons/stocodi.svg" alt="" />
+                <img src="/icons/stocodi-letter.png" alt="" />
             </Link>
         </li>
     );

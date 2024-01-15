@@ -39,10 +39,6 @@ export default function LecturePage() {
         <>
             <Carousel carouselList={CAROUSEL_LINK}></Carousel>
             <div className={styles.search_section}>
-                <div className={styles.logo_container}>
-                    <img src="/icons/stocodi-letter.png" alt="stocodi-letter" />
-                </div>
-
                 <Search ref={searchRef} onClick={onSearchBtnClick} placeholder="원하는 강좌를 검색해보세요!"></Search>
 
                 <div className={styles.badge_container}>
@@ -66,7 +62,7 @@ export default function LecturePage() {
                                 <LectureCard.Light
                                     key={index}
                                     title={element.title}
-                                    publisher={element.description}
+                                    publisher={element.author}
                                     imgSrc={`https://img.youtube.com/vi/${ParseVideoId(element.video_link)}/0.jpg`}
                                     onClick={() => navigate(`/lectures/view/${element.id}`)}
                                 />
@@ -77,11 +73,22 @@ export default function LecturePage() {
             )}
 
             <LectureSection title="실시간 인기강의">
-                {LectureData.map((element, index) => {
-                    return (
-                        <LectureCard.Rank key={index} rank={index + 1} title={element.title} publisher={element.publisher} imgSrc={element.imgSrc} />
-                    );
-                })}
+                {// 조회수 가장많은 5개의 강의를 가져옴
+                data?.response
+                    .sort((e1, e2) => e2.views - e1.views)
+                    .slice(0, 10)
+                    .map((element, index) => {
+                        return (
+                            <LectureCard.Rank
+                                key={index}
+                                rank={index + 1}
+                                title={element.title}
+                                publisher={element.author}
+                                imgSrc={`https://img.youtube.com/vi/${ParseVideoId(element.video_link)}/0.jpg`}
+                                onClick={() => navigate(`/lectures/view/${element.id}`)}
+                            />
+                        );
+                    })}
             </LectureSection>
 
             <LectureSection title="지금 주목받는 강사진">

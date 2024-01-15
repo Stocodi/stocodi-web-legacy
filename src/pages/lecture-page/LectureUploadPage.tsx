@@ -9,7 +9,7 @@ import { Badge } from "../../interfaces/display/Badge";
 import { UploadPlaceholder } from "../../components/lecture-page/UploadPlaceholder";
 
 import { PostRequest } from "../../api/Request";
-import { GetAccessToken } from "../../api/Authentication";
+import { GetAccessToken, GetNickName } from "../../api/Authentication";
 
 import styles from "./LectureUploadPage.module.scss";
 
@@ -61,6 +61,7 @@ export default function LectureUploadPage() {
                     {
                         video_link: videolinkRef.current?.value,
                         title: titleRef.current?.value,
+                        author: GetNickName(),
                         description: descriptionRef.current?.value,
                         tags: hashtags,
                     },
