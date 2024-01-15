@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Question, QuestionOption } from "../../components/test-page/Question";
 import { questions } from "../../constants/Questions";
@@ -9,41 +10,45 @@ import styles from "./QuestionPage.module.scss";
 
 export default function QuestionPage() {
     const navigate = useNavigate();
-    const location = useLocation();
-
-    const index = location.pathname.split("/").at(-1) as string;
-    const problem = questions[+index - 1];
+    const [index, setIndex] = useState<number>(1);
 
     const onPrevClick = () => {
-        navigate(index === "1" ? `/test` : `/test/${+index - 1}`);
+        if (index === 1) navigate("/test");
+        else setIndex(index - 1);
     };
     const onNextClick = () => {
-        navigate(index === questions.length.toString() ? `/test/result` : `/test/${+index + 1}`);
+        if (index === questions.length) navigate("/test/result");
+        else setIndex(index + 1);
     };
 
     return (
         <div className={styles.question_page}>
-            {typeof index === "string" && (
-                <Question index={index} question={problem.question} answer={problem.answer} comment={problem.comment}>
-                    {problem.options.map((element, index) => {
+            {
+                <Question
+                    index={index}
+                    question={questions[index - 1].question}
+                    answer={questions[index - 1].answer}
+                    comment={questions[index - 1].comment}
+                >
+                    {questions[index - 1].options.map((element, index) => {
                         return <QuestionOption key={index}>{element}</QuestionOption>;
                     })}
+
+                    <div className={styles.controller}>
+                        <button onClick={onPrevClick}>
+                            <FontAwesomeIcon icon={faChevronLeft} />
+                        </button>
+
+                        <span>
+                            ( {index} / {questions.length} )
+                        </span>
+
+                        <button onClick={onNextClick}>
+                            <FontAwesomeIcon icon={faChevronRight} />
+                        </button>
+                    </div>
                 </Question>
-            )}
-
-            <div className={styles.controller}>
-                <button onClick={onPrevClick}>
-                    <FontAwesomeIcon icon={faChevronLeft} />
-                </button>
-
-                <span>
-                    ( {index} / {questions.length} )
-                </span>
-
-                <button onClick={onNextClick}>
-                    <FontAwesomeIcon icon={faChevronRight} />
-                </button>
-            </div>
+            }
         </div>
     );
 }

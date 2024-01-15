@@ -1,10 +1,10 @@
 import { Comment, IsCorrect } from "./Comment";
-
-import styles from "./Question.module.scss";
 import { useQuestion } from "../../hooks/useQuestion";
 
+import styles from "./Question.module.scss";
+
 export interface IQuestion {
-    index: string;
+    index: number;
     question: string;
     children: React.ReactNode;
     answer: string;
@@ -17,7 +17,7 @@ export interface IQuestionOption {
 
 export const Question: React.FC<IQuestion> = ({ index, question, answer, comment, children }) => {
     const { isCorrect, isCommentVisible } = useQuestion(question, answer, styles.question_opt);
-    console.log("isCorrect", isCorrect);
+    // console.log("isCorrect", isCorrect);
 
     return (
         <div className={styles.question}>
@@ -26,9 +26,9 @@ export const Question: React.FC<IQuestion> = ({ index, question, answer, comment
             </h1>
 
             <div className={styles.options}>{children}</div>
+            <Comment isVisible={isCommentVisible}>{comment}</Comment>
 
             <IsCorrect value={isCorrect} />
-            <Comment isVisible={isCommentVisible}>{comment}</Comment>
         </div>
     );
 };
