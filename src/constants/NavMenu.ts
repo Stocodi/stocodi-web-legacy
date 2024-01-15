@@ -25,4 +25,9 @@ export const NavMenu: INavMenu[] = [
         to: "/mypage/portfolio",
         text: "마이페이지",
     },
+    {
+        key: 5,
+        to: "/test",
+        text: "금융역량테스트",
+    },
 ];
