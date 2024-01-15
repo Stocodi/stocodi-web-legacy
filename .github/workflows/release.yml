@@ -6,7 +6,7 @@ on:
 jobs:
     build:
         if: ${{ github.event.pull_request.merged }}
-        name: synchronization between local and remote repository
+        name: Deploy on stocodi.com
         runs-on: ubuntu-latest
 
         # 경고 무시
@@ -17,7 +17,7 @@ jobs:
             - name: checkout
               uses: actions/checkout@v1
 
-            - name: executing remote ssh commands with ssh key
+            - name: deploy
               uses: appleboy/ssh-action@master
               with:
                   host: ${{ secrets.DEPLOY_SERVER_HOST }}

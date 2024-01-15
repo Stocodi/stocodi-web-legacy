@@ -13,13 +13,20 @@ import { ParseVideoId } from "../../utils/YoutubeLinks";
 import { PutRequest } from "../../api/Request";
 import styles from "./LectureViewPage.module.scss";
 import { LectureCommentContainer } from "../../components/lecture-page/LectureComment";
+import { GetAccessToken } from "../../api/Authentication";
 
 export default function LectureViewPage() {
     const { id } = useParams();
     const { status, data } = useGetRequest<IGetLectureByIdResponse>(`/lectures/${id as string}`);
 
-    const onHeartClick = () => {
-        alert("서비스 준비중입니다");
+    const onHeartClick = async () => {
+        const response = await PutRequest<Record<string, never>, { response: boolean }>(
+            `/likes/${data?.response.id.toString() as string}`,
+            {},
+            GetAccessToken(),
+        );
+        if (response.response === true) alert("좋아요한 강의에 추가되었습니다");
+        else alert("좋아요가 취소되었습니다");
     };
     const onBookmarkClick = () => {
         alert("서비스 준비중입니다");
@@ -55,7 +62,7 @@ export default function LectureViewPage() {
                         <h2>{data?.response.title}</h2>
 
                         <LectureProvider
-                            name="스토코디"
+                            name={data?.response.author as string}
                             description={`조회수 ${data?.response.views.toString() as string} 회 | 좋아요 ${
                                 data?.response.likes.toString() as string
                             } 개`}

@@ -3,6 +3,7 @@ export interface IGetAllLectureResponse {
         {
             id: number;
             video_link: string;
+            author: string;
             title: string;
             description: string;
             tags: string[];
@@ -16,6 +17,7 @@ export interface IGetLectureByIdResponse {
     response: {
         id: number;
         video_link: string;
+        author: string;
         title: string;
         description: string;
         tags: string[];

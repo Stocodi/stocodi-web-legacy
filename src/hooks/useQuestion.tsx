@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 /**
  * 금융역량테스트 정답 채점 Hook
@@ -6,50 +6,59 @@ import { useState, useEffect } from "react";
  * @param questionOptClassName QuestionOption 의 className Selector
  * @returns
  */
-export const useQuestion = (answer: string, questionOptClassName: string) => {
+export const useQuestion = (question: string, answer: string, questionOptClassName: string) => {
     const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
     const [isCommentVisible, setIsCommentVisible] = useState<boolean>(false);
 
+    const answerElementRef = useRef<HTMLElement | null>(null);
+    const timeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
     useEffect(() => {
-        let timeout: ReturnType<typeof setTimeout> | undefined = undefined;
+        setIsCorrect(null);
+        setIsCommentVisible(false);
 
-        const onChooseOptions = (index: number) => {
-            let selectedAnswer = "";
-            if (index === 0) selectedAnswer = "O";
-            else if (index === 1) selectedAnswer = "X";
-            else selectedAnswer = "";
+        const onChooseOptions = (e: Event) => {
+            const target = e.target as HTMLElement;
+            setIsCorrect(target.innerHTML === answer);
 
-            return () => {
-                if (selectedAnswer === answer) {
-                    setIsCorrect(true);
-                } else {
-                    setIsCorrect(false);
+            timeout.current = setTimeout(() => {
+                setIsCommentVisible(true);
+                setIsCorrect(null);
+
+                if (answerElementRef.current) {
+                    answerElementRef.current.style.backgroundColor = `#0ECB81`;
                 }
-                timeout = setTimeout(() => {
-                    setIsCorrect(null);
-                    setIsCommentVisible(true);
-                }, 2000);
-            };
+            }, 2000);
         };
 
         const $options = document.querySelectorAll(`.${questionOptClassName}`);
 
         for (let index = 0; index < $options.length; index++) {
-            $options[index].addEventListener("click", onChooseOptions(index));
+            $options[index].addEventListener("click", onChooseOptions);
+
+            // 정답 HTML Element 저장
+            if ($options[index].innerHTML === answer && answerElementRef) {
+                answerElementRef.current = $options[index] as HTMLElement;
+                answerElementRef.current.style.transition = `background-color 1s ease-in-out`;
+            }
         }
 
         return () => {
             for (let index = 0; index < $options.length; index++) {
-                $options[index].removeEventListener("click", onChooseOptions(index));
+                $options[index].removeEventListener("click", onChooseOptions);
             }
 
-            // 언마운트 이전 다음 문제에 대해
-            // isCorrect null, isCommentVisible false 로 설정
-            if (timeout !== undefined) clearTimeout(timeout);
-            setIsCorrect(null);
-            setIsCommentVisible(false);
+            if (timeout.current !== undefined) {
+                clearTimeout(timeout.current);
+            }
+
+            if (answerElementRef.current) {
+                answerElementRef.current.style.backgroundColor = `#efefef`;
+                answerElementRef.current.style.transition = `none`;
+                answerElementRef.current = null;
+            }
         };
-    }, [answer, questionOptClassName]);
+    }, [question, answer, questionOptClassName]);
 
     return { isCorrect, isCommentVisible };
 };
