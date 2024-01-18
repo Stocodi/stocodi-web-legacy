@@ -1,0 +1,85 @@
+@import "@/styles/utils";
+
+.result_summary {
+    width: 486px;
+
+    @include place-center;
+    justify-content: space-between;
+
+    margin: 20px auto;
+    padding: 20px 30px;
+
+    div {
+        @include vertical-center;
+        h2 {
+            margin: 5px 0px;
+            font-family: "SCDream";
+            font-weight: normal;
+            font-size: 20px;
+            color: #fff;
+        }
+        h1 {
+            margin: 5px 0px;
+            font-family: "SCDream";
+            font-size: 40px;
+            color: #fff;
+        }
+    }
+    img {
+        display: block;
+        object-fit: contain;
+    }
+
+    border-radius: 16px;
+
+    background-color: #0ecb81;
+}
+
+.result_grid_container {
+    width: 100%;
+}
+
+.result_grid {
+    display: grid;
+    grid-template-rows: repeat(2, 150px);
+    grid-template-columns: repeat(3, 150px);
+    gap: 18px;
+
+    width: fit-content;
+    margin: 20px auto;
+}
+
+.result_grid_item {
+    position: relative;
+
+    width: 150px;
+    height: 150px;
+
+    border-radius: 16px;
+    padding: 25px;
+
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+
+    overflow: hidden;
+
+    h3 {
+        margin: 5px 0px;
+        font-family: "SCDream";
+        font-size: 16px;
+        font-weight: normal;
+        color: #2b302f;
+    }
+    h2 {
+        margin: 5px 0px;
+        font-family: "SCDream";
+        font-size: 20px;
+        font-weight: bold;
+        color: #007649;
+    }
+    img {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+}
