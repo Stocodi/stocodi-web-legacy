@@ -21,7 +21,12 @@ export default function LectureSearchResultPage() {
     const { status, data } = useGetRequest<IGetAllLectureResponse>(`/lectures/search?key=${GetSearchParams(searchParams, "key")}`);
 
     const onSearch = () => {
-        navigate(`/lectures/search?key=${searchRef.current?.value as string}`);
+        if (!searchRef.current?.value || searchRef.current?.value.trim() === "") {
+            alert("검색어를 입력하세요.");
+            return;
+        }
+        // 검색어가 유효한 경우에만 검색 페이지로 이동
+        navigate(`/lectures/search?key=${searchRef.current?.value}`);
     };
 
     if (status !== STATUS.SUCCESS) return <Loader />;
