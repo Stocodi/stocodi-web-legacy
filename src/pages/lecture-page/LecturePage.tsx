@@ -24,9 +24,12 @@ export default function LecturePage() {
     const { status, data } = useGetRequest<IGetAllLectureResponse>("/lectures");
 
     const onSearchBtnClick = () => {
-        if (typeof searchRef.current?.value === "string") {
-            navigate(`/lectures/search?key=${searchRef.current?.value}`);
+        if (!searchRef.current?.value || searchRef.current?.value.trim() === "") {
+            alert("검색어를 입력하세요.");
+            return;
         }
+        // 검색어가 유효한 경우에만 검색 페이지로 이동
+        navigate(`/lectures/search?key=${searchRef.current?.value}`);
     };
 
     const CAROUSEL_LINK = [
