@@ -1,83 +1,27 @@
 @import "@/styles/utils";
 
 .breadcrumb {
-    @include horizontal-center;
+    width: 100%;
+    max-width: 900px;
 
-    margin: 50px 0px;
+    margin: 0px auto;
+    padding: 20px 50px;
+
+    border: 2px solid #0eca80;
 }
 
 .breadcrumb_container {
-    @include horizontal-center;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
 
-    width: auto;
-
-    margin: 10px;
-    padding: 20px;
-
-    border: 2px solid #0eca80;
-    font-size: 20px;
-    font-family: "SCDream";
-
-    span {
-        margin: 0px 10px;
+    div {
+        font-size: 20px;
+        font-family: "SCDream";
         color: #bdbdbd;
     }
 
-    span > svg {
-        color: #bdbdbd;
-    }
-}
-
-// .breadcrumb_item {
-// }
-
-.current {
-    color: #000 !important;
-}
-
-@include tablet {
-    .breadcrumb {
-        margin: 0px;
-    }
-
-    .breadcrumb_container {
-        flex-direction: row;
-        padding: 15px;
-
-        text-align: center;
-    }
-
-    .breadcrumb_item {
-        span:first-child {
-            font-size: 20px;
-        }
-        span:last-child {
-            display: none;
-        }
-    }
-}
-
-@include mobile {
-    .breadcrumb {
-        margin: 0px;
-    }
-
-    .breadcrumb_container {
-        flex-direction: column;
-        padding: 15px;
-
-        text-align: center;
-    }
-
-    .breadcrumb_item {
-        span:first-child {
-            font-size: 20px;
-        }
-        span:last-child {
-            display: none;
-        }
-        span:not(.current) {
-            display: none;
-        }
+    div:last-child {
+        display: none;
     }
 }

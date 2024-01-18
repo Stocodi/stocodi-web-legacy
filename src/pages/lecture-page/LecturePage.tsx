@@ -41,7 +41,7 @@ export default function LecturePage() {
             <div className={styles.search_section}>
                 <Search ref={searchRef} onClick={onSearchBtnClick} placeholder="원하는 강좌를 검색해보세요!"></Search>
 
-                <div className={styles.badge_container}>
+                {/* <div className={styles.badge_container}>
                     <span>인기태그👉</span>
                     <Badge type="primary-stroke">해시태그</Badge>
                     <Badge type="primary-stroke">해시태그</Badge>
@@ -49,14 +49,14 @@ export default function LecturePage() {
                     <Badge type="primary-stroke">해시태그</Badge>
                     <Badge type="primary-stroke">해시태그</Badge>
                     <Badge type="primary-stroke">해시태그</Badge>
-                </div>
+                </div> */}
             </div>
 
             {status !== STATUS.SUCCESS ? (
                 <Loader />
             ) : (
                 <>
-                    <LectureSection title="Recently Uploaded">
+                    <LectureSection title="최근업로드">
                         {data?.response.map((element, index) => {
                             return (
                                 <LectureCard.Light
@@ -91,7 +91,7 @@ export default function LecturePage() {
                     })}
             </LectureSection>
 
-            <LectureSection title="지금 주목받는 강사진">
+            {/* <LectureSection title="지금 주목받는 강사진">
                 {LectureData.map((element, index) => {
                     return (
                         <LectureCard.Default
@@ -103,7 +103,7 @@ export default function LecturePage() {
                         />
                     );
                 })}
-            </LectureSection>
+            </LectureSection> */}
         </>
     );
 }

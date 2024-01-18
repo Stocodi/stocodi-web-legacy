@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import { UserInterfaceSlice } from "./user-interface-slice";
 import { UserSignupSlice } from "./user-signup-slice";
+import { UserQuestionSlice } from "./user-question-slice";
 
 export const store = configureStore({
     reducer: {
         UserInterface: UserInterfaceSlice.reducer,
         UserSignup: UserSignupSlice.reducer,
+        UserQuestion: UserQuestionSlice.reducer,
     },
 });
 

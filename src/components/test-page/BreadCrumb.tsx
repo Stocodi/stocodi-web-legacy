@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import styles from "./BreadCrumb.module.scss";
+import { Fragment } from "react";
 
 export interface IBreadCrumb {
     items: string[];
@@ -15,14 +16,12 @@ export const BreadCrumb: React.FC<IBreadCrumb> = ({ items, cursor }) => {
             <div className={styles.breadcrumb_container}>
                 {items.map((element, index) => {
                     return (
-                        <div className={styles.breadcrumb_item} key={index}>
-                            <span className={index === cursor ? `${styles.current}` : ``}>{element}</span>
-                            {index !== items.length - 1 && (
-                                <span className={`${styles.current}`}>
-                                    <FontAwesomeIcon icon={faChevronRight} />
-                                </span>
-                            )}
-                        </div>
+                        <Fragment key={index}>
+                            <div style={cursor === index + 1 ? { color: "black" } : {}}>{element}</div>
+                            <div>
+                                <FontAwesomeIcon icon={faChevronRight} />
+                            </div>
+                        </Fragment>
                     );
                 })}
             </div>
