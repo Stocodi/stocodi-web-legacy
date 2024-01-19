@@ -1,0 +1,44 @@
+@import "@/styles/utils";
+
+.radio_btn {
+    position: relative;
+
+    width: 25px;
+    height: 25px;
+
+    font-family: "SCDream";
+
+    & + svg {
+        position: absolute;
+
+        width: 15px;
+        height: 15px;
+
+        padding: 5px;
+
+        border-radius: 50%;
+
+        pointer-events: none;
+    }
+    &:checked + svg {
+        background-color: #0eca80;
+        color: #fff;
+    }
+    &:not(:checked) + svg {
+        display: none;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.radio_opt {
+    display: flex;
+
+    p {
+        @include vertical-center;
+        margin: 0px 5px;
+        font-family: "SCDream";
+        font-size: 16px;
+    }
+}

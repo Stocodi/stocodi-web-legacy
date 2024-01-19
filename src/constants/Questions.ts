@@ -6,6 +6,8 @@ export interface IQuestion {
     comment: string;
 }
 
+export const questionsPerPage = 5;
+
 export const questions: IQuestion[] = [
     {
         subject: "경제기초",

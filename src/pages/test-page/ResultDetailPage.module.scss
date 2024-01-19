@@ -1,0 +1,20 @@
+@import "@/styles/utils";
+
+.pros_cons_container {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+
+    width: 100%;
+    max-width: 486px;
+
+    margin: 0px auto;
+}
+
+.pros_cons_item {
+    display: flex;
+    justify-content: space-between;
+
+    width: inherit;
+    height: auto;
+}

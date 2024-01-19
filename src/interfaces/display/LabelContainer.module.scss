@@ -1,0 +1,28 @@
+@import "@/styles/utils";
+
+.label_container {
+    position: relative;
+
+    margin: 50px auto;
+
+    border: 2px solid #0ecb81;
+    border-radius: 12px;
+    padding: 20px;
+
+    background-color: #fff;
+
+    p {
+        position: absolute;
+        top: -10px;
+        background-color: #fff;
+        padding: 0px 10px;
+
+        font-family: "SCDream";
+        font-size: 16px;
+    }
+    div {
+        font-family: "SCDream";
+        font-size: 16px;
+        line-height: 26px;
+    }
+}

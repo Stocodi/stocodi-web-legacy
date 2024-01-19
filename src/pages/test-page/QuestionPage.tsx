@@ -1,65 +1,51 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Question, QuestionOption } from "../../components/test-page/Question";
+
 import { BreadCrumb } from "../../components/test-page/BreadCrumb";
+import { Question } from "../../components/test-page/Question";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { questions, questionsPerPage } from "../../constants/Questions";
 
-import { questions } from "../../constants/Questions";
 import styles from "./QuestionPage.module.scss";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 export default function QuestionPage() {
-    const navigate = useNavigate();
-    const [index, setIndex] = useState<number>(1);
+    const { submittedAnswer } = useSelector((state: RootState) => state.UserQuestion);
 
-    const onPrevClick = () => {
-        if (index === 1) navigate("/test");
-        else setIndex(index - 1);
-    };
-    const onNextClick = () => {
-        if (index === questions.length) navigate("/test/result");
-        else setIndex(index + 1);
+    const navigate = useNavigate();
+    const [page, setPage] = useState<number>(1);
+
+    const onNextBtnClick = () => {
+        console.log(page * questionsPerPage, submittedAnswer.length);
+        if (page * questionsPerPage !== submittedAnswer.length) {
+            alert("아직 풀지 않은 문항이 있습니다!");
+            return;
+        }
+
+        window.scrollTo(0, 0);
+        if (page === questions.length / questionsPerPage) navigate("/test/result");
+        else setPage((page) => page + 1);
     };
 
     return (
         <div className={styles.question_page}>
             <div className={styles.title}>
                 <h1>금융역량테스트</h1>
-                <h3>
-                    <span>총 {questions.length}문항으로, </span>
-                    <span>전 문항 객관식으로 구성되어 있습니다</span>
-                </h3>
+                <p>총 {questions.length}문항으로, 전 문항 객관식으로 구성되어 있습니다</p>
             </div>
 
-            <BreadCrumb cursor={Math.trunc((index - 1) / 5)} items={["경제기초", "은행상품", "카드와 신용", "세금", "보험", "투자"]} />
+            <div className={styles.breadcrumb_wrapper}>
+                <BreadCrumb cursor={page} items={["경제기초", "은행상품", "카드와 신용", "세금", "보험", "투자"]} />
+            </div>
 
-            {
-                <Question
-                    index={index}
-                    question={questions[index - 1].question}
-                    answer={questions[index - 1].answer}
-                    comment={questions[index - 1].comment}
-                >
-                    {questions[index - 1].options.map((element, index) => {
-                        return <QuestionOption key={index}>{element}</QuestionOption>;
-                    })}
+            {questions.slice(page, page + questionsPerPage).map((element, key) => {
+                return <Question key={key} index={page * questionsPerPage - questionsPerPage + 1 + key} question={element.question} />;
+            })}
 
-                    <div className={styles.controller}>
-                        <button onClick={onPrevClick}>
-                            <FontAwesomeIcon icon={faChevronLeft} />
-                        </button>
-
-                        <span>
-                            ( {index} / {questions.length} )
-                        </span>
-
-                        <button onClick={onNextClick}>
-                            <FontAwesomeIcon icon={faChevronRight} />
-                        </button>
-                    </div>
-                </Question>
-            }
+            <button className={styles.btn} onClick={onNextBtnClick}>
+                다음문항
+            </button>
         </div>
     );
 }
