@@ -32,6 +32,8 @@
 @include mobile {
     .breadcrumb {
         padding: 10px 0px;
+        background-color: #0eca80;
+        border-radius: 12px;
     }
     .breadcrumb_container {
         display: flex;
@@ -40,6 +42,7 @@
 
         .active {
             font-size: 16px;
+            color: #fff;
         }
 
         div:not(.active) {

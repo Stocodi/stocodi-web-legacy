@@ -7,9 +7,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "prettier" : "prettier --write **/*.{ts,tsx}",
+    "prettier": "prettier --write **/*.{ts,tsx}",
     "preview": "vite preview",
-    "start":"serve -s dist -l 3000"
+    "start": "serve -s dist -l 3000"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
@@ -17,6 +17,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@reduxjs/toolkit": "^2.0.1",
     "axios": "^1.6.2",
+    "dom-to-image": "^2.6.0",
     "react": "^18.2.0",
     "react-cookie": "^6.1.1",
     "react-dom": "^18.2.0",
@@ -27,6 +28,7 @@
     "storybook": "^7.6.6"
   },
   "devDependencies": {
+    "@types/dom-to-image": "^2.6.7",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "@typescript-eslint/eslint-plugin": "^5.61.0",

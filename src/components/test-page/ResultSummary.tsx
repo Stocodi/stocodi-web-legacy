@@ -10,7 +10,7 @@ export interface IResultGridItem {
     icon: string;
 }
 
-export const ResultSummary = ({ score }: { score: number }) => {
+export const ResultSummary = ({ score }: { score: string }) => {
     return (
         <div className={styles.result_summary}>
             <div>

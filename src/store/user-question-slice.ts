@@ -1,16 +1,11 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-export interface ISubmittedAnswer {
-    index: number;
-    selectedAnswer: "O" | "X" | "모르겠음";
-}
-
 export interface IUserQuestion {
-    submittedAnswer: ISubmittedAnswer[];
+    score: number[];
 }
 
 export const initialState: IUserQuestion = {
-    submittedAnswer: [],
+    score: [0, 0, 0, 0, 0, 0],
 };
 
 export const UserQuestionSlice = createSlice({
@@ -19,10 +14,8 @@ export const UserQuestionSlice = createSlice({
     initialState: initialState,
 
     reducers: {
-        selectAnswer: (state, action: PayloadAction<ISubmittedAnswer>) => {
-            const index = state.submittedAnswer.findIndex((element) => element.index === action.payload.index);
-            if (index === -1) state.submittedAnswer.push(action.payload);
-            else state.submittedAnswer[index] = action.payload;
+        setScore: (state, action: PayloadAction<{ index: number; score: number }>) => {
+            state.score[action.payload.index - 1] += action.payload.score * 20;
         },
     },
 });
