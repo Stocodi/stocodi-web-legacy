@@ -57,7 +57,7 @@ export const ResultMid = [
 export const ResultHigh = [
     {
         img: "/img/test-9.png",
-        title: "가격이 잘못 매겨진 기회를 찾아라. 그게 바로 투자다. 어떤 기회가 가격이 잘못 매겨진 것인지 충분히 알아야 한다. 그게 가치투자다",
+        title: "가격이 잘못 매겨진 기회를 찾아라. 그게 바로 투자다.",
         author: "찰리멍거",
     },
     {
