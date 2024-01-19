@@ -17,6 +17,9 @@ export const UserQuestionSlice = createSlice({
         setScore: (state, action: PayloadAction<{ index: number; score: number }>) => {
             state.score[action.payload.index - 1] += action.payload.score * 20;
         },
+        initScore: (state) => {
+            state.score = [0, 0, 0, 0, 0, 0];
+        },
     },
 });
 
