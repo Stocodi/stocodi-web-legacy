@@ -45,8 +45,12 @@ export default function ResultPage() {
     useEffect(() => {
         // 문제 채점 로직
         setScore({
-            ...score,
-            type_basic: score.type_basic + 10,
+            type_basic: 0,
+            type_bank: 0,
+            type_credit: 0,
+            type_tax: 0,
+            type_insurance: 0,
+            type_investment: 0,
         });
     }, [score]);
 
