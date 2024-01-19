@@ -113,7 +113,7 @@ export default function ResultDetailPage() {
                     label="카카오톡"
                     onClick={() => {
                         console.log("click");
-                        shareKakaoLink("금융역량테스트 바로가기", "http://stocodi.com/test");
+                        shareKakaoLink("금융역량테스트", "금융역량테스트 바로가기", "/img/stocodi-thumbnail.png", "http://stocodi.com/test");
                     }}
                 />
                 <ShareItem icon={shareIG} label="인스타그램" onClick={() => alert("서비스 준비중입니다")} />

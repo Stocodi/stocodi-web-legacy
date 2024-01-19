@@ -11,7 +11,7 @@ declare global {
     }
 }
 
-export const shareKakaoLink = (title: string, link: string): void => {
+export const shareKakaoLink = (title: string, description: string, imageUrl: string, link: string): void => {
     // const script = document.createElement("script");
     // script.setAttribute("src", "https://developers.kakao.com/sdk/js/kakao.js");
     // document.head.appendChild(script);
@@ -26,8 +26,8 @@ export const shareKakaoLink = (title: string, link: string): void => {
             objectType: "feed",
             content: {
                 title: title,
-                description: "설명",
-                imageUrl: "이미지 url",
+                description,
+                imageUrl,
                 link: {
                     mobileWebUrl: link,
                     webUrl: link,
