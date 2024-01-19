@@ -28,3 +28,15 @@
     padding: 30px 0px;
     background-color: #fafbfd;
 }
+
+@include mobile {
+    .result_page {
+        a {
+            font-size: 16px;
+        }
+    }
+
+    .result_section {
+        padding: 20px;
+    }
+}

@@ -5,7 +5,7 @@
     max-width: 900px;
 
     margin: 0px auto;
-    padding: 20px 50px;
+    padding: 20px 0px;
 
     border: 2px solid #0eca80;
 }
@@ -15,13 +15,39 @@
     justify-content: center;
     gap: 30px;
 
+    .active {
+        color: #000;
+    }
+
     div {
         font-size: 20px;
         font-family: "SCDream";
         color: #bdbdbd;
     }
-
     div:last-child {
         display: none;
+    }
+}
+
+@include mobile {
+    .breadcrumb {
+        padding: 10px 0px;
+    }
+    .breadcrumb_container {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+
+        .active {
+            font-size: 16px;
+        }
+
+        div:not(.active) {
+            display: none;
+        }
+
+        div:last-child {
+            display: none;
+        }
     }
 }

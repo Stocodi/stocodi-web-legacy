@@ -17,7 +17,7 @@ export const BreadCrumb: React.FC<IBreadCrumb> = ({ items, cursor }) => {
                 {items.map((element, index) => {
                     return (
                         <Fragment key={index}>
-                            <div style={cursor === index + 1 ? { color: "black" } : {}}>{element}</div>
+                            <div className={cursor === index + 1 ? styles.active : ""}>{element}</div>
                             <div>
                                 <FontAwesomeIcon icon={faChevronRight} />
                             </div>

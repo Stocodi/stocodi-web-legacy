@@ -1,6 +1,8 @@
 @import "@/styles/utils";
 
 .question_page {
+    margin: 100px 0px;
+
     .title {
         text-align: center;
         h1 {
@@ -18,7 +20,7 @@
     }
 
     .breadcrumb_wrapper {
-        margin: 30px 0px;
+        margin: 30px auto;
     }
 
     .btn {
@@ -42,4 +44,23 @@
 }
 
 @include mobile {
+    .question_page {
+        margin: 50px 0px;
+        .title {
+            h1 {
+                font-size: 40px;
+            }
+            p {
+                font-size: 14px;
+            }
+        }
+        .btn {
+            width: 160px;
+            height: 50px;
+            font-size: 18px;
+        }
+    }
+    .breadcrumb_wrapper {
+        padding: 0px 20px;
+    }
 }

@@ -61,3 +61,33 @@
 
     object-fit: cover;
 }
+
+.lecture_redirect_link {
+    display: none;
+
+    margin: 10px 0px;
+
+    a {
+        span {
+            font-size: 16px;
+            font-family: "SCDream";
+            text-align: right;
+        }
+        svg {
+            margin: 0px 10px;
+        }
+        &:hover {
+            color: #000;
+        }
+    }
+}
+
+@include mobile {
+    .lecture_redirect_card {
+        display: none;
+    }
+
+    .lecture_redirect_link {
+        display: block;
+    }
+}

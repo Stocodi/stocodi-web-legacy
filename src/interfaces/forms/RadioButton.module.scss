@@ -3,8 +3,8 @@
 .radio_btn {
     position: relative;
 
-    width: 25px;
-    height: 25px;
+    width: 24px;
+    height: 24px;
 
     font-family: "SCDream";
 
@@ -37,8 +37,9 @@
 
     p {
         @include vertical-center;
-        margin: 0px 5px;
+        margin: 0px 10px;
         font-family: "SCDream";
-        font-size: 16px;
+        font-size: 16px !important;
+        vertical-align: middle;
     }
 }
