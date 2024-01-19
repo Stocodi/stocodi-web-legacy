@@ -18,8 +18,7 @@ export default function QuestionPage() {
     const [page, setPage] = useState<number>(1);
 
     const onNextBtnClick = () => {
-        console.log(page * questionsPerPage, submittedAnswer.length);
-        if (page * questionsPerPage !== submittedAnswer.length) {
+        if (page * questionsPerPage !== submittedAnswer.filter((element) => element != null).length) {
             alert("아직 풀지 않은 문항이 있습니다!");
             return;
         }
