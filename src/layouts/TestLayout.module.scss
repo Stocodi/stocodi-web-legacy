@@ -1,7 +1,10 @@
 @import "@/styles/utils.scss";
 
 .test_page {
-    @include vertical-center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     width: 100%;
 }

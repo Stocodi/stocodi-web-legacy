@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import domtoimage from "dom-to-image";
+
 import { Link } from "react-router-dom";
 
 import { AvatarSection } from "../../components/test-page/AvatarSection";
 import { ResultGrid, ResultGridItem, ResultSummary } from "../../components/test-page/ResultSummary";
-import { ShareItem, ShareSection } from "../../components/test-page/ShareSection";
+import { ShareContainer, ShareItem } from "../../components/test-page/ShareContainer";
+
+import { shareKakaoLink } from "../../utils/ShareKakaoLink";
 
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -24,29 +27,22 @@ import shareFb from "@/assets/share-fb.png";
 import shareLink from "@/assets/share-link.png";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { usePostRequest } from "../../hooks/useRequest";
+import { useEffect } from "react";
+import { PostRequest } from "../../api/Request";
 
-export interface IScore {
-    type_basic: number;
-    type_bank: number;
-    type_credit: number;
-    type_tax: number;
-    type_insurance: number;
-    type_investment: number;
-}
+import { GetResult } from "../../constants/Result";
 
 export default function ResultPage() {
     const { score } = useSelector((state: RootState) => state.UserQuestion);
+    const result = GetResult(score.reduce((prev, next) => prev + next) / 6);
 
-    usePostRequest("/api/v1/statistics/end", {});
+    useEffect(() => {
+        PostRequest("/statistics/end", {});
+    });
 
     return (
         <div className={styles.result_page}>
-            <AvatarSection
-                avatarImg="/img/test-thumbnail.webp"
-                phrase="잭팟을 터트렸다고 말하는 사람들을 부러워해선 안된다"
-                author="워렌 버핏, 버크셔 해서웨이 CEO"
-            />
+            <AvatarSection avatarImg={result?.img as string} phrase={result?.title as string} author={result?.author as string} />
 
             <div className={styles.result_section}>
                 <ResultSummary score={(score.reduce((prev, next) => prev + next) / 6).toFixed(1)} />
@@ -66,11 +62,29 @@ export default function ResultPage() {
                 </Link>
             </div>
 
-            <ShareSection>
-                <ShareItem icon={shareImg} label="이미지 저장" />
-                <ShareItem icon={shareKakao} label="카카오톡" />
-                <ShareItem icon={shareIG} label="인스타그램" />
-                <ShareItem icon={shareFb} label="페이스북" />
+            <ShareContainer>
+                <ShareItem
+                    icon={shareImg}
+                    label="이미지 저장"
+                    onClick={() => {
+                        domtoimage.toJpeg(document.querySelector(`.${styles.result_page}`) as Node, { quality: 0.95 }).then(function (dataUrl) {
+                            const link = document.createElement("a");
+                            link.download = "금융역량테스트 결과.jpeg";
+                            link.href = dataUrl;
+                            link.click();
+                        });
+                    }}
+                />
+                <ShareItem
+                    icon={shareKakao}
+                    label="카카오톡"
+                    onClick={() => {
+                        console.log("click");
+                        shareKakaoLink("공유하기", "http://localhost:3000/test");
+                    }}
+                />
+                <ShareItem icon={shareIG} label="인스타그램" onClick={() => alert("서비스 준비중입니다")} />
+                <ShareItem icon={shareFb} label="페이스북" onClick={() => alert("서비스 준비중입니다")} />
                 <ShareItem
                     icon={shareLink}
                     label="링크 복사"
@@ -80,7 +94,7 @@ export default function ResultPage() {
                         });
                     }}
                 />
-            </ShareSection>
+            </ShareContainer>
         </div>
     );
 }

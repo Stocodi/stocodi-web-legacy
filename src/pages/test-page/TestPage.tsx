@@ -50,7 +50,7 @@ export default function TestPage() {
                 width="250px"
                 height="50px"
                 onClick={() => {
-                    PostRequest("/api/v1/statistics/start", {});
+                    PostRequest("/statistics/start", {});
                     navigate("/test/question");
                 }}
             >

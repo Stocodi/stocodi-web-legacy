@@ -6,3 +6,5 @@ export const COOKIE_REFRESH = (import.meta.env.VITE_PRODUCTION_COOKIE_REFRESH as
 
 export const COOKIE_PATH = (import.meta.env.VITE_PRODUCTION_COOKIE_PATH as string) || (import.meta.env.VITE_COOKIE_PATH as string);
 export const COOKIE_DOMAIN = (import.meta.env.VITE_PRODUCTION_COOKIE_DOMAIN as string) || (import.meta.env.VITE_COOKIE_DOMAIN as string);
+
+export const KAKAO_SDK = import.meta.env.VITE_KAKAO_API_KEY as string;

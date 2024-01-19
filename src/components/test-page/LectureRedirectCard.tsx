@@ -10,7 +10,6 @@ export interface ILectureRedirectCard {
 
     imgSrc: string;
     label: string;
-    link: string;
 }
 
 export interface ILectureRedirectLink {
@@ -18,7 +17,7 @@ export interface ILectureRedirectLink {
     link: string;
 }
 
-export const LectureRedirectCard: React.FC<ILectureRedirectCard> = ({ width, height, imgSrc, label, link }) => {
+export const LectureRedirectCard: React.FC<ILectureRedirectCard> = ({ width, height, imgSrc, label }) => {
     const navigate = useNavigate();
 
     return (
