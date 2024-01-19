@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { BreadCrumb } from "../../components/test-page/BreadCrumb";
 import { Question } from "../../components/test-page/Question";
@@ -16,6 +16,8 @@ export default function QuestionPage() {
     const dispatch: Dispatch = useDispatch();
     const navigate = useNavigate();
     const [page, setPage] = useState<number>(1);
+
+    const location = useLocation();
 
     const onNextBtnClick = () => {
         if (document.querySelectorAll(`input[type=radio]:checked`).length !== 5) {
@@ -51,6 +53,11 @@ export default function QuestionPage() {
         else setPage((page) => page + 1);
     };
 
+    useEffect(() => {
+        // console.log("use effect called");
+        dispatch(UserQuestionActions.initScore());
+    }, [dispatch, location]);
+
     return (
         <div className={styles.question_page}>
             <div className={styles.title}>
@@ -62,7 +69,7 @@ export default function QuestionPage() {
                 <BreadCrumb cursor={page} items={["경제기초", "은행상품", "카드와 신용", "세금", "보험", "투자"]} />
             </div>
 
-            {questions.slice(page, page + questionsPerPage).map((element, key) => {
+            {questions.slice((page - 1) * questionsPerPage, (page - 1) * questionsPerPage + 5).map((element, key) => {
                 return <Question key={key} index={page * questionsPerPage - questionsPerPage + 1 + key} question={element.question} />;
             })}
 

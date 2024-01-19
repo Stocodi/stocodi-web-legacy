@@ -1,11 +1,22 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { Button } from "../../interfaces/forms/Button";
 import styles from "./TestPage.module.scss";
 import { PostRequest } from "../../api/Request";
+import { useEffect } from "react";
+import { Dispatch } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
+import { UserQuestionActions } from "../../store/user-question-slice";
 
 export default function TestPage() {
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const dispatch: Dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(UserQuestionActions.initScore());
+    }, [dispatch, location]);
 
     return (
         <div className={styles.page_wrapper}>
