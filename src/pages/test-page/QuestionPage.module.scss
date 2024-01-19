@@ -5,55 +5,41 @@
         text-align: center;
         h1 {
             margin: 10px 0px;
-            font-size: 3.5rem;
-            font-family: "Tendra";
+            font-size: 60px;
+            font-family: "Tenada";
             font-weight: bold;
         }
-        h3 {
+        p {
             margin: 10px 0px;
-            font-size: 1.5rem;
+            font-size: 24px;
             font-weight: normal;
             font-family: "SCDream";
         }
     }
 
-    .controller {
-        @include place-center;
+    .breadcrumb_wrapper {
+        margin: 30px 0px;
+    }
 
-        margin: 20px 0px;
+    .btn {
+        display: block;
+        margin: 50px auto;
 
-        span {
-            margin: 0px 20px;
-            font-size: 1.2rem;
-        }
+        width: 220px;
+        height: 60px;
 
-        button {
-            width: 50px;
-            height: 50px;
+        background-color: #0ecb81;
+        color: #fff;
 
-            border-radius: 50%;
-            border: 1px solid #e1e1e1;
+        font-family: "SCDream";
+        font-size: 20px;
+        border-radius: 12px;
 
-            color: #999999;
-            background-color: #fff;
-
-            &:hover {
-                cursor: pointer;
-            }
+        &:hover {
+            cursor: pointer;
         }
     }
 }
 
 @include mobile {
-    .question_page {
-        .title {
-            padding: 15px;
-            h1 {
-                font-size: 2.5rem;
-            }
-            h3 {
-                font-size: 1.2rem;
-            }
-        }
-    }
 }

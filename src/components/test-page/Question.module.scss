@@ -1,69 +1,20 @@
 @import "@/styles/utils.scss";
 
 .question {
-    position: relative;
+    width: 100%;
+    max-width: 900px;
 
-    text-align: center;
-
-    h1 {
-        margin: 20px 0px;
-        padding: 20px;
-
-        font-size: 24px;
+    margin: 50px auto;
+    p {
+        font-family: "SCDream";
+        font-size: 20px;
     }
 }
 
-.options {
+.options_container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-}
+    gap: 8px;
 
-.ans {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%);
-
-    width: 200px;
-    height: 200px;
-}
-
-.question_opt {
-    @include place-center;
-
-    width: 90%;
-    max-width: 500px;
-    height: 60px;
-
-    margin: 5px 0px;
-    border-radius: 15px;
-
-    background-color: #efefef;
-
-    font-family: "SCDream";
-    font-size: 20px;
-
-    transition: background-color 1s ease-in-out;
-
-    &:hover {
-        cursor: pointer;
-        border: 2px solid $color-primary;
-    }
-}
-
-@include mobile {
-    .question {
-        text-align: center;
-
-        h1 {
-            font-size: 1.5rem;
-            margin: 0;
-            padding: 15px;
-        }
-    }
-    .question_opt {
-        height: 50px;
-        font-size: 1.2rem;
-    }
+    margin: 10px 0px;
 }

@@ -1,38 +1,48 @@
-import { Comment, IsCorrect } from "./Comment";
-import { useQuestion } from "../../hooks/useQuestion";
-
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { RadioOption } from "../../interfaces/forms/RadioButton";
 import styles from "./Question.module.scss";
+import { Dispatch } from "@reduxjs/toolkit";
+import { UserQuestionActions } from "../../store/user-question-slice";
 
 export interface IQuestion {
     index: number;
     question: string;
-    children: React.ReactNode;
-    answer: string;
-    comment: string;
 }
 
-export interface IQuestionOption {
-    children: React.ReactNode;
-}
+export const Question: React.FC<IQuestion> = ({ index, question }) => {
+    const dispatch: Dispatch = useDispatch();
 
-export const Question: React.FC<IQuestion> = ({ index, question, answer, comment, children }) => {
-    const { isCorrect, isCommentVisible } = useQuestion(question, answer, styles.question_opt);
-    // console.log("isCorrect", isCorrect);
+    useEffect(() => {
+        const options = document.querySelectorAll<HTMLInputElement>(`input[name=question-option-${index}]`);
+
+        for (let optionIndex = 0; optionIndex < options.length; optionIndex++) {
+            options[optionIndex].addEventListener("change", () => {
+                if (optionIndex === 0) dispatch(UserQuestionActions.selectAnswer({ index: index, selectedAnswer: "O" }));
+                else if (optionIndex === 1) dispatch(UserQuestionActions.selectAnswer({ index: index, selectedAnswer: "X" }));
+                else if (optionIndex === 2) dispatch(UserQuestionActions.selectAnswer({ index: index, selectedAnswer: "모르겠음" }));
+            });
+        }
+
+        return () => {
+            // 이전에 체크한 RadioButton 체크해제
+            for (let optionIndex = 0; optionIndex < options.length; optionIndex++) {
+                options[optionIndex].checked = false;
+            }
+        };
+    }, [index, dispatch]);
 
     return (
         <div className={styles.question}>
-            <h1>
+            <p>
                 {index}. {question}
-            </h1>
+            </p>
 
-            <div className={styles.options}>{children}</div>
-            <Comment isVisible={isCommentVisible}>{comment}</Comment>
-
-            <IsCorrect value={isCorrect} />
+            <div className={styles.options_container}>
+                <RadioOption name={`question-option-${index}`} label="O" />
+                <RadioOption name={`question-option-${index}`} label="X" />
+                <RadioOption name={`question-option-${index}`} label="모르겠음" />
+            </div>
         </div>
     );
-};
-
-export const QuestionOption: React.FC<IQuestionOption> = ({ children }) => {
-    return <div className={styles.question_opt}>{children}</div>;
 };

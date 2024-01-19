@@ -1,0 +1,30 @@
+@import "@/styles/utils";
+
+.result_page {
+    width: 100%;
+    max-width: 600px;
+
+    margin: 0px auto;
+
+    a {
+        display: block;
+
+        width: 100%;
+        max-width: 486px;
+
+        margin: 0px auto;
+
+        text-align: right;
+        font-family: "SCDream";
+        font-size: 18px;
+        color: #bbbbbb;
+        &:visited {
+            color: #bbbbbb;
+        }
+    }
+}
+
+.result_section {
+    padding: 30px 0px;
+    background-color: #fafbfd;
+}
