@@ -1,4 +1,5 @@
 import domtoimage from "dom-to-image";
+import { Link } from "react-router-dom";
 
 import { LabelContainer } from "../../interfaces/display/LabelContainer";
 import { AvatarSection } from "../../components/test-page/AvatarSection";
@@ -20,7 +21,9 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { shareKakaoLink } from "../../utils/ShareKakaoLink";
 
-import { GetResult } from "../../constants/Result";
+import { GetResult, GetResultComment, GetResultCommentIndex, ResultComment } from "../../constants/Result";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 export default function ResultDetailPage() {
     const { score } = useSelector((state: RootState) => state.UserQuestion);
@@ -51,15 +54,29 @@ export default function ResultDetailPage() {
 
             <div className={resultPageStyle.result_section}>
                 <LabelContainer label="해설" width="min(486px, 100%)">
-                    경제기초: 경제에 대한 기본 개념을 잘 이해하고 있습니다. 추가적인 학습과 실무 경험을 통해 더욱 향상될 수 있습니다. 인플레이션과
-                    빈부격차에 대한 개념을 더 깊이 파고들면 좋을 것입니다. 은행상품: 은행상품에 대한 기본적인 이해가 있습니다. 예금자 보호법과
-                    은행상품 간의 차이를 명확히 이해하는 것이 중요합니다. 카드와 신용: 카드와 신용에 대한 높은 수준의 이해를 보여주고 있습니다. 몇몇
-                    어려운 개념도 이해하고 있을 것으로 예상됩니다. 카드와 신용을 효과적으로 관리하는 방법에 대한 전문 지식을 보유하고 있습니다.
-                    세금:세금에 대한 일부 기본 개념을 이해하고 있지만, 혼동이 있을 수 있습니다. 은행 예금과 소득에 대한 세금 부과에 대한 이해를 높이는
-                    것이 중요합니다. 보험: 보험에 대한 일부 기본 개념을 이해하고 있지만, 혼동이 있을 수 있습니다. 주보험과 특약에 대한 차이를 명확히
-                    이해하는 것이 중요합니다. 투자: 투자에 대한 기본적인 이해가 있습니다. 그러나 몇몇 부분에서는 미흡할 수 있습니다. ETF와 레버리지
-                    상품에 대한 내용을 더 자세히 이해할 필요가 있습니다.
+                    <span style={{ fontWeight: "bold" }}>경제기초 : </span>
+                    <span>{ResultComment.comment_basic[GetResultCommentIndex(score[0])]}</span>
+                    <br />
+                    <span style={{ fontWeight: "bold" }}>은행상품 : </span>
+                    <span>{ResultComment.comment_bank[GetResultCommentIndex(score[1])]}</span>
+                    <br />
+                    <span style={{ fontWeight: "bold" }}>카드와 신용 : </span>
+                    <span>{ResultComment.comment_credit[GetResultCommentIndex(score[2])]}</span>
+                    <br />
+                    <span style={{ fontWeight: "bold" }}>세금 : </span>
+                    <span>{ResultComment.comment_tax[GetResultCommentIndex(score[3])]}</span>
+                    <br />
+                    <span style={{ fontWeight: "bold" }}>보험 : </span>
+                    <span>{ResultComment.comment_insurance[GetResultCommentIndex(score[4])]}</span>
+                    <br />
+                    <span style={{ fontWeight: "bold" }}>투자 : </span>
+                    <span>{ResultComment.comment_investment[GetResultCommentIndex(score[5])]}</span>
                 </LabelContainer>
+
+                <Link to="/test/result" style={{ textAlign: "left", margin: "20px auto" }}>
+                    <FontAwesomeIcon icon={faArrowLeft} />
+                    <span style={{ margin: "0px 10px" }}>뒤로 가기</span>
+                </Link>
 
                 <div className={styles.pros_cons_container}>
                     <div className={styles.pros_cons_item}>
@@ -82,13 +99,15 @@ export default function ResultDetailPage() {
                     label="이미지 저장"
                     onClick={() => {
                         // eslint-disable-next-line, @typescript-eslint/no-unsafe-call
-                        domtoimage.toJpeg(document.querySelector(`.${styles.result_page}`) as Node, { quality: 0.95 }).then(function (dataUrl) {
-                            const link = document.createElement("a");
-                            link.download = "금융역량테스트 결과.jpeg";
+                        domtoimage
+                            .toJpeg(document.querySelector(`.${resultPageStyle.result_page}`) as Node, { quality: 0.95 })
+                            .then(function (dataUrl) {
+                                const link = document.createElement("a");
+                                link.download = "금융역량테스트 결과.jpeg";
 
-                            link.href = dataUrl;
-                            link.click();
-                        });
+                                link.href = dataUrl;
+                                link.click();
+                            });
                     }}
                 />
                 <ShareItem
@@ -96,7 +115,7 @@ export default function ResultDetailPage() {
                     label="카카오톡"
                     onClick={() => {
                         console.log("click");
-                        shareKakaoLink("공유하기", "http://localhost:3000/test");
+                        shareKakaoLink("금융역량테스트 바로가기", "http://stocodi.com/test");
                     }}
                 />
                 <ShareItem icon={shareIG} label="인스타그램" onClick={() => alert("서비스 준비중입니다")} />

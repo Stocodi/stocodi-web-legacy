@@ -26,7 +26,7 @@ jobs:
                   port: ${{ secrets.DEPLOY_SERVER_PORT }}
                   script: |
                       cd stocodi-web
-                      git checkout release
-                      git pull origin release
+                      echo ${{secrets.DEPLOY_SERVER_PASSWORD}} | sudo -S git checkout release --force
+                      echo ${{secrets.DEPLOY_SERVER_PASSWORD}} | sudo -S git pull origin release --force
                       chmod +x ./deploy.sh
                       echo ${{secrets.DEPLOY_SERVER_PASSWORD}} | sudo -S bash ./deploy.sh
