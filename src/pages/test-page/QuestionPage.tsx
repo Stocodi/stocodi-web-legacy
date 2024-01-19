@@ -6,21 +6,44 @@ import { Question } from "../../components/test-page/Question";
 
 import { questions, questionsPerPage } from "../../constants/Questions";
 
+import { useDispatch } from "react-redux";
+
 import styles from "./QuestionPage.module.scss";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import { Dispatch } from "@reduxjs/toolkit";
+import { UserQuestionActions } from "../../store/user-question-slice";
 
 export default function QuestionPage() {
-    const { submittedAnswer } = useSelector((state: RootState) => state.UserQuestion);
-
+    const dispatch: Dispatch = useDispatch();
     const navigate = useNavigate();
     const [page, setPage] = useState<number>(1);
 
     const onNextBtnClick = () => {
-        console.log(page * questionsPerPage, submittedAnswer.length);
-        if (page * questionsPerPage !== submittedAnswer.length) {
+        if (document.querySelectorAll(`input[type=radio]:checked`).length !== 5) {
             alert("아직 풀지 않은 문항이 있습니다!");
             return;
+        }
+
+        const startIdx = (page - 1) * questionsPerPage;
+        const endIdx = startIdx + questionsPerPage;
+
+        let pageScore = 0;
+
+        for (let i = startIdx + 1; i < endIdx + 1; i++) {
+            const selectedOption = document.querySelector<HTMLInputElement>(`input[name=question-option-${i}]:checked`);
+
+            if (selectedOption) {
+                if (selectedOption.value === questions[i - 1].answer) {
+                    pageScore += 1;
+                }
+            }
+        }
+
+        dispatch(UserQuestionActions.setScore({ index: page, score: pageScore }));
+
+        // Clear selected options on the current page
+        for (let i = startIdx + 1; i < endIdx + 1; i++) {
+            const options = document.querySelectorAll<HTMLInputElement>(`input[name=question-option-${i}]:checked`);
+            options.forEach((option) => (option.checked = false));
         }
 
         window.scrollTo(0, 0);

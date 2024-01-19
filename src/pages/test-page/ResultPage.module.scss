@@ -4,8 +4,6 @@
     width: 100%;
     max-width: 600px;
 
-    margin: 0px auto;
-
     a {
         display: block;
 
@@ -27,4 +25,16 @@
 .result_section {
     padding: 30px 0px;
     background-color: #fafbfd;
+}
+
+@include mobile {
+    .result_page {
+        a {
+            font-size: 16px;
+        }
+    }
+
+    .result_section {
+        padding: 20px;
+    }
 }

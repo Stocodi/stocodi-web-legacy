@@ -1,6 +1,6 @@
-import styles from "./ShareSection.module.scss";
+import styles from "./ShareContainer.module.scss";
 
-export interface IShareSection {
+export interface IShareContainer {
     children: React.ReactNode;
 }
 
@@ -10,7 +10,7 @@ export interface IShareItem {
     onClick?: React.MouseEventHandler;
 }
 
-export const ShareSection: React.FC<IShareSection> = ({ children }) => {
+export const ShareContainer: React.FC<IShareContainer> = ({ children }) => {
     return (
         <div className={styles.share_section}>
             <div className={styles.head}>

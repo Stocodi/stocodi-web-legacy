@@ -1,8 +1,10 @@
+import domtoimage from "dom-to-image";
+
 import { LabelContainer } from "../../interfaces/display/LabelContainer";
 import { AvatarSection } from "../../components/test-page/AvatarSection";
-import { ShareSection, ShareItem } from "../../components/test-page/ShareSection";
+import { ShareContainer, ShareItem } from "../../components/test-page/ShareContainer";
 import { ProsConsContainer } from "../../components/test-page/ProsConsContainer";
-import { LectureRedirectCard } from "../../components/test-page/LectureRedirectCard";
+import { LectureRedirectCard, LectureRedirectLink } from "../../components/test-page/LectureRedirectCard";
 
 import resultPageStyle from "./ResultPage.module.scss";
 import styles from "./ResultDetailPage.module.scss";
@@ -14,15 +16,38 @@ import shareFb from "@/assets/share-fb.png";
 import shareLink from "@/assets/share-link.png";
 
 import lectureImg from "@/assets/lecture.png";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { shareKakaoLink } from "../../utils/ShareKakaoLink";
+
+import { GetResult } from "../../constants/Result";
 
 export default function ResultDetailPage() {
+    const { score } = useSelector((state: RootState) => state.UserQuestion);
+    const result = GetResult(score.reduce((prev, next) => prev + next) / 6);
+
+    const GetCategory = (index: number) => {
+        switch (index) {
+            case 0:
+                return "경제기초";
+            case 1:
+                return "은행상품";
+            case 2:
+                return "카드와 신용";
+            case 3:
+                return "세금";
+            case 4:
+                return "보험";
+            case 5:
+                return "투자";
+            default:
+                return "";
+        }
+    };
+
     return (
         <div className={resultPageStyle.result_page}>
-            <AvatarSection
-                avatarImg="/img/test-thumbnail.webp"
-                phrase="잭팟을 터트렸다고 말하는 사람들을 부러워해선 안된다"
-                author="워렌 버핏, 버크셔 해서웨이 CEO"
-            />
+            <AvatarSection avatarImg={result?.img as string} phrase={result?.title as string} author={result?.author as string} />
 
             <div className={resultPageStyle.result_section}>
                 <LabelContainer label="해설" width="min(486px, 100%)">
@@ -38,24 +63,54 @@ export default function ResultDetailPage() {
 
                 <div className={styles.pros_cons_container}>
                     <div className={styles.pros_cons_item}>
-                        <ProsConsContainer type="pros" width="65%" title="카드와 신용" />
+                        <ProsConsContainer type="pros" width="65%" title={GetCategory(score.indexOf(Math.max(...score)))} />
+                        <LectureRedirectLink label="보다 전문적인 지식을 얻고 싶다면?" link="/" />
                         <LectureRedirectCard width="30%" imgSrc={lectureImg} label="보다 전문적인 지식을 얻고 싶다면?" />
                     </div>
 
                     <div className={styles.pros_cons_item}>
-                        <ProsConsContainer type="cons" width="65%" title="보험" />
+                        <ProsConsContainer type="cons" width="65%" title={GetCategory(score.indexOf(Math.min(...score)))} />
+                        <LectureRedirectLink label="약한 분야를 더 배우고 싶다면?" link="/" />
                         <LectureRedirectCard width="30%" imgSrc={lectureImg} label="약한 분야를 더 배우고 싶다면?" />
                     </div>
                 </div>
             </div>
 
-            <ShareSection>
-                <ShareItem icon={shareImg} label="이미지 저장" />
-                <ShareItem icon={shareKakao} label="카카오톡" />
-                <ShareItem icon={shareIG} label="인스타그램" />
-                <ShareItem icon={shareFb} label="페이스북" />
-                <ShareItem icon={shareLink} label="링크 복사" />
-            </ShareSection>
+            <ShareContainer>
+                <ShareItem
+                    icon={shareImg}
+                    label="이미지 저장"
+                    onClick={() => {
+                        // eslint-disable-next-line, @typescript-eslint/no-unsafe-call
+                        domtoimage.toJpeg(document.querySelector(`.${styles.result_page}`) as Node, { quality: 0.95 }).then(function (dataUrl) {
+                            const link = document.createElement("a");
+                            link.download = "금융역량테스트 결과.jpeg";
+
+                            link.href = dataUrl;
+                            link.click();
+                        });
+                    }}
+                />
+                <ShareItem
+                    icon={shareKakao}
+                    label="카카오톡"
+                    onClick={() => {
+                        console.log("click");
+                        shareKakaoLink("공유하기", "http://localhost:3000/test");
+                    }}
+                />
+                <ShareItem icon={shareIG} label="인스타그램" onClick={() => alert("서비스 준비중입니다")} />
+                <ShareItem icon={shareFb} label="페이스북" onClick={() => alert("서비스 준비중입니다")} />
+                <ShareItem
+                    icon={shareLink}
+                    label="링크 복사"
+                    onClick={() => {
+                        window.navigator.clipboard.writeText("https://stocodi.com/test").then(() => {
+                            alert("링크가 클립보드에 복사되었습니다");
+                        });
+                    }}
+                />
+            </ShareContainer>
         </div>
     );
 }

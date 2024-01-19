@@ -35,3 +35,17 @@
         }
     }
 }
+
+@include mobile {
+    .pros_cons_container {
+        gap: 20px;
+        div {
+            p {
+                font-size: 16px;
+            }
+            h1 {
+                font-size: 26px;
+            }
+        }
+    }
+}
