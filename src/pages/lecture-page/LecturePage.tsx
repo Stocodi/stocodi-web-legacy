@@ -2,7 +2,6 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Search } from "../../interfaces/forms/Search";
-import { Badge } from "../../interfaces/display/Badge";
 import { Loader } from "../../interfaces/feedback/Loader";
 
 import { LectureSection } from "../../components/lecture-page/LectureSection";
@@ -14,7 +13,6 @@ import { IGetAllLectureResponse } from "../../api/ResponseTypes";
 import styles from "./LecturePage.module.scss";
 
 //test
-import { LectureData } from "../../constants/__test__/Lecture";
 import { ParseVideoId } from "../../utils/YoutubeLinks";
 
 export default function LecturePage() {

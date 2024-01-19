@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 import { LabelContainer } from "../../interfaces/display/LabelContainer";
 import { AvatarSection } from "../../components/test-page/AvatarSection";
 import { ShareSection, ShareItem } from "../../components/test-page/ShareSection";
@@ -52,11 +50,11 @@ export default function ResultDetailPage() {
             </div>
 
             <ShareSection>
-                <ShareItem icon={shareImg} label="이미지 저장" onClick={() => {}} />
-                <ShareItem icon={shareKakao} label="카카오톡" onClick={() => {}} />
-                <ShareItem icon={shareIG} label="인스타그램" onClick={() => {}} />
-                <ShareItem icon={shareFb} label="페이스북" onClick={() => {}} />
-                <ShareItem icon={shareLink} label="링크 복사" onClick={() => {}} />
+                <ShareItem icon={shareImg} label="이미지 저장" />
+                <ShareItem icon={shareKakao} label="카카오톡" />
+                <ShareItem icon={shareIG} label="인스타그램" />
+                <ShareItem icon={shareFb} label="페이스북" />
+                <ShareItem icon={shareLink} label="링크 복사" />
             </ShareSection>
         </div>
     );
