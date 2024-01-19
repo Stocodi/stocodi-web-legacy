@@ -22,6 +22,9 @@ import shareKakao from "@/assets/share-kakao.png";
 import shareIG from "@/assets/share-ig.png";
 import shareFb from "@/assets/share-fb.png";
 import shareLink from "@/assets/share-link.png";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { usePostRequest } from "../../hooks/useRequest";
 
 export interface IScore {
     type_basic: number;
@@ -33,26 +36,9 @@ export interface IScore {
 }
 
 export default function ResultPage() {
-    const [score, setScore] = useState<IScore>({
-        type_basic: 0,
-        type_bank: 0,
-        type_credit: 0,
-        type_tax: 0,
-        type_insurance: 0,
-        type_investment: 0,
-    });
+    const { score } = useSelector((state: RootState) => state.UserQuestion);
 
-    useEffect(() => {
-        // 문제 채점 로직
-        setScore({
-            type_basic: 0,
-            type_bank: 0,
-            type_credit: 0,
-            type_tax: 0,
-            type_insurance: 0,
-            type_investment: 0,
-        });
-    }, []);
+    usePostRequest("/api/v1/statistics/end", {});
 
     return (
         <div className={styles.result_page}>
@@ -63,15 +49,15 @@ export default function ResultPage() {
             />
 
             <div className={styles.result_section}>
-                <ResultSummary score={83.4} />
+                <ResultSummary score={(score.reduce((prev, next) => prev + next) / 6).toFixed(1)} />
 
                 <ResultGrid>
-                    <ResultGridItem category="경제기초" score={score.type_basic} icon={resultIcon1} />
-                    <ResultGridItem category="은행상품" score={score.type_bank} icon={resultIcon2} />
-                    <ResultGridItem category="카드와 신용" score={score.type_credit} icon={resultIcon3} />
-                    <ResultGridItem category="세금" score={score.type_tax} icon={resultIcon4} />
-                    <ResultGridItem category="보험" score={score.type_insurance} icon={resultIcon5} />
-                    <ResultGridItem category="투자" score={score.type_investment} icon={resultIcon6} />
+                    <ResultGridItem category="경제기초" score={score[0]} icon={resultIcon1} />
+                    <ResultGridItem category="은행상품" score={score[1]} icon={resultIcon2} />
+                    <ResultGridItem category="카드와 신용" score={score[2]} icon={resultIcon3} />
+                    <ResultGridItem category="세금" score={score[3]} icon={resultIcon4} />
+                    <ResultGridItem category="보험" score={score[4]} icon={resultIcon5} />
+                    <ResultGridItem category="투자" score={score[5]} icon={resultIcon6} />
                 </ResultGrid>
 
                 <Link to="/test/result/detail">
@@ -85,7 +71,15 @@ export default function ResultPage() {
                 <ShareItem icon={shareKakao} label="카카오톡" />
                 <ShareItem icon={shareIG} label="인스타그램" />
                 <ShareItem icon={shareFb} label="페이스북" />
-                <ShareItem icon={shareLink} label="링크 복사" />
+                <ShareItem
+                    icon={shareLink}
+                    label="링크 복사"
+                    onClick={() => {
+                        window.navigator.clipboard.writeText("https://stocodi.com/test").then(() => {
+                            alert("링크가 클립보드에 복사되었습니다");
+                        });
+                    }}
+                />
             </ShareSection>
         </div>
     );

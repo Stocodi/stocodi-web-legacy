@@ -14,8 +14,31 @@ import shareFb from "@/assets/share-fb.png";
 import shareLink from "@/assets/share-link.png";
 
 import lectureImg from "@/assets/lecture.png";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 export default function ResultDetailPage() {
+    const { score } = useSelector((state: RootState) => state.UserQuestion);
+
+    const GetCategory = (index: number) => {
+        switch (index) {
+            case 0:
+                return "경제기초";
+            case 1:
+                return "은행상품";
+            case 2:
+                return "카드와 신용";
+            case 3:
+                return "세금";
+            case 4:
+                return "보험";
+            case 5:
+                return "투자";
+            default:
+                return "";
+        }
+    };
+
     return (
         <div className={resultPageStyle.result_page}>
             <AvatarSection
@@ -38,15 +61,15 @@ export default function ResultDetailPage() {
 
                 <div className={styles.pros_cons_container}>
                     <div className={styles.pros_cons_item}>
-                        <ProsConsContainer type="pros" width="65%" title="카드와 신용" />
-                        <LectureRedirectLink label="보다 전문적인 지식을 얻고 싶다면?" to="/lectures" />
-                        <LectureRedirectCard width="30%" imgSrc={lectureImg} label="보다 전문적인 지식을 얻고 싶다면?" />
+                        <ProsConsContainer type="pros" width="65%" title={GetCategory(score.indexOf(Math.max(...score)))} />
+                        <LectureRedirectLink label="보다 전문적인 지식을 얻고 싶다면?" link="/" />
+                        <LectureRedirectCard width="30%" imgSrc={lectureImg} label="보다 전문적인 지식을 얻고 싶다면?" link="/" />
                     </div>
 
                     <div className={styles.pros_cons_item}>
-                        <ProsConsContainer type="cons" width="65%" title="보험" />
-                        <LectureRedirectLink label="약한 분야를 더 배우고 싶다면?" to="/lectures" />
-                        <LectureRedirectCard width="30%" imgSrc={lectureImg} label="약한 분야를 더 배우고 싶다면?" />
+                        <ProsConsContainer type="cons" width="65%" title={GetCategory(score.indexOf(Math.min(...score)))} />
+                        <LectureRedirectLink label="약한 분야를 더 배우고 싶다면?" link="/" />
+                        <LectureRedirectCard width="30%" imgSrc={lectureImg} label="약한 분야를 더 배우고 싶다면?" link="/" />
                     </div>
                 </div>
             </div>
