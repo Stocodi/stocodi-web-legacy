@@ -21,6 +21,7 @@ import LectureUploadPage from "./pages/lecture-page/LectureUploadPage";
 import TestPage from "./pages/test-page/TestPage";
 import QuestionPage from "./pages/test-page/QuestionPage";
 import ResultPage from "./pages/test-page/ResultPage";
+import ResultDetailPage from "./pages/test-page/ResultDetailPage";
 
 import PageNotFound from "./pages/PageNotFound";
 import ServiceNotAvailablePage from "./pages/ServiceNotAvailable";
@@ -61,8 +62,8 @@ export default function App() {
                     <Route path="/test" element={<TestLayout />}>
                         <Route index element={<TestPage />} />
                         <Route path="question" element={<QuestionPage />} />
-
                         <Route path="result" element={<ResultPage />}></Route>
+                        <Route path="result/detail" element={<ResultDetailPage />}></Route>
                     </Route>
                 </Routes>
             </Provider>
