@@ -2,7 +2,7 @@ import { LabelContainer } from "../../interfaces/display/LabelContainer";
 import { AvatarSection } from "../../components/test-page/AvatarSection";
 import { ShareSection, ShareItem } from "../../components/test-page/ShareSection";
 import { ProsConsContainer } from "../../components/test-page/ProsConsContainer";
-import { LectureRedirectCard } from "../../components/test-page/LectureRedirectCard";
+import { LectureRedirectCard, LectureRedirectLink } from "../../components/test-page/LectureRedirectCard";
 
 import resultPageStyle from "./ResultPage.module.scss";
 import styles from "./ResultDetailPage.module.scss";
@@ -39,11 +39,13 @@ export default function ResultDetailPage() {
                 <div className={styles.pros_cons_container}>
                     <div className={styles.pros_cons_item}>
                         <ProsConsContainer type="pros" width="65%" title="카드와 신용" />
+                        <LectureRedirectLink label="보다 전문적인 지식을 얻고 싶다면?" to="/lectures" />
                         <LectureRedirectCard width="30%" imgSrc={lectureImg} label="보다 전문적인 지식을 얻고 싶다면?" />
                     </div>
 
                     <div className={styles.pros_cons_item}>
                         <ProsConsContainer type="cons" width="65%" title="보험" />
+                        <LectureRedirectLink label="약한 분야를 더 배우고 싶다면?" to="/lectures" />
                         <LectureRedirectCard width="30%" imgSrc={lectureImg} label="약한 분야를 더 배우고 싶다면?" />
                     </div>
                 </div>

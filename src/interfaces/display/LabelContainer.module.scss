@@ -26,3 +26,14 @@
         line-height: 26px;
     }
 }
+
+@include mobile {
+    .label_container {
+        p {
+            font-size: 14px;
+        }
+        div {
+            font-size: 14px;
+        }
+    }
+}

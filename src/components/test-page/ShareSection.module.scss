@@ -65,3 +65,32 @@
         cursor: pointer;
     }
 }
+
+@include mobile {
+    .share_section {
+        .body {
+            gap: 12px;
+        }
+    }
+
+    .share_item {
+        .img_container {
+            width: 40px;
+            height: 40px;
+
+            margin: 10px auto;
+            border-radius: 50%;
+
+            background-color: #fff;
+            box-shadow: 0px 0px 10px -2px rgba(0, 0, 0, 0.2);
+
+            img {
+                width: 50%;
+                height: 50%;
+            }
+        }
+        p {
+            font-size: 12px;
+        }
+    }
+}

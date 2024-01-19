@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "./LectureRedirectCard.module.scss";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import styles from "./LectureRedirectCard.module.scss";
 
 export interface ILectureRedirectCard {
     width?: string;
@@ -9,6 +11,11 @@ export interface ILectureRedirectCard {
     imgSrc: string;
     label: string;
     onClick?: React.MouseEventHandler;
+}
+
+export interface ILectureRedirectLink {
+    label: string;
+    link: string;
 }
 
 export const LectureRedirectCard: React.FC<ILectureRedirectCard> = ({ width, height, imgSrc, label, onClick }) => {
@@ -24,6 +31,17 @@ export const LectureRedirectCard: React.FC<ILectureRedirectCard> = ({ width, hei
             </div>
 
             <img className={styles.background} src={imgSrc} alt="lecture-redirect-bg" />
+        </div>
+    );
+};
+
+export const LectureRedirectLink: React.FC<ILectureRedirectLink> = ({ label, link }) => {
+    return (
+        <div className={styles.lecture_redirect_link}>
+            <Link to={link}>
+                <span>{label}</span>
+                <FontAwesomeIcon icon={faArrowRight} />
+            </Link>
         </div>
     );
 };

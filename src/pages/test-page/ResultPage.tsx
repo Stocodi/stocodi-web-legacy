@@ -52,7 +52,7 @@ export default function ResultPage() {
             type_insurance: 0,
             type_investment: 0,
         });
-    }, [score]);
+    }, []);
 
     return (
         <div className={styles.result_page}>

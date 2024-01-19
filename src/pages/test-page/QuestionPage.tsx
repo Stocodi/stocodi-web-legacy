@@ -6,9 +6,10 @@ import { Question } from "../../components/test-page/Question";
 
 import { questions, questionsPerPage } from "../../constants/Questions";
 
-import styles from "./QuestionPage.module.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+
+import styles from "./QuestionPage.module.scss";
 
 export default function QuestionPage() {
     const { submittedAnswer } = useSelector((state: RootState) => state.UserQuestion);

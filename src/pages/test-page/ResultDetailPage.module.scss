@@ -18,3 +18,12 @@
     width: inherit;
     height: auto;
 }
+
+@include mobile {
+    .pros_cons_item {
+        flex-direction: column;
+        div {
+            width: 100% !important;
+        }
+    }
+}

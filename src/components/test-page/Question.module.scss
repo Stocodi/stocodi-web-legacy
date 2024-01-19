@@ -18,3 +18,13 @@
 
     margin: 10px 0px;
 }
+
+@include mobile {
+    .question {
+        margin: 40px auto;
+        padding: 0px 20px;
+        p {
+            font-size: 16px;
+        }
+    }
+}
