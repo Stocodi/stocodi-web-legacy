@@ -8,7 +8,7 @@
     justify-content: space-between;
 
     margin: 20px auto;
-    padding: 20px 30px;
+    padding: 20px;
 
     div {
         @include vertical-center;
@@ -121,8 +121,10 @@
     }
 
     .result_grid_item {
+        height: 120px;
+
         border-radius: 16px;
-        padding: 30px;
+        padding: 20px;
 
         h3 {
             font-size: 18px;
