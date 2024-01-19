@@ -3,12 +3,12 @@ import styles from "./LectureRedirectCard.module.scss";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 export interface ILectureRedirectCard {
-    width: string;
-    height: string;
+    width?: string;
+    height?: string;
 
     imgSrc: string;
     label: string;
-    onClick: React.MouseEventHandler;
+    onClick?: React.MouseEventHandler;
 }
 
 export const LectureRedirectCard: React.FC<ILectureRedirectCard> = ({ width, height, imgSrc, label, onClick }) => {
