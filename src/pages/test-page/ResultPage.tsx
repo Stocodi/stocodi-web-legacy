@@ -67,7 +67,7 @@ export default function ResultPage() {
                     icon={shareImg}
                     label="이미지 저장"
                     onClick={() => {
-                        domtoimage.toJpeg(document.querySelector(`.${styles.result_page}`) as Node, { quality: 0.95 }).then(function (dataUrl) {
+                        domtoimage.toJpeg(document.querySelector(`.${styles.result_page}`) as Node, { quality: 1 }).then(function (dataUrl) {
                             const link = document.createElement("a");
                             link.download = "금융역량테스트 결과.jpeg";
                             link.href = dataUrl;

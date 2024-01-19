@@ -21,7 +21,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { shareKakaoLink } from "../../utils/ShareKakaoLink";
 
-import { GetResult, GetResultComment, GetResultCommentIndex, ResultComment } from "../../constants/Result";
+import { GetResult, GetResultCommentIndex, ResultComment } from "../../constants/Result";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
@@ -99,15 +99,13 @@ export default function ResultDetailPage() {
                     label="이미지 저장"
                     onClick={() => {
                         // eslint-disable-next-line, @typescript-eslint/no-unsafe-call
-                        domtoimage
-                            .toJpeg(document.querySelector(`.${resultPageStyle.result_page}`) as Node, { quality: 0.95 })
-                            .then(function (dataUrl) {
-                                const link = document.createElement("a");
-                                link.download = "금융역량테스트 결과.jpeg";
+                        domtoimage.toJpeg(document.querySelector(`.${resultPageStyle.result_page}`) as Node, { quality: 1 }).then(function (dataUrl) {
+                            const link = document.createElement("a");
+                            link.download = "금융역량테스트 결과.jpeg";
 
-                                link.href = dataUrl;
-                                link.click();
-                            });
+                            link.href = dataUrl;
+                            link.click();
+                        });
                     }}
                 />
                 <ShareItem
