@@ -3,22 +3,6 @@
 .question_page {
     margin: 100px 0px;
 
-    .title {
-        text-align: center;
-        h1 {
-            margin: 10px 0px;
-            font-size: 60px;
-            font-family: "Tenada";
-            font-weight: bold;
-        }
-        p {
-            margin: 10px 0px;
-            font-size: 24px;
-            font-weight: normal;
-            font-family: "SCDream";
-        }
-    }
-
     .breadcrumb_wrapper {
         margin: 30px auto;
     }
@@ -43,21 +27,37 @@
     }
 }
 
+.title {
+    text-align: center;
+    h1 {
+        margin: 10px 0px;
+        font-size: 60px;
+        font-family: "Tenada";
+        font-weight: bold;
+    }
+    p {
+        margin: 10px 0px;
+        font-size: 24px;
+        font-weight: normal;
+        font-family: "SCDream";
+    }
+}
+
 @include mobile {
     .question_page {
         margin: 50px 0px;
-        .title {
-            h1 {
-                font-size: 40px;
-            }
-            p {
-                font-size: 14px;
-            }
-        }
         .btn {
             width: 160px;
             height: 50px;
             font-size: 18px;
+        }
+    }
+    .title {
+        h1 {
+            font-size: 40px;
+        }
+        p {
+            font-size: 14px;
         }
     }
     .breadcrumb_wrapper {

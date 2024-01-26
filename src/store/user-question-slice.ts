@@ -2,10 +2,12 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export interface IUserQuestion {
     score: number[];
+    wrongAnswer: number[];
 }
 
 export const initialState: IUserQuestion = {
     score: [0, 0, 0, 0, 0, 0],
+    wrongAnswer: [],
 };
 
 export const UserQuestionSlice = createSlice({
@@ -19,6 +21,9 @@ export const UserQuestionSlice = createSlice({
         },
         initScore: (state) => {
             state.score = [0, 0, 0, 0, 0, 0];
+        },
+        addWrongAnswerIndex: (state, action: PayloadAction<number>) => {
+            state.wrongAnswer.push(action.payload);
         },
     },
 });
