@@ -19,6 +19,28 @@
     margin: 10px 0px;
 }
 
+.commentary_question {
+    width: 100%;
+    max-width: 900px;
+
+    margin: 50px auto;
+    p {
+        position: relative;
+
+        font-family: "SCDream";
+        font-size: 20px;
+
+        img {
+            display: block;
+            position: absolute;
+            top: -50%;
+
+            width: 80px;
+            height: 80px;
+        }
+    }
+}
+
 @include mobile {
     .question {
         margin: 40px auto;
