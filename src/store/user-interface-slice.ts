@@ -18,6 +18,9 @@ export const UserInterfaceSlice = createSlice({
             if (state.isNavOpen) state.isNavOpen = false;
             else state.isNavOpen = true;
         },
+        closeNav: (state) => {
+            state.isNavOpen = false;
+        },
     },
 });
 

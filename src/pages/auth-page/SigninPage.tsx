@@ -8,10 +8,15 @@ import { InputContainer } from "../../interfaces/forms/Input";
 import { Title } from "../../components/auth-page/Title";
 
 import { handleLogin } from "../../api/Authentication";
+import { Dispatch } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
+import { UserInterfaceActions } from "../../store/user-interface-slice";
 
 // import { SocialLoginProviders } from "../../constants/SocialLogin";
 
 export default function SigninPage() {
+    const dispatch: Dispatch = useDispatch();
+
     const naviagte = useNavigate();
     const idRef = useRef<HTMLInputElement>(null);
     const pwRef = useRef<HTMLInputElement>(null);
@@ -20,6 +25,7 @@ export default function SigninPage() {
         // 로그인 요청 & 쿠키 저장
         try {
             await handleLogin(idRef.current?.value as string, pwRef.current?.value as string);
+            dispatch(UserInterfaceActions.closeNav());
             naviagte("/");
         } catch (err) {
             alert("아이디 혹은 비밀번호가 일치하지 않습니다");
