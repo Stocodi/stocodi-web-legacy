@@ -19,6 +19,10 @@
     height: auto;
 }
 
+.btn_wrong_ans {
+    margin: 0px auto;
+}
+
 @include mobile {
     .pros_cons_item {
         flex-direction: column;

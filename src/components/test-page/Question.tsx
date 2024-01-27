@@ -10,6 +10,7 @@ export interface ICommentaryQuestion {
     type: "correct" | "incorrect";
     index: number;
     question: string;
+    answer: string;
     commentary: string;
 }
 
@@ -29,15 +30,18 @@ export const Question: React.FC<IQuestion> = ({ index, question }) => {
     );
 };
 
-export const CommentaryQuestion: React.FC<ICommentaryQuestion> = ({ type, index, question, commentary }) => {
+export const CommentaryQuestion: React.FC<ICommentaryQuestion> = ({ type, index, question, commentary, selected, answer }) => {
     return (
         <div className={styles.commentary_question}>
             <p>
                 <img src={`/icons/icon-${type}.png`} alt="" />
-                {index}. {question}
+                {index}. {question} (정답 : {answer})
             </p>
 
-            <p>{commentary}</p>
+            <div className={styles.commentary}>
+                <p>해설</p>
+                <p>{commentary}</p>
+            </div>
         </div>
     );
 };

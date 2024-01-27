@@ -1,5 +1,5 @@
 import domtoimage from "dom-to-image";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { LabelContainer } from "../../interfaces/display/LabelContainer";
 import { AvatarSection } from "../../components/test-page/AvatarSection";
@@ -24,10 +24,13 @@ import { shareKakaoLink } from "../../utils/ShareKakaoLink";
 import { GetResult, GetResultCommentIndex, ResultComment } from "../../constants/Result";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { Button } from "../../interfaces/forms/Button";
 
 export default function ResultDetailPage() {
     const { score } = useSelector((state: RootState) => state.UserQuestion);
     const result = GetResult(score.reduce((prev, next) => prev + next) / 6);
+
+    const navigate = useNavigate();
 
     const GetCategory = (index: number) => {
         switch (index) {
@@ -72,6 +75,16 @@ export default function ResultDetailPage() {
                     <span style={{ fontWeight: "bold" }}>투자 : </span>
                     <span>{ResultComment.comment_investment[GetResultCommentIndex(score[5])]}</span>
                 </LabelContainer>
+
+                <Button
+                    type="primary-filled"
+                    className={styles.btn_wrong_ans}
+                    width="min(100%, 486px)"
+                    height="50px"
+                    onClick={() => navigate("/test/result/comment")}
+                >
+                    틀린문제 보러가기
+                </Button>
 
                 <Link to="/test/result" style={{ textAlign: "left", margin: "20px auto" }}>
                     <FontAwesomeIcon icon={faArrowLeft} />
