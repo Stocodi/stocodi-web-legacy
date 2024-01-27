@@ -11,20 +11,21 @@ import { LectureRedirectCard, LectureRedirectLink } from "../../components/test-
 import resultPageStyle from "./ResultPage.module.scss";
 import styles from "./ResultDetailPage.module.scss";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+
 import shareImg from "@/assets/share-image.png";
 import shareKakao from "@/assets/share-kakao.png";
-import shareIG from "@/assets/share-ig.png";
-import shareFb from "@/assets/share-fb.png";
 import shareLink from "@/assets/share-link.png";
-
 import lectureImg from "@/assets/lecture.png";
+
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { shareKakaoLink } from "../../utils/ShareKakaoLink";
 
 import { GetResult, GetResultCommentIndex, ResultComment } from "../../constants/Result";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+// import shareIG from "@/assets/share-ig.png";
+// import shareFb from "@/assets/share-fb.png";
 
 export default function ResultDetailPage() {
     const { score } = useSelector((state: RootState) => state.UserQuestion);
@@ -136,8 +137,8 @@ export default function ResultDetailPage() {
                         shareKakaoLink("금융역량테스트", "금융역량테스트 바로가기", "/img/stocodi-thumbnail.png", "http://stocodi.com/test");
                     }}
                 />
-                <ShareItem icon={shareIG} label="인스타그램" onClick={() => alert("서비스 준비중입니다")} />
-                <ShareItem icon={shareFb} label="페이스북" onClick={() => alert("서비스 준비중입니다")} />
+                {/* <ShareItem icon={shareIG} label="인스타그램" onClick={() => alert("서비스 준비중입니다")} />
+                <ShareItem icon={shareFb} label="페이스북" onClick={() => alert("서비스 준비중입니다")} /> */}
                 <ShareItem
                     icon={shareLink}
                     label="링크 복사"

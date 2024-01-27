@@ -13,7 +13,7 @@ export default function ResultCommentPage() {
         <div className={styles.result_comment_page}>
             <div className={questionStyles.title}>
                 <h1>금융역량테스트 해설</h1>
-                <p>금융역량테스트 해설페이지 입니다 (무슨글 넣지)</p>
+                <p>틀린문제에 대한 해설을 확인해보세요</p>
             </div>
 
             {wrongAnswer.map((element) => {
