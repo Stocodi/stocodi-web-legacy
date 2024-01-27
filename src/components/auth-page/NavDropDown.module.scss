@@ -32,6 +32,12 @@
     left: -50%;
 
     width: 120px;
+    max-height: 0;
+    will-change: max-height;
+
+    overflow: hidden;
+
+    transition: max-height 0.3s ease-in-out;
 }
 
 .nav_dropdown_item {
