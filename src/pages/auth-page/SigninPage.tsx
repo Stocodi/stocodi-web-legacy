@@ -41,7 +41,7 @@ export default function SigninPage() {
             <Title title="로그인" subtitle="로그인 후 서비스를 이용해보세요"></Title>
 
             <div className={styles.signin_container}>
-                <InputContainer ref={idRef} type="text" width="100%" height="50px" label="아이디"></InputContainer>
+                <InputContainer ref={idRef} type="text" width="100%" height="50px" label="이메일"></InputContainer>
                 <InputContainer ref={pwRef} type="password" width="100%" height="50px" label="비밀번호"></InputContainer>
             </div>
 
