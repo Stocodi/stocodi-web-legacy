@@ -45,7 +45,7 @@
 }
 
 .nav_aside_item {
-    height: 60px;
+    height: 55px;
     margin: 5px 0px;
 
     a {
@@ -60,7 +60,7 @@
 
     div {
         @include vertical-center;
-        height: 60px;
+        height: 55px;
 
         margin-left: 30px;
         color: #7d8790;
@@ -74,6 +74,9 @@
 @include mobile {
     .nav_aside_wrapper {
         display: block;
+    }
+    .nav_aside_container {
+        margin-top: $nav-height-mobile;
     }
 }
 

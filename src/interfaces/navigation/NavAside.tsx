@@ -52,7 +52,6 @@ export const NavAside = () => {
                             <div>{GetNickName()} 님</div>
                             <div>내 정보 변경</div>
                             <div>FAQ</div>
-                            <div>내 정보 변경</div>
                             <div onClick={onLogout}>로그아웃</div>
                         </div>
                     )}
