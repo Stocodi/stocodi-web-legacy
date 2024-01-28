@@ -34,11 +34,13 @@
         img {
             display: block;
             position: absolute;
-            top: -30px;
+            top: -0px;
             left: -40px;
 
             width: 100px;
-            height: 100px;
+            aspect-ratio: 1457/282;
+
+            transform: rotate(-45deg);
         }
     }
 
