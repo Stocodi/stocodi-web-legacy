@@ -27,6 +27,7 @@ export default function LectureUploadPage() {
     const onHashTagAddClicked = () => {
         if (hashtagRef.current?.value) {
             setHashTags([...hashtags, hashtagRef.current.value]);
+            hashtagRef.current.value = "";
         }
     };
 
