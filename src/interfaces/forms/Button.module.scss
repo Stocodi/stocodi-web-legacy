@@ -23,8 +23,8 @@
 
 .btn_circle {
     display: block;
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 45px;
 
     border: 1px solid $color-primary;
     border-radius: 50%;
@@ -32,7 +32,17 @@
     color: $color-primary;
     background-color: #fff;
 
+    font-size: 0.8rem;
+
     &:hover {
         cursor: pointer;
+    }
+}
+
+@include mobile {
+    .btn_circle {
+        width: 40px;
+        height: 40px;
+        font-size: 0.6rem;
     }
 }
