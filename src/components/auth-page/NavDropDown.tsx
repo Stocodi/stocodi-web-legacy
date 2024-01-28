@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useLayoutEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
@@ -22,6 +22,18 @@ export const NavDropDown: React.FC = () => {
         }
     };
 
+    useLayoutEffect(() => {
+        const $dropdown = document.querySelector<HTMLDivElement>(`.${styles.nav_dropdown_container}`);
+        const $item = document.querySelector<HTMLDivElement>(`.${styles.nav_dropdown_item}`);
+
+        if (dropdown && $dropdown) {
+            $dropdown.style.maxHeight = `${($item?.scrollHeight as number) * $dropdown.children.length}px`;
+        }
+        if (!dropdown && $dropdown) {
+            $dropdown.style.maxHeight = `0px`;
+        }
+    }, [dropdown]);
+
     return (
         <li className={styles.nav_dropdown_wrapper}>
             <div className={styles.nav_dropdown_header} onClick={onDropdownToggle}>
@@ -31,16 +43,14 @@ export const NavDropDown: React.FC = () => {
                 </span>
             </div>
 
-            {dropdown && (
-                <div className={styles.nav_dropdown_container}>
-                    <div className={styles.nav_dropdown_item}>내 정보 수정</div>
-                    <div className={styles.nav_dropdown_item}>FAQ</div>
-                    <div className={styles.nav_dropdown_item}>고객센터</div>
-                    <div onClick={onLogout} className={styles.nav_dropdown_item}>
-                        로그아웃
-                    </div>
+            <div className={styles.nav_dropdown_container}>
+                <div className={styles.nav_dropdown_item}>내 정보 수정</div>
+                <div className={styles.nav_dropdown_item}>FAQ</div>
+                <div className={styles.nav_dropdown_item}>고객센터</div>
+                <div onClick={onLogout} className={styles.nav_dropdown_item}>
+                    로그아웃
                 </div>
-            )}
+            </div>
         </li>
     );
 };

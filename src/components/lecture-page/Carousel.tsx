@@ -1,13 +1,19 @@
 import styles from "./Carousel.module.scss";
 import { useEffect, useRef, useState } from "react";
 import { ButtonCircle } from "../../interfaces/forms/Button";
+
+import { ICarouselList } from "../../constants/Carousel";
+import { useNavigate } from "react-router-dom";
+
 interface Props {
-    carouselList: string[];
+    carouselList: ICarouselList[];
 }
 
 export const Carousel = ({ carouselList }: Props) => {
+    const navigate = useNavigate();
+
     const [currIndex, setCurrIndex] = useState(1);
-    const [currList, setCurrList] = useState<string[]>();
+    const [currList, setCurrList] = useState<ICarouselList[]>([]);
 
     const carouselRef = useRef<HTMLUListElement>(null);
 
@@ -66,11 +72,11 @@ export const Carousel = ({ carouselList }: Props) => {
                 <ButtonCircle type="left" className={styles.swipeLeft} onClick={() => handleSwipe(-1)}></ButtonCircle>
                 <ButtonCircle type="right" className={styles.swipeRight} onClick={() => handleSwipe(1)}></ButtonCircle>
                 <ul className={styles.carousel} ref={carouselRef}>
-                    {currList?.map((image, idx) => {
-                        const key = `${image}-${idx}`;
+                    {currList?.map((element, idx) => {
+                        const key = `${element.imgSrc}-${idx}`;
                         return (
-                            <li key={key} className={styles.carouselItem}>
-                                <img src={image} alt="carousel-img" />
+                            <li key={key} className={styles.carouselItem} onClick={() => navigate(element.link)}>
+                                <img src={element.imgSrc} alt="carousel-img" />
                             </li>
                         );
                     })}

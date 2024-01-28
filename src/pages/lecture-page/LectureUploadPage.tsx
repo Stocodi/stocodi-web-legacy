@@ -26,7 +26,13 @@ export default function LectureUploadPage() {
 
     const onHashTagAddClicked = () => {
         if (hashtagRef.current?.value) {
+            if (hashtags.includes(hashtagRef.current.value)) {
+                alert("이미 등록된 해시태그입니다");
+                return;
+            }
+
             setHashTags([...hashtags, hashtagRef.current.value]);
+            hashtagRef.current.value = "";
         }
     };
 

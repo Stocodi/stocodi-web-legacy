@@ -22,6 +22,7 @@ import TestPage from "./pages/test-page/TestPage";
 import QuestionPage from "./pages/test-page/QuestionPage";
 import ResultPage from "./pages/test-page/ResultPage";
 import ResultDetailPage from "./pages/test-page/ResultDetailPage";
+import ResultCommentPage from "./pages/test-page/ResultCommentPage";
 
 import PageNotFound from "./pages/PageNotFound";
 import ServiceNotAvailablePage from "./pages/ServiceNotAvailable";
@@ -54,16 +55,15 @@ export default function App() {
 
                     <Route path="/auth" element={<AuthLayout />}>
                         <Route path="signin" element={<SigninPage />} />
-                        <Route path="signup/step1" element={<SignupPage.One />} />
-                        <Route path="signup/step2" element={<SignupPage.Two />} />
-                        <Route path="signup/step3" element={<SignupPage.Three />} />
+                        <Route path="signup" element={<SignupPage />} />
                     </Route>
 
                     <Route path="/test" element={<TestLayout />}>
                         <Route index element={<TestPage />} />
                         <Route path="question" element={<QuestionPage />} />
                         <Route path="result" element={<ResultPage />}></Route>
-                        <Route path="result/detail" element={<ResultDetailPage />}></Route>
+                        <Route path="result/detail" element={<ResultDetailPage />} />
+                        <Route path="result/comment" element={<ResultCommentPage />} />
                     </Route>
                 </Routes>
             </Provider>

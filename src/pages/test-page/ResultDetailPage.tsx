@@ -1,7 +1,8 @@
 import domtoimage from "dom-to-image";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { LabelContainer } from "../../interfaces/display/LabelContainer";
+import { Button } from "../../interfaces/forms/Button";
 import { AvatarSection } from "../../components/test-page/AvatarSection";
 import { ShareContainer, ShareItem } from "../../components/test-page/ShareContainer";
 import { ProsConsContainer } from "../../components/test-page/ProsConsContainer";
@@ -10,24 +11,27 @@ import { LectureRedirectCard, LectureRedirectLink } from "../../components/test-
 import resultPageStyle from "./ResultPage.module.scss";
 import styles from "./ResultDetailPage.module.scss";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+
 import shareImg from "@/assets/share-image.png";
 import shareKakao from "@/assets/share-kakao.png";
-import shareIG from "@/assets/share-ig.png";
-import shareFb from "@/assets/share-fb.png";
 import shareLink from "@/assets/share-link.png";
-
 import lectureImg from "@/assets/lecture.png";
+
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { shareKakaoLink } from "../../utils/ShareKakaoLink";
 
 import { GetResult, GetResultCommentIndex, ResultComment } from "../../constants/Result";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+// import shareIG from "@/assets/share-ig.png";
+// import shareFb from "@/assets/share-fb.png";
 
 export default function ResultDetailPage() {
     const { score } = useSelector((state: RootState) => state.UserQuestion);
     const result = GetResult(score.reduce((prev, next) => prev + next) / 6);
+
+    const navigate = useNavigate();
 
     const GetCategory = (index: number) => {
         switch (index) {
@@ -53,24 +57,41 @@ export default function ResultDetailPage() {
             <AvatarSection avatarImg={result?.img as string} phrase={result?.title as string} author={result?.author as string} />
 
             <div className={resultPageStyle.result_section}>
+                <Button
+                    type="primary-filled"
+                    className={styles.btn_wrong_ans}
+                    width="min(100%, 486px)"
+                    height="50px"
+                    onClick={() => navigate("/test/result/comment")}
+                >
+                    틀린문제 보러가기
+                </Button>
+
                 <LabelContainer label="해설" width="min(486px, 100%)">
-                    <span style={{ fontWeight: "bold" }}>경제기초 : </span>
-                    <span>{ResultComment.comment_basic[GetResultCommentIndex(score[0])]}</span>
-                    <br />
-                    <span style={{ fontWeight: "bold" }}>은행상품 : </span>
-                    <span>{ResultComment.comment_bank[GetResultCommentIndex(score[1])]}</span>
-                    <br />
-                    <span style={{ fontWeight: "bold" }}>카드와 신용 : </span>
-                    <span>{ResultComment.comment_credit[GetResultCommentIndex(score[2])]}</span>
-                    <br />
-                    <span style={{ fontWeight: "bold" }}>세금 : </span>
-                    <span>{ResultComment.comment_tax[GetResultCommentIndex(score[3])]}</span>
-                    <br />
-                    <span style={{ fontWeight: "bold" }}>보험 : </span>
-                    <span>{ResultComment.comment_insurance[GetResultCommentIndex(score[4])]}</span>
-                    <br />
-                    <span style={{ fontWeight: "bold" }}>투자 : </span>
-                    <span>{ResultComment.comment_investment[GetResultCommentIndex(score[5])]}</span>
+                    <p>
+                        <span style={{ fontWeight: "bold" }}>경제기초 : </span>
+                        <span>{ResultComment.comment_basic[GetResultCommentIndex(score[0])]}</span>
+                    </p>
+                    <p>
+                        <span style={{ fontWeight: "bold" }}>은행상품 : </span>
+                        <span>{ResultComment.comment_bank[GetResultCommentIndex(score[1])]}</span>
+                    </p>
+                    <p>
+                        <span style={{ fontWeight: "bold" }}>카드와 신용 : </span>
+                        <span>{ResultComment.comment_credit[GetResultCommentIndex(score[2])]}</span>
+                    </p>
+                    <p>
+                        <span style={{ fontWeight: "bold" }}>세금 : </span>
+                        <span>{ResultComment.comment_tax[GetResultCommentIndex(score[3])]}</span>
+                    </p>
+                    <p>
+                        <span style={{ fontWeight: "bold" }}>보험 : </span>
+                        <span>{ResultComment.comment_insurance[GetResultCommentIndex(score[4])]}</span>
+                    </p>
+                    <p>
+                        <span style={{ fontWeight: "bold" }}>투자 : </span>
+                        <span>{ResultComment.comment_investment[GetResultCommentIndex(score[5])]}</span>
+                    </p>
                 </LabelContainer>
 
                 <Link to="/test/result" style={{ textAlign: "left", margin: "20px auto" }}>
@@ -116,8 +137,8 @@ export default function ResultDetailPage() {
                         shareKakaoLink("금융역량테스트", "금융역량테스트 바로가기", "/img/stocodi-thumbnail.png", "http://stocodi.com/test");
                     }}
                 />
-                <ShareItem icon={shareIG} label="인스타그램" onClick={() => alert("서비스 준비중입니다")} />
-                <ShareItem icon={shareFb} label="페이스북" onClick={() => alert("서비스 준비중입니다")} />
+                {/* <ShareItem icon={shareIG} label="인스타그램" onClick={() => alert("서비스 준비중입니다")} />
+                <ShareItem icon={shareFb} label="페이스북" onClick={() => alert("서비스 준비중입니다")} /> */}
                 <ShareItem
                     icon={shareLink}
                     label="링크 복사"

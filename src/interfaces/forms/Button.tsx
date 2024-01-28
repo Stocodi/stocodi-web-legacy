@@ -5,6 +5,7 @@ import styles from "./Button.module.scss";
 
 export interface IButton {
     type: "primary-filled" | "primary-stroke";
+    className?: string;
     width?: string;
     height?: string;
     children?: React.ReactNode;
@@ -20,11 +21,11 @@ export interface IButtonCircle {
     onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
-export const Button: React.FC<IButton> = ({ type, width, height, children, onClick, ...rest }) => {
+export const Button: React.FC<IButton> = ({ type, className, width, height, children, onClick, ...rest }) => {
     if (type === "primary-filled") {
         return (
             <button
-                className={`${styles.btn_default} ${styles.btn_primary_filled}`}
+                className={`${styles.btn_default} ${styles.btn_primary_filled} ${className as string}`}
                 style={{ width: width, height: height }}
                 onClick={onClick}
                 {...rest}

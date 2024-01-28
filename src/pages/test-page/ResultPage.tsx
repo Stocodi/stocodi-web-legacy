@@ -22,8 +22,6 @@ import resultIcon6 from "@/assets/result-icon-6.png";
 
 import shareImg from "@/assets/share-image.png";
 import shareKakao from "@/assets/share-kakao.png";
-import shareIG from "@/assets/share-ig.png";
-import shareFb from "@/assets/share-fb.png";
 import shareLink from "@/assets/share-link.png";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
@@ -31,6 +29,8 @@ import { useEffect } from "react";
 import { PostRequest } from "../../api/Request";
 
 import { GetResult } from "../../constants/Result";
+// import shareIG from "@/assets/share-ig.png";
+// import shareFb from "@/assets/share-fb.png";
 
 export default function ResultPage() {
     const { score } = useSelector((state: RootState) => state.UserQuestion);
@@ -83,8 +83,8 @@ export default function ResultPage() {
                         shareKakaoLink("금융역량테스트", "금융역량테스트 바로가기", "/img/stocodi-thumbnail.png", "http://stocodi.com/test");
                     }}
                 />
-                <ShareItem icon={shareIG} label="인스타그램" onClick={() => alert("서비스 준비중입니다")} />
-                <ShareItem icon={shareFb} label="페이스북" onClick={() => alert("서비스 준비중입니다")} />
+                {/* <ShareItem icon={shareIG} label="인스타그램" onClick={() => alert("서비스 준비중입니다")} /> */}
+                {/* <ShareItem icon={shareFb} label="페이스북" onClick={() => alert("서비스 준비중입니다")} /> */}
                 <ShareItem
                     icon={shareLink}
                     label="링크 복사"
