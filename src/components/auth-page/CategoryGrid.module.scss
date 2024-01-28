@@ -3,6 +3,9 @@
 .category_grid_container {
     margin: 0px auto;
 
+    max-height: 80%;
+    overflow: scroll;
+
     display: grid;
     grid-template-rows: repeat(5, 1fr);
     grid-template-columns: repeat(5, 1fr);
