@@ -11,7 +11,8 @@ export interface ILoginResponseBody {
     };
 }
 
-export interface ISignupRequestBody extends Omit<IUserSignup, "interest_categories" | "isEmailVerified" | "isNickNameVerified"> {
+export interface ISignupRequestBody
+    extends Omit<IUserSignup, "interest_categories" | "isEmailVerified" | "isPasswordVerified" | "isNickNameVerified"> {
     interest_categories: string[];
 }
 

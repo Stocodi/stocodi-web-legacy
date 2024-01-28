@@ -9,11 +9,16 @@ export interface IInput {
     rest?: unknown;
     placeholder?: string;
     disabled?: boolean;
+    inlineStyle?: React.CSSProperties;
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 export interface IInputContainer extends IInput {
     label: string;
+}
+
+export interface IInputVerifyContainer extends IInputContainer {
+    verifyLabel: string;
 }
 
 export interface ITextArea {
@@ -33,8 +38,17 @@ export interface IInputButtonContainer extends IInputContainer {
     onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
-export const Input = forwardRef<HTMLInputElement, IInput>(({ width, height, onChange, disabled, ...rest }, ref) => {
-    return <input ref={ref} disabled={disabled} className={styles.input} style={{ width: width, height: height }} onChange={onChange} {...rest} />;
+export const Input = forwardRef<HTMLInputElement, IInput>(({ width, height, onChange, disabled, inlineStyle, ...rest }, ref) => {
+    return (
+        <input
+            ref={ref}
+            disabled={disabled}
+            className={styles.input}
+            style={{ ...inlineStyle, width: width, height: height }}
+            onChange={onChange}
+            {...rest}
+        />
+    );
 });
 
 export const InputContainer = forwardRef<HTMLInputElement, IInputContainer>(({ width, height, label, ...rest }, ref) => {
@@ -45,6 +59,20 @@ export const InputContainer = forwardRef<HTMLInputElement, IInputContainer>(({ w
         </div>
     );
 });
+
+export const InputVerificationContainer = forwardRef<HTMLInputElement, IInputVerifyContainer>(
+    ({ width, height, label, verifyLabel, ...rest }, ref) => {
+        return (
+            <div className={styles.input_container} style={{ width: width }}>
+                <p>
+                    <span>{label}</span>
+                    <span>{verifyLabel}</span>
+                </p>
+                <Input ref={ref} width="inherit" height={height} {...rest} />
+            </div>
+        );
+    },
+);
 
 export const InputButtonContainer = forwardRef<HTMLInputElement, IInputButtonContainer>(
     ({ width, height, label, btnWidth, btnLabel, onClick, ...rest }, ref) => {

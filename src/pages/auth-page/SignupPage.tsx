@@ -1,14 +1,15 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 import { Button } from "../../interfaces/forms/Button";
-import { InputContainer, InputButtonContainer } from "../../interfaces/forms/Input";
+import { InputContainer, InputButtonContainer, InputVerificationContainer } from "../../interfaces/forms/Input";
 import { Title } from "../../components/auth-page/Title";
 import { CategoryGrid } from "../../components/auth-page/CategoryGrid";
 import { Categories } from "../../constants/Categories";
 
-import { useRef } from "react";
+import { ChangeEventHandler, useRef } from "react";
 import { Dispatch } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { UserSignupActions } from "../../store/user-signup-slice";
@@ -16,12 +17,27 @@ import { handleSignup, verifyEmail, verifyNickName } from "../../api/Authenticat
 import { RootState } from "../../store/store";
 
 import styles from "./SignupPage.module.scss";
+import { verifyBirth, verifyPassword, verifyPhone } from "../../utils/verify";
 
-const SignupPage = {
-    One: () => {
+export default function SignupPage() {
+    const [step, setStep] = useState<number>(1);
+
+    if (step === 1) return <SignupStep.One setStep={setStep} />;
+    else if (step === 2) return <SignupStep.Two setStep={setStep} />;
+    else if (step === 3) return <SignupStep.Three setStep={setStep} />;
+}
+
+interface ISignupStep {
+    setStep: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const SignupStep = {
+    One: ({ setStep }: ISignupStep) => {
         const navigate = useNavigate();
         const dispatch: Dispatch = useDispatch();
-        const { isEmailVerified } = useSelector((state: RootState) => state.UserSignup);
+
+        // ❓ 변경시 리렌더링 필요없다면 useRef 훅 사용해도 되지 않을까 ??
+        const { isEmailVerified, isPasswordVerified } = useSelector((state: RootState) => state.UserSignup);
 
         const nameRef = useRef<HTMLInputElement>(null);
         const emailRef = useRef<HTMLInputElement>(null);
@@ -37,42 +53,70 @@ const SignupPage = {
             }
         };
 
-        const onEmailChange = () => {
+        const onEmailChange: ChangeEventHandler<HTMLInputElement> = () => {
             // 이메일 변경시 재검사 필요
             dispatch(UserSignupActions.unVerifyEmail());
         };
 
+        const onPasswordChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+            const pwVerification = verifyPassword(e.target.value);
+            if (pwVerification) {
+                dispatch(UserSignupActions.verifyPassword());
+            } else {
+                dispatch(UserSignupActions.unVerifyPassword());
+            }
+        };
+
         const onPrevBtnClick = () => {
-            navigate("/auth/signin");
+            navigate("/");
         };
         const onNextBtnClick = () => {
-            if (isEmailVerified) {
-                dispatch(UserSignupActions.setName(nameRef.current?.value as string));
-                dispatch(UserSignupActions.setEmail(emailRef.current?.value as string));
-                dispatch(UserSignupActions.setPassword(passwordRef.current?.value as string));
-                navigate("/auth/signup/step2");
-            } else {
+            if (!isEmailVerified) {
                 alert("이메일 중복검사를 해주세요");
+                return;
             }
+            if (!isPasswordVerified) {
+                alert("비밀번호는 영문 숫자 특수기호 조합 8 ~ 15자리 이어야 합니다");
+                return;
+            }
+            if (!nameRef.current?.value) {
+                alert("이름을 입력해주세요");
+                return;
+            }
+
+            dispatch(UserSignupActions.setName(nameRef.current?.value));
+            dispatch(UserSignupActions.setEmail(emailRef.current?.value as string));
+            dispatch(UserSignupActions.setPassword(passwordRef.current?.value as string));
+            setStep((step) => step + 1);
         };
 
         return (
             <>
                 <Title title="Stocodi 에 오신걸 환영해요!" />
 
-                <InputContainer ref={nameRef} label="이름" type="text" width="100%" height="50px"></InputContainer>
-                <InputButtonContainer
-                    ref={emailRef}
-                    label="이메일 주소(아이디)"
-                    type="text"
-                    width="100%"
-                    height="50px"
-                    btnWidth="100px"
-                    btnLabel="중복확인"
-                    onChange={onEmailChange}
-                    onClick={onEmailVerificationClick}
-                ></InputButtonContainer>
-                <InputContainer ref={passwordRef} label="비밀번호" type="password" width="100%" height="50px"></InputContainer>
+                <div className={styles.input_wrapper}>
+                    <InputContainer ref={nameRef} label="이름" type="text" width="100%" height="50px"></InputContainer>
+                    <InputButtonContainer
+                        ref={emailRef}
+                        label="이메일 주소(아이디)"
+                        type="text"
+                        width="100%"
+                        height="50px"
+                        btnWidth="100px"
+                        btnLabel="중복확인"
+                        onChange={onEmailChange}
+                        onClick={onEmailVerificationClick}
+                    />
+                    <InputVerificationContainer
+                        ref={passwordRef}
+                        label="비밀번호"
+                        verifyLabel={!isPasswordVerified ? "비밀번호는 영문 숫자 특수기호 조합 8 ~ 15자리 이어야 합니다" : ""}
+                        type="password"
+                        width="100%"
+                        height="50px"
+                        onChange={onPasswordChange}
+                    />
+                </div>
 
                 <div className={styles.btn_group}>
                     <Button type="primary-stroke" width="80px" height="80px" onClick={onPrevBtnClick}>
@@ -87,8 +131,7 @@ const SignupPage = {
         );
     },
 
-    Two: () => {
-        const navigate = useNavigate();
+    Two: ({ setStep }: ISignupStep) => {
         const dispatch: Dispatch = useDispatch();
         const { isNickNameVerified } = useSelector((state: RootState) => state.UserSignup);
 
@@ -111,43 +154,73 @@ const SignupPage = {
             dispatch(UserSignupActions.unVerifyNickName());
         };
 
+        const onPrevBtnClick = () => {
+            setStep((step) => step - 1);
+        };
+
         const onNextBtnClick = () => {
-            if (isNickNameVerified) {
-                dispatch(UserSignupActions.setNickName(nicknameRef.current?.value as string));
-                dispatch(UserSignupActions.setBirthDate(birthRef.current?.value as string));
-                navigate("/auth/signup/step3");
-            } else {
+            if (!isNickNameVerified) {
                 alert("닉네임 중복확인을 해주세요");
+                return;
             }
+            if (!phoneRef.current?.value) {
+                alert("휴대폰 번호를 입력해주세요");
+                return;
+            }
+            if (!verifyPhone(phoneRef.current.value)) {
+                alert("휴대폰 번호 형식이 알맞지 않습니다");
+                return;
+            }
+            if (!birthRef.current?.value) {
+                alert("생년월일을 입력해주세요");
+                return;
+            }
+            if (!verifyBirth(birthRef.current.value)) {
+                alert("생년월일이 형식에 알맞지 않습니다");
+                return;
+            }
+
+            dispatch(UserSignupActions.setNickName(nicknameRef.current?.value as string));
+            dispatch(UserSignupActions.setBirthDate(birthRef.current?.value));
+            setStep((step) => step + 1);
         };
 
         return (
             <>
                 <Title title="Stocodi 에 오신걸 환영해요!" />
 
-                <InputButtonContainer
-                    ref={nicknameRef}
-                    label="닉네임"
-                    type="text"
-                    width="100%"
-                    height="50px"
-                    btnWidth="100px"
-                    btnLabel="중복확인"
-                    onChange={onNickNameChange}
-                    onClick={onNicknameVerificationClick}
-                ></InputButtonContainer>
-                <InputContainer
-                    ref={phoneRef}
-                    label="휴대폰 번호"
-                    type="text"
-                    width="100%"
-                    height="50px"
-                    placeholder="하이픈(-)을 제외한 숫자만 입력해주세요"
-                ></InputContainer>
-                <InputContainer ref={birthRef} label="생년월일" type="text" width="100%" height="50px" placeholder="ex) 20001212"></InputContainer>
+                <div className={styles.input_wrapper}>
+                    <InputButtonContainer
+                        ref={nicknameRef}
+                        label="닉네임"
+                        type="text"
+                        width="100%"
+                        height="50px"
+                        btnWidth="100px"
+                        btnLabel="중복확인"
+                        onChange={onNickNameChange}
+                        onClick={onNicknameVerificationClick}
+                    ></InputButtonContainer>
+                    <InputContainer
+                        ref={phoneRef}
+                        label="휴대폰 번호"
+                        type="text"
+                        width="100%"
+                        height="50px"
+                        placeholder="하이픈(-)을 제외한 숫자만 입력해주세요"
+                    ></InputContainer>
+                    <InputContainer
+                        ref={birthRef}
+                        label="생년월일"
+                        type="text"
+                        width="100%"
+                        height="50px"
+                        placeholder="ex) 20001212"
+                    ></InputContainer>
+                </div>
 
                 <div className={styles.btn_group}>
-                    <Button type="primary-stroke" width="80px" height="80px" onClick={() => navigate("/auth/signup/step1")}>
+                    <Button type="primary-stroke" width="80px" height="80px" onClick={onPrevBtnClick}>
                         <FontAwesomeIcon icon={faChevronLeft} size="xl" />
                     </Button>
 
@@ -159,12 +232,12 @@ const SignupPage = {
         );
     },
 
-    Three: () => {
+    Three: ({ setStep }: ISignupStep) => {
         const navigate = useNavigate();
         const signupData = useSelector((state: RootState) => state.UserSignup);
 
         const onPrevBtnClick = () => {
-            navigate("/auth/signup/step2");
+            setStep((step) => step - 1);
         };
 
         const onSignupBtnClicked = async () => {
@@ -207,5 +280,3 @@ const SignupPage = {
         );
     },
 };
-
-export default SignupPage;

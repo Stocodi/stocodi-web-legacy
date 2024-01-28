@@ -8,10 +8,15 @@ import { InputContainer } from "../../interfaces/forms/Input";
 import { Title } from "../../components/auth-page/Title";
 
 import { handleLogin } from "../../api/Authentication";
+import { Dispatch } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
+import { UserInterfaceActions } from "../../store/user-interface-slice";
 
 // import { SocialLoginProviders } from "../../constants/SocialLogin";
 
 export default function SigninPage() {
+    const dispatch: Dispatch = useDispatch();
+
     const naviagte = useNavigate();
     const idRef = useRef<HTMLInputElement>(null);
     const pwRef = useRef<HTMLInputElement>(null);
@@ -20,6 +25,7 @@ export default function SigninPage() {
         // 로그인 요청 & 쿠키 저장
         try {
             await handleLogin(idRef.current?.value as string, pwRef.current?.value as string);
+            dispatch(UserInterfaceActions.closeNav());
             naviagte("/");
         } catch (err) {
             alert("아이디 혹은 비밀번호가 일치하지 않습니다");
@@ -35,7 +41,7 @@ export default function SigninPage() {
             <Title title="로그인" subtitle="로그인 후 서비스를 이용해보세요"></Title>
 
             <div className={styles.signin_container}>
-                <InputContainer ref={idRef} type="text" width="100%" height="50px" label="아이디"></InputContainer>
+                <InputContainer ref={idRef} type="text" width="100%" height="50px" label="이메일"></InputContainer>
                 <InputContainer ref={pwRef} type="password" width="100%" height="50px" label="비밀번호"></InputContainer>
             </div>
 
@@ -54,7 +60,7 @@ export default function SigninPage() {
 
                 <div className={styles.signup_link}>
                     아직 계정이 없으신가요?
-                    <Link to="/auth/signup/step1">회원가입</Link>
+                    <Link to="/auth/signup">회원가입</Link>
                 </div>
             </div>
 
