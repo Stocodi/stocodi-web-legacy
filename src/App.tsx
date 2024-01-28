@@ -54,9 +54,7 @@ export default function App() {
 
                     <Route path="/auth" element={<AuthLayout />}>
                         <Route path="signin" element={<SigninPage />} />
-                        <Route path="signup/step1" element={<SignupPage.One />} />
-                        <Route path="signup/step2" element={<SignupPage.Two />} />
-                        <Route path="signup/step3" element={<SignupPage.Three />} />
+                        <Route path="signup" element={<SignupPage />} />
                     </Route>
 
                     <Route path="/test" element={<TestLayout />}>

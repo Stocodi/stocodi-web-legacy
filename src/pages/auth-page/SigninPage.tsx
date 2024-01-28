@@ -60,7 +60,7 @@ export default function SigninPage() {
 
                 <div className={styles.signup_link}>
                     아직 계정이 없으신가요?
-                    <Link to="/auth/signup/step1">회원가입</Link>
+                    <Link to="/auth/signup">회원가입</Link>
                 </div>
             </div>
 

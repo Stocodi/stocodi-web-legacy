@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
@@ -19,14 +19,25 @@ import { RootState } from "../../store/store";
 import styles from "./SignupPage.module.scss";
 import { verifyPassword } from "../../utils/verify";
 
-const SignupPage = {
-    One: () => {
-        const [emailVerify, setEmailVerify] = useState<boolean>(false);
-        const [pwVerify, setPwVerify] = useState<boolean>(false);
+export default function SignupPage() {
+    const [step, setStep] = useState<number>(1);
 
+    if (step === 1) return <SignupStep.One setStep={setStep} />;
+    else if (step === 2) return <SignupStep.Two setStep={setStep} />;
+    else if (step === 3) return <SignupStep.Three setStep={setStep} />;
+}
+
+interface ISignupStep {
+    setStep: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const SignupStep = {
+    One: ({ setStep }: ISignupStep) => {
         const navigate = useNavigate();
         const dispatch: Dispatch = useDispatch();
-        const { isEmailVerified } = useSelector((state: RootState) => state.UserSignup);
+
+        // ❓ 변경시 리렌더링 필요없다면 useRef 훅 사용해도 되지 않을까 ??
+        const { isEmailVerified, isPasswordVerified } = useSelector((state: RootState) => state.UserSignup);
 
         const nameRef = useRef<HTMLInputElement>(null);
         const emailRef = useRef<HTMLInputElement>(null);
@@ -46,22 +57,33 @@ const SignupPage = {
             // 이메일 변경시 재검사 필요
             dispatch(UserSignupActions.unVerifyEmail());
         };
+
         const onPasswordChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-            setPwVerify(verifyPassword(e.target.value));
+            const pwVerification = verifyPassword(e.target.value);
+            if (pwVerification) {
+                dispatch(UserSignupActions.verifyPassword());
+            } else {
+                dispatch(UserSignupActions.unVerifyPassword());
+            }
         };
 
         const onPrevBtnClick = () => {
-            navigate("/auth/signin");
+            navigate("/");
         };
         const onNextBtnClick = () => {
-            if (isEmailVerified) {
-                dispatch(UserSignupActions.setName(nameRef.current?.value as string));
-                dispatch(UserSignupActions.setEmail(emailRef.current?.value as string));
-                dispatch(UserSignupActions.setPassword(passwordRef.current?.value as string));
-                navigate("/auth/signup/step2");
-            } else {
+            if (!isEmailVerified) {
                 alert("이메일 중복검사를 해주세요");
+                return;
             }
+            if (!isPasswordVerified) {
+                alert("비밀번호는 영문 숫자 특수기호 조합 8 ~ 15자리 이어야 합니다");
+                return;
+            }
+
+            dispatch(UserSignupActions.setName(nameRef.current?.value as string));
+            dispatch(UserSignupActions.setEmail(emailRef.current?.value as string));
+            dispatch(UserSignupActions.setPassword(passwordRef.current?.value as string));
+            setStep((step) => step + 1);
         };
 
         return (
@@ -84,7 +106,7 @@ const SignupPage = {
                     <InputVerificationContainer
                         ref={passwordRef}
                         label="비밀번호"
-                        verifyLabel={pwVerify ? "비밀번호는 영문 숫자 특수기호 조합 8자리 이상이어야 합니다" : ""}
+                        verifyLabel={!isPasswordVerified ? "비밀번호는 영문 숫자 특수기호 조합 8 ~ 15자리 이어야 합니다" : ""}
                         type="password"
                         width="100%"
                         height="50px"
@@ -105,7 +127,7 @@ const SignupPage = {
         );
     },
 
-    Two: () => {
+    Two: ({ setStep }: ISignupStep) => {
         const navigate = useNavigate();
         const dispatch: Dispatch = useDispatch();
         const { isNickNameVerified } = useSelector((state: RootState) => state.UserSignup);
@@ -127,6 +149,10 @@ const SignupPage = {
         const onNickNameChange = () => {
             // 닉네임 변경시 재검사 필요
             dispatch(UserSignupActions.unVerifyNickName());
+        };
+
+        const onPrevBtnClick = () => {
+            setStep((step) => step - 1);
         };
 
         const onNextBtnClick = () => {
@@ -174,7 +200,7 @@ const SignupPage = {
                 </div>
 
                 <div className={styles.btn_group}>
-                    <Button type="primary-stroke" width="80px" height="80px" onClick={() => navigate("/auth/signup/step1")}>
+                    <Button type="primary-stroke" width="80px" height="80px" onClick={onPrevBtnClick}>
                         <FontAwesomeIcon icon={faChevronLeft} size="xl" />
                     </Button>
 
@@ -186,12 +212,12 @@ const SignupPage = {
         );
     },
 
-    Three: () => {
+    Three: ({ setStep }: ISignupStep) => {
         const navigate = useNavigate();
         const signupData = useSelector((state: RootState) => state.UserSignup);
 
         const onPrevBtnClick = () => {
-            navigate("/auth/signup/step2");
+            setStep((step) => step - 1);
         };
 
         const onSignupBtnClicked = async () => {
@@ -234,5 +260,3 @@ const SignupPage = {
         );
     },
 };
-
-export default SignupPage;
