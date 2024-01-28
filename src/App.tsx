@@ -22,6 +22,7 @@ import TestPage from "./pages/test-page/TestPage";
 import QuestionPage from "./pages/test-page/QuestionPage";
 import ResultPage from "./pages/test-page/ResultPage";
 import ResultDetailPage from "./pages/test-page/ResultDetailPage";
+import ResultCommentPage from "./pages/test-page/ResultCommentPage";
 
 import PageNotFound from "./pages/PageNotFound";
 import ServiceNotAvailablePage from "./pages/ServiceNotAvailable";
@@ -63,7 +64,8 @@ export default function App() {
                         <Route index element={<TestPage />} />
                         <Route path="question" element={<QuestionPage />} />
                         <Route path="result" element={<ResultPage />}></Route>
-                        <Route path="result/detail" element={<ResultDetailPage />}></Route>
+                        <Route path="result/detail" element={<ResultDetailPage />} />
+                        <Route path="result/comment" element={<ResultCommentPage />} />
                     </Route>
                 </Routes>
             </Provider>

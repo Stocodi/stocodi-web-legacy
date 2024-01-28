@@ -3,12 +3,13 @@ export const GetResult = (score: number) => {
         return ResultLow[Math.floor(Math.random() * ResultLow.length)];
     } else if (50 <= score && score < 80) {
         return ResultMid[Math.floor(Math.random() * ResultMid.length)];
-    } else if (80 <= score && score < 100) {
+    } else if (80 <= score && score <= 100) {
         return ResultHigh[Math.floor(Math.random() * ResultHigh.length)];
     }
 };
 
 export const GetResultCommentIndex = (score: number) => {
+    if (score === 100) return 4;
     return ((score / 20 + 1).toFixed(0) as unknown as number) - 1;
 };
 

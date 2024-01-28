@@ -9,7 +9,7 @@ export interface ILabelContainer {
 export const LabelContainer: React.FC<ILabelContainer> = ({ label, children, width }) => {
     return (
         <div className={styles.label_container} style={{ width: width }}>
-            <p>{label}</p>
+            <p className={styles.label}>{label}</p>
             <div>{children}</div>
         </div>
     );

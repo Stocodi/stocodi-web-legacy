@@ -36,6 +36,8 @@ export default function QuestionPage() {
             if (selectedOption) {
                 if (selectedOption.value === questions[i - 1].answer) {
                     pageScore += 1;
+                } else {
+                    dispatch(UserQuestionActions.addWrongAnswerIndex(i));
                 }
             }
         }
