@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
@@ -17,7 +17,7 @@ import { handleSignup, verifyEmail, verifyNickName } from "../../api/Authenticat
 import { RootState } from "../../store/store";
 
 import styles from "./SignupPage.module.scss";
-import { verifyPassword } from "../../utils/verify";
+import { verifyBirth, verifyPassword, verifyPhone } from "../../utils/verify";
 
 export default function SignupPage() {
     const [step, setStep] = useState<number>(1);
@@ -79,8 +79,12 @@ const SignupStep = {
                 alert("비밀번호는 영문 숫자 특수기호 조합 8 ~ 15자리 이어야 합니다");
                 return;
             }
+            if (!nameRef.current?.value) {
+                alert("이름을 입력해주세요");
+                return;
+            }
 
-            dispatch(UserSignupActions.setName(nameRef.current?.value as string));
+            dispatch(UserSignupActions.setName(nameRef.current?.value));
             dispatch(UserSignupActions.setEmail(emailRef.current?.value as string));
             dispatch(UserSignupActions.setPassword(passwordRef.current?.value as string));
             setStep((step) => step + 1);
@@ -128,7 +132,6 @@ const SignupStep = {
     },
 
     Two: ({ setStep }: ISignupStep) => {
-        const navigate = useNavigate();
         const dispatch: Dispatch = useDispatch();
         const { isNickNameVerified } = useSelector((state: RootState) => state.UserSignup);
 
@@ -156,13 +159,30 @@ const SignupStep = {
         };
 
         const onNextBtnClick = () => {
-            if (isNickNameVerified) {
-                dispatch(UserSignupActions.setNickName(nicknameRef.current?.value as string));
-                dispatch(UserSignupActions.setBirthDate(birthRef.current?.value as string));
-                navigate("/auth/signup/step3");
-            } else {
+            if (!isNickNameVerified) {
                 alert("닉네임 중복확인을 해주세요");
+                return;
             }
+            if (!phoneRef.current?.value) {
+                alert("휴대폰 번호를 입력해주세요");
+                return;
+            }
+            if (!verifyPhone(phoneRef.current.value)) {
+                alert("휴대폰 번호 형식이 알맞지 않습니다");
+                return;
+            }
+            if (!birthRef.current?.value) {
+                alert("생년월일을 입력해주세요");
+                return;
+            }
+            if (!verifyBirth(birthRef.current.value)) {
+                alert("생년월일이 형식에 알맞지 않습니다");
+                return;
+            }
+
+            dispatch(UserSignupActions.setNickName(nicknameRef.current?.value as string));
+            dispatch(UserSignupActions.setBirthDate(birthRef.current?.value));
+            setStep((step) => step + 1);
         };
 
         return (

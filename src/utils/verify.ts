@@ -15,3 +15,17 @@ export const verifyPassword = (password: string): boolean => {
     if (!pwRegExp.exec(password)) return false;
     return true;
 };
+
+export const phoneRegExp = /^[0-9]{3}[0-9]{4}[0-9]{4}$/;
+
+export const verifyPhone = (phone: string): boolean => {
+    if (!phoneRegExp.exec(phone)) return false;
+    return true;
+};
+
+export const birthRegExp = /^[0-9]{4}[0-1][0-9][0-3][1-9]/;
+
+export const verifyBirth = (birth: string): boolean => {
+    if (!birthRegExp.exec(birth)) return false;
+    return true;
+};
