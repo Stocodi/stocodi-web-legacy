@@ -30,7 +30,7 @@ export const Question: React.FC<IQuestion> = ({ index, question }) => {
     );
 };
 
-export const CommentaryQuestion: React.FC<ICommentaryQuestion> = ({ type, index, question, commentary, selected, answer }) => {
+export const CommentaryQuestion: React.FC<ICommentaryQuestion> = ({ type, index, question, commentary, answer }) => {
     return (
         <div className={styles.commentary_question}>
             <p>
