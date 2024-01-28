@@ -1,14 +1,15 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 import { Button } from "../../interfaces/forms/Button";
-import { InputContainer, InputButtonContainer } from "../../interfaces/forms/Input";
+import { InputContainer, InputButtonContainer, InputVerificationContainer } from "../../interfaces/forms/Input";
 import { Title } from "../../components/auth-page/Title";
 import { CategoryGrid } from "../../components/auth-page/CategoryGrid";
 import { Categories } from "../../constants/Categories";
 
-import { useRef } from "react";
+import { ChangeEventHandler, useRef } from "react";
 import { Dispatch } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { UserSignupActions } from "../../store/user-signup-slice";
@@ -16,9 +17,13 @@ import { handleSignup, verifyEmail, verifyNickName } from "../../api/Authenticat
 import { RootState } from "../../store/store";
 
 import styles from "./SignupPage.module.scss";
+import { verifyPassword } from "../../utils/verify";
 
 const SignupPage = {
     One: () => {
+        const [emailVerify, setEmailVerify] = useState<boolean>(false);
+        const [pwVerify, setPwVerify] = useState<boolean>(false);
+
         const navigate = useNavigate();
         const dispatch: Dispatch = useDispatch();
         const { isEmailVerified } = useSelector((state: RootState) => state.UserSignup);
@@ -37,9 +42,12 @@ const SignupPage = {
             }
         };
 
-        const onEmailChange = () => {
+        const onEmailChange: ChangeEventHandler<HTMLInputElement> = () => {
             // 이메일 변경시 재검사 필요
             dispatch(UserSignupActions.unVerifyEmail());
+        };
+        const onPasswordChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+            setPwVerify(verifyPassword(e.target.value));
         };
 
         const onPrevBtnClick = () => {
@@ -60,19 +68,29 @@ const SignupPage = {
             <>
                 <Title title="Stocodi 에 오신걸 환영해요!" />
 
-                <InputContainer ref={nameRef} label="이름" type="text" width="100%" height="50px"></InputContainer>
-                <InputButtonContainer
-                    ref={emailRef}
-                    label="이메일 주소(아이디)"
-                    type="text"
-                    width="100%"
-                    height="50px"
-                    btnWidth="100px"
-                    btnLabel="중복확인"
-                    onChange={onEmailChange}
-                    onClick={onEmailVerificationClick}
-                ></InputButtonContainer>
-                <InputContainer ref={passwordRef} label="비밀번호" type="password" width="100%" height="50px"></InputContainer>
+                <div className={styles.input_wrapper}>
+                    <InputContainer ref={nameRef} label="이름" type="text" width="100%" height="50px"></InputContainer>
+                    <InputButtonContainer
+                        ref={emailRef}
+                        label="이메일 주소(아이디)"
+                        type="text"
+                        width="100%"
+                        height="50px"
+                        btnWidth="100px"
+                        btnLabel="중복확인"
+                        onChange={onEmailChange}
+                        onClick={onEmailVerificationClick}
+                    />
+                    <InputVerificationContainer
+                        ref={passwordRef}
+                        label="비밀번호"
+                        verifyLabel={pwVerify ? "비밀번호는 영문 숫자 특수기호 조합 8자리 이상이어야 합니다" : ""}
+                        type="password"
+                        width="100%"
+                        height="50px"
+                        onChange={onPasswordChange}
+                    />
+                </div>
 
                 <div className={styles.btn_group}>
                     <Button type="primary-stroke" width="80px" height="80px" onClick={onPrevBtnClick}>
@@ -125,26 +143,35 @@ const SignupPage = {
             <>
                 <Title title="Stocodi 에 오신걸 환영해요!" />
 
-                <InputButtonContainer
-                    ref={nicknameRef}
-                    label="닉네임"
-                    type="text"
-                    width="100%"
-                    height="50px"
-                    btnWidth="100px"
-                    btnLabel="중복확인"
-                    onChange={onNickNameChange}
-                    onClick={onNicknameVerificationClick}
-                ></InputButtonContainer>
-                <InputContainer
-                    ref={phoneRef}
-                    label="휴대폰 번호"
-                    type="text"
-                    width="100%"
-                    height="50px"
-                    placeholder="하이픈(-)을 제외한 숫자만 입력해주세요"
-                ></InputContainer>
-                <InputContainer ref={birthRef} label="생년월일" type="text" width="100%" height="50px" placeholder="ex) 20001212"></InputContainer>
+                <div className={styles.input_wrapper}>
+                    <InputButtonContainer
+                        ref={nicknameRef}
+                        label="닉네임"
+                        type="text"
+                        width="100%"
+                        height="50px"
+                        btnWidth="100px"
+                        btnLabel="중복확인"
+                        onChange={onNickNameChange}
+                        onClick={onNicknameVerificationClick}
+                    ></InputButtonContainer>
+                    <InputContainer
+                        ref={phoneRef}
+                        label="휴대폰 번호"
+                        type="text"
+                        width="100%"
+                        height="50px"
+                        placeholder="하이픈(-)을 제외한 숫자만 입력해주세요"
+                    ></InputContainer>
+                    <InputContainer
+                        ref={birthRef}
+                        label="생년월일"
+                        type="text"
+                        width="100%"
+                        height="50px"
+                        placeholder="ex) 20001212"
+                    ></InputContainer>
+                </div>
 
                 <div className={styles.btn_group}>
                     <Button type="primary-stroke" width="80px" height="80px" onClick={() => navigate("/auth/signup/step1")}>
