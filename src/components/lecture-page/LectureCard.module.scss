@@ -6,12 +6,12 @@
     width: 300px;
 
     margin: 10px;
-    border-radius: 20px;
+    // border-radius: 10px;
 
     img {
         display: block;
         width: 100%;
-        aspect-ratio: 30/16;
+        aspect-ratio: 16/9;
         object-fit: cover;
     }
     &:hover {
@@ -19,6 +19,7 @@
     }
     @include mobile {
         width: 200px;
+        margin: 5px;
     }
 }
 
