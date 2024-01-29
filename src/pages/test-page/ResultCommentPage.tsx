@@ -23,7 +23,7 @@ export default function ResultCommentPage() {
                         answer={questions[element - 1].answer}
                         commentary={questions[element - 1].comment}
                         index={element}
-                        question="Sample Question"
+                        question={questions[element - 1].question}
                     />
                 );
             })}
