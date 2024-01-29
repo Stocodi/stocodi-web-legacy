@@ -6,6 +6,12 @@ export interface INavMenu {
 
 export const NavMenu: INavMenu[] = [
     {
+        key: 0,
+        to: "/",
+        text: "강좌",
+    },
+    /*
+    {
         key: 1,
         to: "/experiment",
         text: "투자실험",
@@ -25,6 +31,8 @@ export const NavMenu: INavMenu[] = [
         to: "/mypage/portfolio",
         text: "마이페이지",
     },
+    */
+
     {
         key: 5,
         to: "/test",
