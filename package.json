@@ -25,7 +25,8 @@
     "react-router-dom": "^6.21.1",
     "react-youtube": "^10.1.0",
     "sass": "^1.69.5",
-    "storybook": "^7.6.6"
+    "storybook": "^7.6.6",
+    "tsyringe": "^4.8.0"
   },
   "devDependencies": {
     "@types/dom-to-image": "^2.6.7",

@@ -20,6 +20,7 @@ export default function TestPage() {
 
     return (
         <div className={styles.page_wrapper}>
+            <input type="text" />
             <img className={styles.page_bg} src="/img/test-background.svg" alt="" />
             <div className={styles.banner}>
                 <h2>2023 당신의 올해 금융점수는 ?</h2>
