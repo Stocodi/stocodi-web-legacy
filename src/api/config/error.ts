@@ -1,10 +1,8 @@
 export class ApiError extends Error {
-    private readonly status: string;
-    private readonly response: unknown;
+    public status: number;
 
-    constructor(message: string, status: string, response: unknown) {
-        super(message);
+    constructor(status: number) {
+        super("HTTP Request Failed");
         this.status = status;
-        this.response = response;
     }
 }
