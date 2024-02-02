@@ -24,6 +24,7 @@
     "react-redux": "^9.0.4",
     "react-router-dom": "^6.21.1",
     "react-youtube": "^10.1.0",
+    "reflect-metadata": "^0.2.1",
     "sass": "^1.69.5",
     "storybook": "^7.6.6",
     "tsyringe": "^4.8.0"
