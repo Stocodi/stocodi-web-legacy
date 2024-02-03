@@ -7,8 +7,8 @@ import { NavLinkStyle } from "../../utils/NavLinkStyle";
 import { useNavAside } from "../../hooks/useNavAside";
 
 import styles from "./NavAside.module.scss";
-import { GetAccessToken, GetNickName } from "../../api/Authentication";
-import { handleLogout } from "../../api/Authentication";
+import { GetAccessToken, GetNickName } from "../../api/config/cookies";
+import { authService } from "../../api/services/auth.service";
 
 export interface INavAsideItem {
     to: string;
@@ -24,7 +24,7 @@ export const NavAside = () => {
 
     const onLogout = async () => {
         try {
-            await handleLogout();
+            await authService.signOut();
             alert("로그아웃 되었습니다");
             window.location.href = "/";
         } catch (err) {

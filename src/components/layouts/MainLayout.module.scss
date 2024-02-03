@@ -1,0 +1,19 @@
+@import "@/styles/utils.scss";
+
+.header {
+    width: 100vw;
+    overflow: hidden;
+}
+
+.main {
+    @include layout;
+    margin-top: $nav-height;
+    position: relative;
+    z-index: 0;
+}
+
+@include mobile {
+    .main {
+        margin-top: $nav-height-mobile;
+    }
+}

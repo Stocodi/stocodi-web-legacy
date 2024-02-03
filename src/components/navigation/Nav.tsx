@@ -8,10 +8,10 @@ import { useDispatch } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 import { UserInterfaceActions } from "../../store/user-interface-slice";
 
-import { NavDropDown } from "../../components/auth-page/NavDropDown";
+import { NavDropDown } from "../../pages/auth-page/components/NavDropDown";
 import { NavMenu } from "../../constants/NavMenu";
 import { NavLinkStyle } from "../../utils/NavLinkStyle";
-import { GetAccessToken } from "../../api/Authentication";
+import { GetAccessToken } from "../../api/config/cookies";
 
 import styles from "./Nav.module.scss";
 

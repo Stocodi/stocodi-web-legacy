@@ -1,0 +1,15 @@
+@import "@/styles/utils.scss";
+
+.test_page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+}
+
+@include mobile {
+    .test_page {
+    }
+}
