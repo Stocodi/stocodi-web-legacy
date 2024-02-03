@@ -1,23 +1,26 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
-
-import { Button } from "../../interfaces/forms/Button";
-import { InputContainer, InputButtonContainer, InputVerificationContainer } from "../../interfaces/forms/Input";
-import { Title } from "../../components/auth-page/Title";
-import { CategoryGrid } from "../../components/auth-page/CategoryGrid";
-import { Categories } from "../../constants/Categories";
-
 import { ChangeEventHandler, useRef } from "react";
-import { Dispatch } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
-import { UserSignupActions } from "../../store/user-signup-slice";
-import { handleSignup, verifyEmail, verifyNickName } from "../../api/Authentication";
+import { useNavigate } from "react-router-dom";
+
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { Button } from "../../components/forms/Button";
+import { InputContainer, InputButtonContainer, InputVerificationContainer } from "../../components/forms/Input";
+import { CategoryGrid } from "./components/CategoryGrid";
+import { Title } from "./components/Title";
+
+import { Categories } from "../../constants/Categories";
+import { verifyBirth, verifyPassword, verifyPhone } from "../../utils/verify";
+
+import { authService } from "../../api/services/auth.service";
+
 import { RootState } from "../../store/store";
+import { UserSignupActions } from "../../store/user-signup-slice";
+import { Dispatch } from "@reduxjs/toolkit";
 
 import styles from "./SignupPage.module.scss";
-import { verifyBirth, verifyPassword, verifyPhone } from "../../utils/verify";
 
 export default function SignupPage() {
     const [step, setStep] = useState<number>(1);
@@ -35,8 +38,6 @@ const SignupStep = {
     One: ({ setStep }: ISignupStep) => {
         const navigate = useNavigate();
         const dispatch: Dispatch = useDispatch();
-
-        // ❓ 변경시 리렌더링 필요없다면 useRef 훅 사용해도 되지 않을까 ??
         const { isEmailVerified, isPasswordVerified } = useSelector((state: RootState) => state.UserSignup);
 
         const nameRef = useRef<HTMLInputElement>(null);
@@ -45,7 +46,7 @@ const SignupStep = {
 
         const onEmailVerificationClick = async () => {
             try {
-                await verifyEmail(emailRef.current?.value as string);
+                await authService.verifyEmail(emailRef.current?.value as string);
                 dispatch(UserSignupActions.verifyEmail());
                 alert("사용가능한 이메일 입니다");
             } catch (err) {
@@ -60,16 +61,14 @@ const SignupStep = {
 
         const onPasswordChange: ChangeEventHandler<HTMLInputElement> = (e) => {
             const pwVerification = verifyPassword(e.target.value);
-            if (pwVerification) {
-                dispatch(UserSignupActions.verifyPassword());
-            } else {
-                dispatch(UserSignupActions.unVerifyPassword());
-            }
+            if (pwVerification) dispatch(UserSignupActions.verifyPassword());
+            else dispatch(UserSignupActions.unVerifyPassword());
         };
 
         const onPrevBtnClick = () => {
             navigate("/");
         };
+
         const onNextBtnClick = () => {
             if (!isEmailVerified) {
                 alert("이메일 중복검사를 해주세요");
@@ -141,7 +140,7 @@ const SignupStep = {
 
         const onNicknameVerificationClick = async () => {
             try {
-                await verifyNickName(nicknameRef.current?.value as string);
+                await authService.verifyNickName(nicknameRef.current?.value as string);
                 dispatch(UserSignupActions.verifyNickName());
                 alert("사용가능한 닉네임 입니다");
             } catch (err) {
@@ -242,7 +241,7 @@ const SignupStep = {
 
         const onSignupBtnClicked = async () => {
             try {
-                await handleSignup({
+                await authService.signUp({
                     email: signupData.email,
                     password: signupData.password,
                     name: signupData.name,

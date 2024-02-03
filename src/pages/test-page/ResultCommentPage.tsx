@@ -1,10 +1,13 @@
-import styles from "./ResultCommentPage.module.scss";
-import questionStyles from "./QuestionPage.module.scss";
-import { CommentaryQuestion } from "../../components/test-page/Question";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+
+import { CommentaryQuestion } from "./components/Question";
 
 import { questions } from "../../constants/Questions";
+
+import { RootState } from "../../store/store";
+
+import questionStyles from "./QuestionPage.module.scss";
+import styles from "./ResultCommentPage.module.scss";
 
 export default function ResultCommentPage() {
     const { wrongAnswer } = useSelector((state: RootState) => state.UserQuestion);

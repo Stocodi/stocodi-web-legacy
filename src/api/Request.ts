@@ -1,6 +1,6 @@
 import { API_BASE_URL } from "./env";
 
-export const GetRequest = async <ResponseBody>(url: string, token?: string): Promise<ResponseBody> => {
+export async function GetRequest<ResponseBody>(url: string, token?: string): Promise<ResponseBody> {
     const headers: HeadersInit = token ? { Authorization: `Bearer ${token}` } : {};
     const repsonse = await fetch(API_BASE_URL + url, {
         method: "GET",
@@ -8,9 +8,9 @@ export const GetRequest = async <ResponseBody>(url: string, token?: string): Pro
     });
     if (!repsonse.ok) throw new Error(`GET Request Failed ${url}`);
     return repsonse.json() as Promise<ResponseBody>;
-};
+}
 
-export const PostRequest = async <RequestBody, ResponseBody>(url: string, body: RequestBody, token?: string): Promise<ResponseBody> => {
+export async function PostRequest<RequestBody, ResponseBody>(url: string, body: RequestBody, token?: string): Promise<ResponseBody> {
     const headers: HeadersInit = token
         ? { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }
         : { "Content-Type": "application/json" };
@@ -20,10 +20,10 @@ export const PostRequest = async <RequestBody, ResponseBody>(url: string, body: 
         body: JSON.stringify(body),
     });
     if (!response.ok) throw new Error(`POST Request Failed ${url}`);
-    return (await response.json()) as Promise<ResponseBody>;
-};
+    return response.json() as Promise<ResponseBody>;
+}
 
-export const PutRequest = async <RequestBody, ResponseBody>(url: string, body: RequestBody, token?: string): Promise<ResponseBody> => {
+export async function PutRequest<RequestBody, ResponseBody>(url: string, body: RequestBody, token?: string): Promise<ResponseBody> {
     const headers: HeadersInit = token
         ? { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }
         : { "Content-Type": "application/json" };
@@ -33,5 +33,5 @@ export const PutRequest = async <RequestBody, ResponseBody>(url: string, body: R
         body: JSON.stringify(body),
     });
     if (!response.ok) throw new Error(`PUT Request Failed ${url}`);
-    return (await response.json()) as Promise<ResponseBody>;
-};
+    return response.json() as Promise<ResponseBody>;
+}
