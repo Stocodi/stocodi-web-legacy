@@ -7,9 +7,10 @@ import { ISignInResponseBody, ISignInRequestBody, ISignUpRequestBody, ISignUpRes
 export const authService = {
     signIn: async (body: ISignInRequestBody) => {
         const data = await api.Post<ISignInRequestBody, ISignInResponseBody>("/auth/login", body);
-        cookies.set(COOKIE_NICKNAME, data.member_nickname, cookieOptions);
-        cookies.set(COOKIE_ACCESS, data.access_token, cookieOptions);
-        cookies.set(COOKIE_REFRESH, data.refresh_token, cookieOptions);
+        console.log(data);
+        cookies.set(COOKIE_NICKNAME, data.response.member_nickname, cookieOptions);
+        cookies.set(COOKIE_ACCESS, data.response.access_token, cookieOptions);
+        cookies.set(COOKIE_REFRESH, data.response.refresh_token, cookieOptions);
         return data;
     },
 

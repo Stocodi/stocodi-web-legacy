@@ -1,4 +1,4 @@
-import { GetAccessToken } from "../../api/Authentication";
+import { GetAccessToken } from "../../api/config/cookies";
 
 export const AuthGuard = ({ children }: { children: React.ReactNode }) => {
     if (!GetAccessToken()) return <></>;

@@ -4,10 +4,12 @@ export interface ISignInRequestBody {
 }
 
 export interface ISignInResponseBody {
-    member_id: number;
-    member_nickname: string;
-    access_token: string;
-    refresh_token: string;
+    response: {
+        member_id: number;
+        member_nickname: string;
+        access_token: string;
+        refresh_token: string;
+    };
 }
 
 export interface ISignUpRequestBody {

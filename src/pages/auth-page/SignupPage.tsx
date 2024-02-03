@@ -17,6 +17,7 @@ import { UserSignupActions } from "../../store/user-signup-slice";
 import styles from "./SignupPage.module.scss";
 import { verifyBirth, verifyPassword, verifyPhone } from "../../utils/verify";
 import { authService } from "../../api/services/auth.service";
+import { RootState } from "../../store/store";
 
 export default function SignupPage() {
     const [step, setStep] = useState<number>(1);
@@ -57,16 +58,14 @@ const SignupStep = {
 
         const onPasswordChange: ChangeEventHandler<HTMLInputElement> = (e) => {
             const pwVerification = verifyPassword(e.target.value);
-            if (pwVerification) {
-                dispatch(UserSignupActions.verifyPassword());
-            } else {
-                dispatch(UserSignupActions.unVerifyPassword());
-            }
+            if (pwVerification) dispatch(UserSignupActions.verifyPassword());
+            else dispatch(UserSignupActions.unVerifyPassword());
         };
 
         const onPrevBtnClick = () => {
             navigate("/");
         };
+
         const onNextBtnClick = () => {
             if (!isEmailVerified) {
                 alert("이메일 중복검사를 해주세요");

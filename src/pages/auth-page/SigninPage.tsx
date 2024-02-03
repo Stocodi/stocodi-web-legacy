@@ -12,8 +12,6 @@ import { useDispatch } from "react-redux";
 import { UserInterfaceActions } from "../../store/user-interface-slice";
 import { authService } from "../../api/services/auth.service";
 
-// import { SocialLoginProviders } from "../../constants/SocialLogin";
-
 export default function SigninPage() {
     const dispatch: Dispatch = useDispatch();
 
