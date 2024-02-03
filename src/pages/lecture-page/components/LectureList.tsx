@@ -1,7 +1,9 @@
-import { Badge } from "../../../components/display/Badge";
-import { Avatar } from "../../../components/display/Avatar";
-import styles from "./LectureList.module.scss";
 import { useNavigate } from "react-router-dom";
+
+import { Avatar } from "../../../components/display/Avatar";
+import { Badge } from "../../../components/display/Badge";
+
+import styles from "./LectureList.module.scss";
 
 export interface ILectureListContainer {
     children: React.ReactNode;

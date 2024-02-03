@@ -1,17 +1,18 @@
 import { useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-import { LectureList } from "./components/LectureList";
-import { Search } from "../../components/forms/Search";
+import { useQuery } from "@tanstack/react-query";
+
 import { Loader } from "../../components/feedback/Loader";
+import { Search } from "../../components/forms/Search";
+import { LectureList } from "./components/LectureList";
 
 import { GetSearchParams } from "../../utils/SearchParams";
 import { ParseVideoId } from "../../utils/YoutubeLinks";
 
-import styles from "./LectureSearchResultPage.module.scss";
-
-import { useQuery } from "@tanstack/react-query";
 import { lectureService } from "../../api/services/lecture.service";
+
+import styles from "./LectureSearchResultPage.module.scss";
 
 export default function LectureSearchResultPage() {
     const navigate = useNavigate();

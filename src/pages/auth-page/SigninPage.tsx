@@ -1,16 +1,17 @@
+import { Dispatch } from "@reduxjs/toolkit";
 import { useRef } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-
-import styles from "./SigninPage.module.scss";
 
 import { Button } from "../../components/forms/Button";
 import { InputContainer } from "../../components/forms/Input";
 import { Title } from "./components/Title";
 
-import { Dispatch } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
-import { UserInterfaceActions } from "../../store/user-interface-slice";
 import { authService } from "../../api/services/auth.service";
+
+import { UserInterfaceActions } from "../../store/user-interface-slice";
+
+import styles from "./SigninPage.module.scss";
 
 export default function SigninPage() {
     const dispatch: Dispatch = useDispatch();

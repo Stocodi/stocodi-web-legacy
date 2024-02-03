@@ -1,9 +1,11 @@
-import styles from "./Carousel.module.scss";
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { ButtonCircle } from "../../../components/forms/Button";
 
 import { ICarouselList } from "../../../constants/Carousel";
-import { useNavigate } from "react-router-dom";
+
+import styles from "./Carousel.module.scss";
 
 interface Props {
     carouselList: ICarouselList[];

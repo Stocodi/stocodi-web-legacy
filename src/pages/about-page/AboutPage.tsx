@@ -1,13 +1,13 @@
 // 랜딩페이지
+import BackgroundSection from "./components/BackgroundSection";
+import ContentSection from "./components/ContentSection";
+import { FeatureExperiment, FeaturePortfolio, FeaturePractice, FeatureLecture } from "./components/FeatureSection";
+import FooterSection from "./components/FooterSection";
+import HeadingSection from "./components/HeadingSection";
+
 import { useObserver } from "../../hooks/useObserver";
 
 import "./AboutPage.scss";
-
-import BackgroundSection from "./components/BackgroundSection";
-import HeadingSection from "./components/HeadingSection";
-import ContentSection from "./components/ContentSection";
-import FooterSection from "./components/FooterSection";
-import { FeatureExperiment, FeaturePortfolio, FeaturePractice, FeatureLecture } from "./components/FeatureSection";
 
 export default function AboutPage() {
     // 스크롤 애니메이션

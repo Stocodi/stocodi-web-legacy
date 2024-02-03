@@ -1,10 +1,12 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { MouseEventHandler } from "react";
+
 import { faHeart, faBookmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { Avatar } from "../../../components/display/Avatar";
 import { ButtonCircle } from "../../../components/forms/Button";
+
 import styles from "./LectureProvider.module.scss";
-import { MouseEventHandler } from "react";
 
 export interface ILectureProvider {
     name: string;

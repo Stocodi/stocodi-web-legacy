@@ -1,21 +1,20 @@
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Search } from "../../components/forms/Search";
+import { useQuery } from "@tanstack/react-query";
+
 import { Loader } from "../../components/feedback/Loader";
-
-import { LectureSection } from "./components/LectureSection";
-import { LectureCard } from "./components/LectureCard";
+import { Search } from "../../components/forms/Search";
 import { Carousel } from "./components/Carousel";
-
-import styles from "./LecturePage.module.scss";
+import { LectureCard } from "./components/LectureCard";
+import { LectureSection } from "./components/LectureSection";
 
 import { CarouselList } from "../../constants/Carousel";
-//test
 import { ParseVideoId } from "../../utils/YoutubeLinks";
 
 import { lectureService } from "../../api/services/lecture.service";
-import { useQuery } from "@tanstack/react-query";
+
+import styles from "./LecturePage.module.scss";
 
 export default function LecturePage() {
     const navigate = useNavigate();

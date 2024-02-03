@@ -1,7 +1,8 @@
 import { MouseEventHandler } from "react";
-import styles from "./UploadPlaceHolder.module.scss";
 
 import uploadIcon from "@/assets/upload.svg";
+
+import styles from "./UploadPlaceHolder.module.scss";
 
 export interface IUploadPlaceholder {
     width?: string;

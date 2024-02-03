@@ -1,23 +1,26 @@
 import { useState } from "react";
+import { ChangeEventHandler, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { Button } from "../../components/forms/Button";
 import { InputContainer, InputButtonContainer, InputVerificationContainer } from "../../components/forms/Input";
-import { Title } from "./components/Title";
 import { CategoryGrid } from "./components/CategoryGrid";
-import { Categories } from "../../constants/Categories";
+import { Title } from "./components/Title";
 
-import { ChangeEventHandler, useRef } from "react";
-import { Dispatch } from "@reduxjs/toolkit";
-import { useDispatch, useSelector } from "react-redux";
+import { Categories } from "../../constants/Categories";
+import { verifyBirth, verifyPassword, verifyPhone } from "../../utils/verify";
+
+import { authService } from "../../api/services/auth.service";
+
+import { RootState } from "../../store/store";
 import { UserSignupActions } from "../../store/user-signup-slice";
+import { Dispatch } from "@reduxjs/toolkit";
 
 import styles from "./SignupPage.module.scss";
-import { verifyBirth, verifyPassword, verifyPhone } from "../../utils/verify";
-import { authService } from "../../api/services/auth.service";
-import { RootState } from "../../store/store";
 
 export default function SignupPage() {
     const [step, setStep] = useState<number>(1);

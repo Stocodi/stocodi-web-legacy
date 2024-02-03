@@ -1,17 +1,16 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Button } from "../../components/forms/Button";
-import { Input, InputContainer, InputButtonContainer, TextAreaContainer } from "../../components/forms/Input";
-import { CheckBox } from "../../components/forms/CheckBox";
 import { Badge } from "../../components/display/Badge";
-
+import { Button } from "../../components/forms/Button";
+import { CheckBox } from "../../components/forms/CheckBox";
+import { Input, InputContainer, InputButtonContainer, TextAreaContainer } from "../../components/forms/Input";
 import { UploadPlaceholder } from "./components/UploadPlaceholder";
 
 import { GetAccessToken, GetNickName } from "../../api/config/cookies";
+import { lectureService } from "../../api/services/lecture.service";
 
 import styles from "./LectureUploadPage.module.scss";
-import { lectureService } from "../../api/services/lecture.service";
 
 export default function LectureUploadPage() {
     const [hashtags, setHashTags] = useState<string[]>([]);

@@ -1,10 +1,11 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRef } from "react";
+
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { ButtonCircle } from "../../../components/forms/Button";
 
 import styles from "./LectureSection.module.scss";
-import { useRef } from "react";
 
 export interface ILectureSection {
     title: string;

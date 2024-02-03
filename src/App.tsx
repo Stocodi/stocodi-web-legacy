@@ -1,33 +1,32 @@
-import "@/styles/globals.scss";
 import { useEffect } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
-import { Provider } from "react-redux";
-import { store } from "./store/store";
 import { CookiesProvider } from "react-cookie";
+import { Provider } from "react-redux";
+import { Route, Routes, useLocation } from "react-router-dom";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import { MainLayout } from "./components/layouts/MainLayout";
 import { AuthLayout } from "./components/layouts/AuthLayout";
+import { MainLayout } from "./components/layouts/MainLayout";
 import { TestLayout } from "./components/layouts/TestLayout";
-
-import AboutPage from "./pages/about-page/AboutPage";
-import SigninPage from "./pages/auth-page/SigninPage";
-import SignupPage from "./pages/auth-page/SignupPage";
-
-import LecturePage from "./pages/lecture-page/LecturePage";
-import LectureSearchResultPage from "./pages/lecture-page/LectureSearchResultPage";
-import LectureViewPage from "./pages/lecture-page/LectureViewPage";
-import LectureUploadPage from "./pages/lecture-page/LectureUploadPage";
-
-import TestPage from "./pages/test-page/TestPage";
-import QuestionPage from "./pages/test-page/QuestionPage";
-import ResultPage from "./pages/test-page/ResultPage";
-import ResultDetailPage from "./pages/test-page/ResultDetailPage";
-import ResultCommentPage from "./pages/test-page/ResultCommentPage";
 
 import PageNotFound from "./pages/PageNotFound";
 import ServiceNotAvailablePage from "./pages/ServiceNotAvailable";
+import AboutPage from "./pages/about-page/AboutPage";
+import SigninPage from "./pages/auth-page/SigninPage";
+import SignupPage from "./pages/auth-page/SignupPage";
+import LecturePage from "./pages/lecture-page/LecturePage";
+import LectureSearchResultPage from "./pages/lecture-page/LectureSearchResultPage";
+import LectureUploadPage from "./pages/lecture-page/LectureUploadPage";
+import LectureViewPage from "./pages/lecture-page/LectureViewPage";
+import QuestionPage from "./pages/test-page/QuestionPage";
+import ResultCommentPage from "./pages/test-page/ResultCommentPage";
+import ResultDetailPage from "./pages/test-page/ResultDetailPage";
+import ResultPage from "./pages/test-page/ResultPage";
+import TestPage from "./pages/test-page/TestPage";
+
+import { store } from "./store/store";
+
+import "@/styles/globals.scss";
 
 const queryClient = new QueryClient();
 

@@ -1,5 +1,7 @@
 import { MouseEventHandler } from "react";
+
 import { Badge } from "../../../components/display/Badge";
+
 import styles from "./LectureCard.module.scss";
 
 export interface ILectureCardDefault {

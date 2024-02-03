@@ -1,18 +1,20 @@
-import YouTube from "react-youtube";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import YouTube from "react-youtube";
 
-import { Loader } from "../../components/feedback/Loader";
+import { useQuery } from "@tanstack/react-query";
+
 import { Badge } from "../../components/display/Badge";
+import { Loader } from "../../components/feedback/Loader";
+import { LectureCommentContainer } from "./components/LectureComment";
 import { LectureProvider } from "./components/LectureProvider";
 
 import { ParseVideoId } from "../../utils/YoutubeLinks";
 
-import styles from "./LectureViewPage.module.scss";
-import { LectureCommentContainer } from "./components/LectureComment";
 import { GetAccessToken } from "../../api/config/cookies";
 import { lectureService } from "../../api/services/lecture.service";
-import { useQuery } from "@tanstack/react-query";
+
+import styles from "./LectureViewPage.module.scss";
 
 export default function LectureViewPage() {
     const { id } = useParams();

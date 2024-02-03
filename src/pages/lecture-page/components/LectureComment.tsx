@@ -1,16 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { STATUS } from "../../../hooks/useRequest";
+import { useQuery } from "@tanstack/react-query";
 
-import { API_BASE_URL } from "../../../api/env";
-import { PostRequest } from "../../../api/Request";
 import { GetAccessToken } from "../../../api/config/cookies";
-import { IGetAllLectureCommentsResponse } from "../../../api/ResponseTypes";
+import { lectureService } from "../../../api/services/lecture.service";
 
 import styles from "./LectureComment.module.scss";
-import { useQuery } from "@tanstack/react-query";
-import { lectureService } from "../../../api/services/lecture.service";
 
 export interface ILectureCommentContainer {
     lectureId: number;
