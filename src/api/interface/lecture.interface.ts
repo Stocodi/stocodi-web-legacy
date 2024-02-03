@@ -39,3 +39,21 @@ export type ISearchLectureResponseBody = IGetAllLectureResponse;
 export interface IViewLectureResponseBody {
     response: number;
 }
+
+export interface IGetAllLectureCommentsResponseBody {
+    response: [
+        {
+            comment_id: number;
+            member_id: number;
+            lecture_id: number;
+            created_at: string;
+            author: string;
+            content: string;
+        },
+    ];
+}
+
+export interface IWriteLectureCommentRequestBody {
+    lecture_id: number;
+    content: string;
+}

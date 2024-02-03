@@ -58,25 +58,27 @@ export default function LectureUploadPage() {
         // 필드값 비어있는 경우 예외처리
         if (!(titleRef.current?.value && videolinkRef.current?.value)) {
             alert("제목을 입력해주세요!");
-        } else if (!videolinkRef.current.value.startsWith("https://www.youtube.com/watch?v=")) {
+            return;
+        }
+        if (!videolinkRef.current.value.startsWith("https://www.youtube.com/watch?v=")) {
             alert("잘못된 유튜브 링크 형식입니다");
-        } else {
-            try {
-                await lectureService.uploadLecture(
-                    {
-                        video_link: videolinkRef.current?.value,
-                        title: titleRef.current?.value,
-                        author: GetNickName() as string,
-                        description: descriptionRef.current?.value as string,
-                        tags: hashtags,
-                    },
-                    GetAccessToken() as string,
-                );
-                alert("영상 업로드 완료!");
-                navigate("/");
-            } catch (err) {
-                alert("영상 업로드에 실패하였습니다");
-            }
+            return;
+        }
+        try {
+            await lectureService.uploadLecture(
+                {
+                    video_link: videolinkRef.current?.value,
+                    title: titleRef.current?.value,
+                    author: GetNickName() as string,
+                    description: descriptionRef.current?.value as string,
+                    tags: hashtags,
+                },
+                GetAccessToken() as string,
+            );
+            alert("영상 업로드 완료!");
+            navigate("/");
+        } catch (err) {
+            alert("영상 업로드에 실패하였습니다");
         }
     };
 

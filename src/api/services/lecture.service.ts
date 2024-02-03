@@ -6,6 +6,8 @@ import {
     IUploadLectureRequestBody,
     ISearchLectureResponseBody,
     IViewLectureResponseBody,
+    IGetAllLectureCommentsResponseBody,
+    IWriteLectureCommentRequestBody,
 } from "../interface/lecture.interface";
 
 export const lectureService = {
@@ -33,11 +35,19 @@ export const lectureService = {
         return api.Put<Record<string, never>, IViewLectureResponseBody>(`/lectures/views/${id}`, {});
     },
 
-    toggleLikeLecture: async (id: number) => {
-        return api.Put<Record<string, never>, boolean>(`/lectures/likes/${id}`, {});
+    toggleLikeLecture: async (id: number, token?: string) => {
+        return api.Put<Record<string, never>, boolean>(`/likes/${id}`, {}, token);
     },
 
     checkLikeLecture: async (id: number) => {
-        return api.Get<boolean>(`/lectures/likes/${id}`);
+        return api.Get<boolean>(`/likes/${id}`);
+    },
+
+    getAllLectureComments: async (id: number) => {
+        return api.Get<IGetAllLectureCommentsResponseBody>(`/comments/lectures/${id}`);
+    },
+
+    writeLectureComment: async (body: IWriteLectureCommentRequestBody, token?: string) => {
+        return api.Post(`/comments`, body, token);
     },
 };

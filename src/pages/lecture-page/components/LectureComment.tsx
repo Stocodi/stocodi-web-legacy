@@ -9,6 +9,8 @@ import { GetAccessToken } from "../../../api/config/cookies";
 import { IGetAllLectureCommentsResponse } from "../../../api/ResponseTypes";
 
 import styles from "./LectureComment.module.scss";
+import { useQuery } from "@tanstack/react-query";
+import { lectureService } from "../../../api/services/lecture.service";
 
 export interface ILectureCommentContainer {
     lectureId: number;
@@ -22,43 +24,23 @@ export interface ILectureCommentItem {
 export const LectureCommentContainer: React.FC<ILectureCommentContainer> = ({ lectureId }) => {
     const navigate = useNavigate();
     const inputRef = useRef<HTMLInputElement>(null);
-    const [refetch, setRefetch] = useState(false);
 
-    const [status, setStatus] = useState<STATUS>(STATUS.IDLE);
-    const [data, setData] = useState<IGetAllLectureCommentsResponse>();
-
-    // 댓글 작성할때 마다 refetch (deps 에 refetch 추가)
-    useEffect(() => {
-        try {
-            (async () => {
-                setStatus(STATUS.PENDING);
-                const response = await fetch(API_BASE_URL + `/comments/lectures/${lectureId}`, {
-                    method: "GET",
-                    headers: { Authorization: `Bearer ${GetAccessToken() as string}` },
-                });
-                if (!response.ok) throw new Error("댓글 불러오기 실패!");
-                const d = (await response.json()) as IGetAllLectureCommentsResponse;
-                setStatus(STATUS.SUCCESS);
-                setData(d);
-            })();
-        } catch (err) {
-            alert("로그인 후 이용해주세요!");
-            navigate("/auth/signin");
-        }
-    }, [lectureId, navigate, refetch]);
+    const { isPending, data, refetch } = useQuery({
+        queryKey: ["comment", lectureId],
+        queryFn: () => lectureService.getAllLectureComments(lectureId),
+    });
 
     const onCommentSubmit = async () => {
         try {
-            await PostRequest(
-                "/comments",
+            await lectureService.writeLectureComment(
                 {
                     lecture_id: lectureId,
-                    content: inputRef.current?.value,
+                    content: inputRef.current?.value as string,
                 },
                 GetAccessToken(),
             );
             inputRef.current?.value && (inputRef.current.value = "");
-            setRefetch((refetch) => !refetch); // 댓글 api refetch
+            refetch();
         } catch (err) {
             alert("로그인 후 이용해주세요");
             navigate("/auth/signin");
@@ -77,7 +59,7 @@ export const LectureCommentContainer: React.FC<ILectureCommentContainer> = ({ le
             <input ref={inputRef} type="text" placeholder="댓글을 입력하세요" />
             <input type="submit" />
             <div className={styles.comment_container}>
-                {status === STATUS.SUCCESS &&
+                {!isPending &&
                     data?.response.map((element) => {
                         return (
                             <LectureCommentItem
