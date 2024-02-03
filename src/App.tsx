@@ -5,9 +5,11 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { CookiesProvider } from "react-cookie";
 
-import { MainLayout } from "./layouts/MainLayout";
-import { AuthLayout } from "./layouts/AuthLayout";
-import { TestLayout } from "./layouts/TestLayout";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+import { MainLayout } from "./components/layouts/MainLayout";
+import { AuthLayout } from "./components/layouts/AuthLayout";
+import { TestLayout } from "./components/layouts/TestLayout";
 
 import AboutPage from "./pages/about-page/AboutPage";
 import SigninPage from "./pages/auth-page/SigninPage";
@@ -27,6 +29,8 @@ import ResultCommentPage from "./pages/test-page/ResultCommentPage";
 import PageNotFound from "./pages/PageNotFound";
 import ServiceNotAvailablePage from "./pages/ServiceNotAvailable";
 
+const queryClient = new QueryClient();
+
 export default function App() {
     const pathname = useLocation();
 
@@ -36,37 +40,39 @@ export default function App() {
 
     return (
         <CookiesProvider>
-            <Provider store={store}>
-                <Routes>
-                    <Route path="/" element={<MainLayout />}>
-                        <Route index element={<LecturePage />} />
-                        <Route path="lectures/search" element={<LectureSearchResultPage />} />
-                        <Route path="lectures/view/:id" element={<LectureViewPage />} />
-                        <Route path="lectures/upload" element={<LectureUploadPage />} />
+            <QueryClientProvider client={queryClient}>
+                <Provider store={store}>
+                    <Routes>
+                        <Route path="/" element={<MainLayout />}>
+                            <Route index element={<LecturePage />} />
+                            <Route path="lectures/search" element={<LectureSearchResultPage />} />
+                            <Route path="lectures/view/:id" element={<LectureViewPage />} />
+                            <Route path="lectures/upload" element={<LectureUploadPage />} />
 
-                        <Route path="/experiment" element={<ServiceNotAvailablePage />} />
-                        <Route path="/community" element={<ServiceNotAvailablePage />} />
-                        <Route path="/mypage/*" element={<ServiceNotAvailablePage />} />
-                        <Route path="/column" element={<ServiceNotAvailablePage />} />
+                            <Route path="/experiment" element={<ServiceNotAvailablePage />} />
+                            <Route path="/community" element={<ServiceNotAvailablePage />} />
+                            <Route path="/mypage/*" element={<ServiceNotAvailablePage />} />
+                            <Route path="/column" element={<ServiceNotAvailablePage />} />
 
-                        <Route path="/about" element={<AboutPage />} />
-                        <Route path="*" element={<PageNotFound />} />
-                    </Route>
+                            <Route path="/about" element={<AboutPage />} />
+                            <Route path="*" element={<PageNotFound />} />
+                        </Route>
 
-                    <Route path="/auth" element={<AuthLayout />}>
-                        <Route path="signin" element={<SigninPage />} />
-                        <Route path="signup" element={<SignupPage />} />
-                    </Route>
+                        <Route path="/auth" element={<AuthLayout />}>
+                            <Route path="signin" element={<SigninPage />} />
+                            <Route path="signup" element={<SignupPage />} />
+                        </Route>
 
-                    <Route path="/test" element={<TestLayout />}>
-                        <Route index element={<TestPage />} />
-                        <Route path="question" element={<QuestionPage />} />
-                        <Route path="result" element={<ResultPage />}></Route>
-                        <Route path="result/detail" element={<ResultDetailPage />} />
-                        <Route path="result/comment" element={<ResultCommentPage />} />
-                    </Route>
-                </Routes>
-            </Provider>
+                        <Route path="/test" element={<TestLayout />}>
+                            <Route index element={<TestPage />} />
+                            <Route path="question" element={<QuestionPage />} />
+                            <Route path="result" element={<ResultPage />}></Route>
+                            <Route path="result/detail" element={<ResultDetailPage />} />
+                            <Route path="result/comment" element={<ResultCommentPage />} />
+                        </Route>
+                    </Routes>
+                </Provider>
+            </QueryClientProvider>
         </CookiesProvider>
     );
 }

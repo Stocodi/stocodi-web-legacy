@@ -1,12 +1,12 @@
 import domtoimage from "dom-to-image";
 import { Link, useNavigate } from "react-router-dom";
 
-import { LabelContainer } from "../../interfaces/display/LabelContainer";
-import { Button } from "../../interfaces/forms/Button";
-import { AvatarSection } from "../../components/test-page/AvatarSection";
-import { ShareContainer, ShareItem } from "../../components/test-page/ShareContainer";
-import { ProsConsContainer } from "../../components/test-page/ProsConsContainer";
-import { LectureRedirectCard, LectureRedirectLink } from "../../components/test-page/LectureRedirectCard";
+import { LabelContainer } from "../../components/display/LabelContainer";
+import { Button } from "../../components/forms/Button";
+import { AvatarSection } from "./components/AvatarSection";
+import { ShareContainer, ShareItem } from "./components/ShareContainer";
+import { ProsConsContainer } from "./components/ProsConsContainer";
+import { LectureRedirectCard, LectureRedirectLink } from "./components/LectureRedirectCard";
 
 import resultPageStyle from "./ResultPage.module.scss";
 import styles from "./ResultDetailPage.module.scss";

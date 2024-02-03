@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { Button } from "../../interfaces/forms/Button";
+import { Button } from "../../components/forms/Button";
 import styles from "./TestPage.module.scss";
 import { PostRequest } from "../../api/Request";
 import { useEffect } from "react";

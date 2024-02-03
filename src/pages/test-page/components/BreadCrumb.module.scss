@@ -1,0 +1,56 @@
+@import "@/styles/utils";
+
+.breadcrumb {
+    width: 100%;
+    max-width: 900px;
+
+    margin: 0px auto;
+    padding: 20px 30px;
+
+    border: 2px solid #0eca80;
+}
+
+.breadcrumb_container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+
+    .active {
+        color: #000;
+    }
+
+    div {
+        font-size: 20px;
+        font-family: "SCDream";
+        color: #bdbdbd;
+    }
+    div:last-child {
+        display: none;
+    }
+}
+
+@include mobile {
+    .breadcrumb {
+        padding: 10px 0px;
+        background-color: #0eca80;
+        border-radius: 12px;
+    }
+    .breadcrumb_container {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+
+        .active {
+            font-size: 16px;
+            color: #fff;
+        }
+
+        div:not(.active) {
+            display: none;
+        }
+
+        div:last-child {
+            display: none;
+        }
+    }
+}

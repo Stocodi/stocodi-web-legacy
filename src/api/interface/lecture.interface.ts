@@ -26,7 +26,7 @@ export interface IGetLectureByIdResponse {
     };
 }
 
-export interface IPostLectureRequestBody {
+export interface IUploadLectureRequestBody {
     video_link: string;
     title: string;
     author: string;
@@ -34,7 +34,7 @@ export interface IPostLectureRequestBody {
     tags: string[];
 }
 
-export type ISearchLectureResponseBody = IGetLectureByIdResponse;
+export type ISearchLectureResponseBody = IGetAllLectureResponse;
 
 export interface IViewLectureResponseBody {
     response: number;

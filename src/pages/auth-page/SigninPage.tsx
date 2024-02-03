@@ -3,14 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./SigninPage.module.scss";
 
-import { Button } from "../../interfaces/forms/Button";
-import { InputContainer } from "../../interfaces/forms/Input";
-import { Title } from "../../components/auth-page/Title";
+import { Button } from "../../components/forms/Button";
+import { InputContainer } from "../../components/forms/Input";
+import { Title } from "./components/Title";
 
-import { handleLogin } from "../../api/Authentication";
 import { Dispatch } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { UserInterfaceActions } from "../../store/user-interface-slice";
+import { authService } from "../../api/services/auth.service";
 
 // import { SocialLoginProviders } from "../../constants/SocialLogin";
 
@@ -22,9 +22,8 @@ export default function SigninPage() {
     const pwRef = useRef<HTMLInputElement>(null);
 
     const onLoginBtnClick = async () => {
-        // 로그인 요청 & 쿠키 저장
         try {
-            await handleLogin(idRef.current?.value as string, pwRef.current?.value as string);
+            await authService.signIn({ email: idRef.current?.value as string, password: pwRef.current?.value as string });
             dispatch(UserInterfaceActions.closeNav());
             naviagte("/");
         } catch (err) {

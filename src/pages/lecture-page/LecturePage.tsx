@@ -1,15 +1,12 @@
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Search } from "../../interfaces/forms/Search";
-import { Loader } from "../../interfaces/feedback/Loader";
+import { Search } from "../../components/forms/Search";
+import { Loader } from "../../components/feedback/Loader";
 
-import { LectureSection } from "../../components/lecture-page/LectureSection";
-import { LectureCard } from "../../components/lecture-page/LectureCard";
-import { Carousel } from "../../components/lecture-page/Carousel";
-
-import { STATUS, useGetRequest } from "../../hooks/useRequest";
-import { IGetAllLectureResponse } from "../../api/ResponseTypes";
+import { LectureSection } from "./components/LectureSection";
+import { LectureCard } from "./components/LectureCard";
+import { Carousel } from "./components/Carousel";
 
 import styles from "./LecturePage.module.scss";
 
@@ -17,11 +14,19 @@ import { CarouselList } from "../../constants/Carousel";
 //test
 import { ParseVideoId } from "../../utils/YoutubeLinks";
 
+import { lectureService } from "../../api/services/lecture.service";
+import { useQuery } from "@tanstack/react-query";
+
 export default function LecturePage() {
     const navigate = useNavigate();
     const searchRef = useRef<HTMLInputElement>(null);
 
-    const { status, data } = useGetRequest<IGetAllLectureResponse>("/lectures");
+    const { data, isPending } = useQuery({
+        queryKey: ["lectures", "all"],
+        queryFn: lectureService.getAllLectures,
+        staleTime: 10000,
+        gcTime: 100000,
+    });
 
     const onSearchBtnClick = () => {
         if (!searchRef.current?.value || searchRef.current?.value.trim() === "") {
@@ -49,7 +54,7 @@ export default function LecturePage() {
                 </div> */}
             </div>
 
-            {status !== STATUS.SUCCESS ? (
+            {isPending ? (
                 <Loader />
             ) : (
                 <>

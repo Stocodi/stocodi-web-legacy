@@ -3,11 +3,11 @@ import { useObserver } from "../../hooks/useObserver";
 
 import "./AboutPage.scss";
 
-import BackgroundSection from "../../components/about-page/BackgroundSection";
-import HeadingSection from "../../components/about-page/HeadingSection";
-import ContentSection from "../../components/about-page/ContentSection";
-import FooterSection from "../../components/about-page/FooterSection";
-import { FeatureExperiment, FeaturePortfolio, FeaturePractice, FeatureLecture } from "../../components/about-page/FeatureSection";
+import BackgroundSection from "./components/BackgroundSection";
+import HeadingSection from "./components/HeadingSection";
+import ContentSection from "./components/ContentSection";
+import FooterSection from "./components/FooterSection";
+import { FeatureExperiment, FeaturePortfolio, FeaturePractice, FeatureLecture } from "./components/FeatureSection";
 
 export default function AboutPage() {
     // 스크롤 애니메이션

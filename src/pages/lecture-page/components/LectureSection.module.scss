@@ -1,0 +1,50 @@
+@import "@/styles/utils.scss";
+
+.lecture_section_wrapper {
+    position: relative;
+
+    width: min(90%, 1400px);
+    margin: 50px auto;
+
+    button {
+        position: absolute;
+        top: 50%;
+    }
+
+    button:first-child {
+        left: 0;
+    }
+    button:last-child {
+        right: 0;
+    }
+}
+
+.section_title {
+    margin: 10px 0px;
+
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    span {
+    }
+    svg {
+        margin: 0px 10px;
+        color: $color-primary;
+    }
+}
+
+.section_container {
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    flex-shrink: 1;
+    flex-wrap: nowrap;
+
+    overflow-x: scroll;
+    overflow-y: hidden;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}

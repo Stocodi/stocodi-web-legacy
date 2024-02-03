@@ -1,17 +1,17 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Button } from "../../interfaces/forms/Button";
-import { Input, InputContainer, InputButtonContainer, TextAreaContainer } from "../../interfaces/forms/Input";
-import { CheckBox } from "../../interfaces/forms/CheckBox";
-import { Badge } from "../../interfaces/display/Badge";
+import { Button } from "../../components/forms/Button";
+import { Input, InputContainer, InputButtonContainer, TextAreaContainer } from "../../components/forms/Input";
+import { CheckBox } from "../../components/forms/CheckBox";
+import { Badge } from "../../components/display/Badge";
 
-import { UploadPlaceholder } from "../../components/lecture-page/UploadPlaceholder";
+import { UploadPlaceholder } from "./components/UploadPlaceholder";
 
-import { PostRequest } from "../../api/Request";
-import { GetAccessToken, GetNickName } from "../../api/Authentication";
+import { GetAccessToken, GetNickName } from "../../api/config/cookies";
 
 import styles from "./LectureUploadPage.module.scss";
+import { lectureService } from "../../api/services/lecture.service";
 
 export default function LectureUploadPage() {
     const [hashtags, setHashTags] = useState<string[]>([]);
@@ -62,16 +62,15 @@ export default function LectureUploadPage() {
             alert("잘못된 유튜브 링크 형식입니다");
         } else {
             try {
-                await PostRequest(
-                    "/lectures",
+                await lectureService.uploadLecture(
                     {
                         video_link: videolinkRef.current?.value,
                         title: titleRef.current?.value,
-                        author: GetNickName(),
-                        description: descriptionRef.current?.value,
+                        author: GetNickName() as string,
+                        description: descriptionRef.current?.value as string,
                         tags: hashtags,
                     },
-                    GetAccessToken(),
+                    GetAccessToken() as string,
                 );
                 alert("영상 업로드 완료!");
                 navigate("/");

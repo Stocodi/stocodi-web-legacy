@@ -1,8 +1,8 @@
 import { API_BASE_URL } from "../env";
 import { ApiError } from "./error";
 
-export default class Api {
-    public async Get<ResponseBody>(url: string, token?: string): Promise<ResponseBody> {
+export const api = {
+    Get: async <ResponseBody>(url: string, token?: string): Promise<ResponseBody> => {
         const headers: HeadersInit = token ? { Authorization: `Bearer ${token}` } : {};
         const response = await fetch(API_BASE_URL + url, {
             method: "GET",
@@ -10,9 +10,9 @@ export default class Api {
         });
         if (!response.ok) throw new ApiError(response.status);
         return response.json() as Promise<ResponseBody>;
-    }
+    },
 
-    public async Post<RequestBody, ResponseBody>(url: string, body: RequestBody, token?: string): Promise<ResponseBody> {
+    Post: async <RequestBody, ResponseBody>(url: string, body: RequestBody, token?: string): Promise<ResponseBody> => {
         const headers: HeadersInit = token
             ? { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }
             : { "Content-Type": "application/json" };
@@ -23,9 +23,9 @@ export default class Api {
         });
         if (!response.ok) throw new ApiError(response.status);
         return response.json() as Promise<ResponseBody>;
-    }
+    },
 
-    public async Put<RequestBody, ResponseBody>(url: string, body: RequestBody, token?: string): Promise<ResponseBody> {
+    Put: async <RequestBody, ResponseBody>(url: string, body: RequestBody, token?: string): Promise<ResponseBody> => {
         const headers: HeadersInit = token
             ? { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }
             : { "Content-Type": "application/json" };
@@ -36,9 +36,9 @@ export default class Api {
         });
         if (!response.ok) throw new Error(`PUT Request Failed ${url}`);
         return response.json() as Promise<ResponseBody>;
-    }
+    },
 
-    public async Delete<ResponseBody>(url: string, token?: string): Promise<ResponseBody> {
+    Delete: async <ResponseBody>(url: string, token?: string): Promise<ResponseBody> => {
         const headers: HeadersInit = token
             ? { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }
             : { "Content-Type": "application/json" };
@@ -48,5 +48,5 @@ export default class Api {
         });
         if (!response.ok) throw new ApiError(response.status);
         return response.json() as Promise<ResponseBody>;
-    }
-}
+    },
+};

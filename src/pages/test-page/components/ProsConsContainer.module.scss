@@ -1,0 +1,51 @@
+@import "@/styles/utils";
+
+.pros_cons_container {
+    display: flex;
+
+    height: 100%;
+
+    border-radius: 16px;
+    padding: 20px;
+
+    background: #fff;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+
+    img {
+        width: 100px;
+        height: 100px;
+    }
+
+    div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+
+        margin: 0px 10px;
+
+        p {
+            font-family: "SCDream";
+            font-size: 16px;
+        }
+        h1 {
+            font-family: "SCDream";
+            font-size: 28px;
+            color: #0ecb81;
+        }
+    }
+}
+
+@include mobile {
+    .pros_cons_container {
+        gap: 20px;
+        div {
+            p {
+                font-size: 16px;
+            }
+            h1 {
+                font-size: 26px;
+            }
+        }
+    }
+}

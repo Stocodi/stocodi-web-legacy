@@ -2,9 +2,9 @@ import domtoimage from "dom-to-image";
 
 import { Link } from "react-router-dom";
 
-import { AvatarSection } from "../../components/test-page/AvatarSection";
-import { ResultGrid, ResultGridItem, ResultSummary } from "../../components/test-page/ResultSummary";
-import { ShareContainer, ShareItem } from "../../components/test-page/ShareContainer";
+import { AvatarSection } from "./components/AvatarSection";
+import { ResultGrid, ResultGridItem, ResultSummary } from "./components/ResultSummary";
+import { ShareContainer, ShareItem } from "./components/ShareContainer";
 
 import { shareKakaoLink } from "../../utils/ShareKakaoLink";
 

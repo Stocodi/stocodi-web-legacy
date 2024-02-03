@@ -1,6 +1,6 @@
 import styles from "./ResultCommentPage.module.scss";
 import questionStyles from "./QuestionPage.module.scss";
-import { CommentaryQuestion } from "../../components/test-page/Question";
+import { CommentaryQuestion } from "./components/Question";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 

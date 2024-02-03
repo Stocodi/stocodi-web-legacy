@@ -2,9 +2,9 @@ import YouTube from "react-youtube";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import { Loader } from "../../interfaces/feedback/Loader";
-import { Badge } from "../../interfaces/display/Badge";
-import { LectureProvider } from "../../components/lecture-page/LectureProvider";
+import { Loader } from "../../components/feedback/Loader";
+import { Badge } from "../../components/display/Badge";
+import { LectureProvider } from "./components/LectureProvider";
 
 import { STATUS, useGetRequest } from "../../hooks/useRequest";
 import { IGetLectureByIdResponse } from "../../api/ResponseTypes";
@@ -12,8 +12,9 @@ import { ParseVideoId } from "../../utils/YoutubeLinks";
 
 import { PutRequest } from "../../api/Request";
 import styles from "./LectureViewPage.module.scss";
-import { LectureCommentContainer } from "../../components/lecture-page/LectureComment";
-import { GetAccessToken } from "../../api/Authentication";
+import { LectureCommentContainer } from "./components/LectureComment";
+import { GetAccessToken } from "../../api/config/cookies";
+import { lectureService } from "../../api/services/lecture.service";
 
 export default function LectureViewPage() {
     const { id } = useParams();

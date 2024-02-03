@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { BreadCrumb } from "../../components/test-page/BreadCrumb";
-import { Question } from "../../components/test-page/Question";
+import { BreadCrumb } from "./components/BreadCrumb";
+import { Question } from "./components/Question";
 
 import { questions, questionsPerPage } from "../../constants/Questions";
 

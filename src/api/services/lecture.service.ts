@@ -1,42 +1,43 @@
-import { inject, injectable } from "tsyringe";
-import Api from "../config/api";
+import { api } from "../config/api";
 
 import {
     IGetAllLectureResponse,
     IGetLectureByIdResponse,
-    IPostLectureRequestBody,
+    IUploadLectureRequestBody,
     ISearchLectureResponseBody,
     IViewLectureResponseBody,
 } from "../interface/lecture.interface";
 
-@injectable()
-export default class LectureService {
-    constructor(
-        @inject("Api")
-        private readonly api: Api,
-    ) {}
+export const lectureService = {
+    getAllLectures: async () => {
+        return api.Get<IGetAllLectureResponse>("/lectures");
+    },
 
-    public async getAllLectures() {
-        return this.api.Get<IGetAllLectureResponse>("/lectures");
-    }
+    getLectureById: async (id: number) => {
+        return api.Get<IGetLectureByIdResponse>(`/lectures/${id}`);
+    },
 
-    public async getLectureById(id: number) {
-        return this.api.Get<IGetLectureByIdResponse>(`/lectures/${id}`);
-    }
+    uploadLecture: async (body: IUploadLectureRequestBody, token: string) => {
+        return api.Post<typeof body, number>("/lectures", body, token);
+    },
 
-    public async postLecture(body: IPostLectureRequestBody, token: string) {
-        return this.api.Post<typeof body, number>("/lectures", body, token);
-    }
+    deleteLecture: async (id: number) => {
+        return api.Delete<string>(`/lectures/${id}`);
+    },
 
-    public async deleteLecture(id: number) {
-        return this.api.Delete<string>(`/lectures/${id}`);
-    }
+    searchLecture: async (key: string) => {
+        return api.Get<ISearchLectureResponseBody>(`/lectures?key=${key}`);
+    },
 
-    public async searchLecture(key: string) {
-        return this.api.Get<ISearchLectureResponseBody>(`/lectures?key=${key}`);
-    }
+    viewLecture: async (id: number) => {
+        return api.Put<Record<string, never>, IViewLectureResponseBody>(`/lectures/views/${id}`, {});
+    },
 
-    public async viewLecture(id: number) {
-        return this.api.Put<Record<string, never>, IViewLectureResponseBody>(`/lectures/views/${id}`, {});
-    }
-}
+    toggleLikeLecture: async (id: number) => {
+        return api.Put<Record<string, never>, boolean>(`/lectures/likes/${id}`, {});
+    },
+
+    checkLikeLecture: async (id: number) => {
+        return api.Get<boolean>(`/lectures/likes/${id}`);
+    },
+};

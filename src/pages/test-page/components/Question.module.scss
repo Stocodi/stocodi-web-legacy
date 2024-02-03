@@ -1,0 +1,84 @@
+@import "@/styles/utils.scss";
+
+.question {
+    width: 100%;
+    max-width: 900px;
+
+    margin: 50px auto;
+    p {
+        font-family: "SCDream";
+        font-size: 20px;
+    }
+}
+
+.options_container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    margin: 10px 0px;
+}
+
+.commentary_question {
+    width: 100%;
+    max-width: 900px;
+
+    margin: 50px auto;
+    padding: 0px 40px;
+    p {
+        position: relative;
+
+        font-family: "SCDream";
+        font-size: 20px;
+
+        img {
+            display: block;
+            position: absolute;
+            top: -0px;
+            left: -40px;
+
+            width: 100px;
+            aspect-ratio: 1457/282;
+
+            transform: rotate(-45deg);
+        }
+    }
+
+    .commentary {
+        position: relative;
+
+        margin: 20px 0px;
+        padding: 20px;
+
+        border: 2px solid #0ecb81;
+        border-radius: 15px;
+
+        p:first-child {
+            position: absolute;
+            top: -10px;
+
+            display: inline-block;
+            width: 50px;
+
+            text-align: center;
+
+            background-color: #fff;
+        }
+    }
+}
+
+@include mobile {
+    .question {
+        margin: 40px auto;
+        padding: 0px 20px;
+        p {
+            font-size: 16px;
+        }
+    }
+    .commentary_question {
+        padding: 0px 20px;
+        p {
+            font-size: 16px;
+        }
+    }
+}
