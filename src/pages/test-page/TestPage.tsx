@@ -1,12 +1,15 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { Button } from "../../interfaces/forms/Button";
-import styles from "./TestPage.module.scss";
+import { Button } from "../../components/forms/Button";
+
 import { PostRequest } from "../../api/Request";
-import { useEffect } from "react";
-import { Dispatch } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
+
 import { UserQuestionActions } from "../../store/user-question-slice";
+import { Dispatch } from "@reduxjs/toolkit";
+
+import styles from "./TestPage.module.scss";
 
 export default function TestPage() {
     const navigate = useNavigate();
@@ -20,6 +23,7 @@ export default function TestPage() {
 
     return (
         <div className={styles.page_wrapper}>
+            <input type="text" />
             <img className={styles.page_bg} src="/img/test-background.svg" alt="" />
             <div className={styles.banner}>
                 <h2>2023 당신의 올해 금융점수는 ?</h2>

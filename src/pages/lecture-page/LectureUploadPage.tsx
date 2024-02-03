@@ -1,15 +1,14 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Button } from "../../interfaces/forms/Button";
-import { Input, InputContainer, InputButtonContainer, TextAreaContainer } from "../../interfaces/forms/Input";
-import { CheckBox } from "../../interfaces/forms/CheckBox";
-import { Badge } from "../../interfaces/display/Badge";
+import { Badge } from "../../components/display/Badge";
+import { Button } from "../../components/forms/Button";
+import { CheckBox } from "../../components/forms/CheckBox";
+import { Input, InputContainer, InputButtonContainer, TextAreaContainer } from "../../components/forms/Input";
+import { UploadPlaceholder } from "./components/UploadPlaceholder";
 
-import { UploadPlaceholder } from "../../components/lecture-page/UploadPlaceholder";
-
-import { PostRequest } from "../../api/Request";
-import { GetAccessToken, GetNickName } from "../../api/Authentication";
+import { GetAccessToken, GetNickName } from "../../api/config/cookies";
+import { lectureService } from "../../api/services/lecture.service";
 
 import styles from "./LectureUploadPage.module.scss";
 
@@ -58,26 +57,27 @@ export default function LectureUploadPage() {
         // 필드값 비어있는 경우 예외처리
         if (!(titleRef.current?.value && videolinkRef.current?.value)) {
             alert("제목을 입력해주세요!");
-        } else if (!videolinkRef.current.value.startsWith("https://www.youtube.com/watch?v=")) {
+            return;
+        }
+        if (!videolinkRef.current.value.startsWith("https://www.youtube.com/watch?v=")) {
             alert("잘못된 유튜브 링크 형식입니다");
-        } else {
-            try {
-                await PostRequest(
-                    "/lectures",
-                    {
-                        video_link: videolinkRef.current?.value,
-                        title: titleRef.current?.value,
-                        author: GetNickName(),
-                        description: descriptionRef.current?.value,
-                        tags: hashtags,
-                    },
-                    GetAccessToken(),
-                );
-                alert("영상 업로드 완료!");
-                navigate("/");
-            } catch (err) {
-                alert("영상 업로드에 실패하였습니다");
-            }
+            return;
+        }
+        try {
+            await lectureService.uploadLecture(
+                {
+                    video_link: videolinkRef.current?.value,
+                    title: titleRef.current?.value,
+                    author: GetNickName() as string,
+                    description: descriptionRef.current?.value as string,
+                    tags: hashtags,
+                },
+                GetAccessToken() as string,
+            );
+            alert("영상 업로드 완료!");
+            navigate("/");
+        } catch (err) {
+            alert("영상 업로드에 실패하였습니다");
         }
     };
 

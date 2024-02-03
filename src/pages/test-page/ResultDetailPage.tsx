@@ -1,29 +1,30 @@
-import domtoimage from "dom-to-image";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
-import { LabelContainer } from "../../interfaces/display/LabelContainer";
-import { Button } from "../../interfaces/forms/Button";
-import { AvatarSection } from "../../components/test-page/AvatarSection";
-import { ShareContainer, ShareItem } from "../../components/test-page/ShareContainer";
-import { ProsConsContainer } from "../../components/test-page/ProsConsContainer";
-import { LectureRedirectCard, LectureRedirectLink } from "../../components/test-page/LectureRedirectCard";
-
-import resultPageStyle from "./ResultPage.module.scss";
-import styles from "./ResultDetailPage.module.scss";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import domtoimage from "dom-to-image";
 
+import { LabelContainer } from "../../components/display/LabelContainer";
+import { Button } from "../../components/forms/Button";
+import { AvatarSection } from "./components/AvatarSection";
+import { LectureRedirectCard, LectureRedirectLink } from "./components/LectureRedirectCard";
+import { ProsConsContainer } from "./components/ProsConsContainer";
+import { ShareContainer, ShareItem } from "./components/ShareContainer";
+
+import lectureImg from "@/assets/lecture.png";
 import shareImg from "@/assets/share-image.png";
 import shareKakao from "@/assets/share-kakao.png";
 import shareLink from "@/assets/share-link.png";
-import lectureImg from "@/assets/lecture.png";
-
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
-import { shareKakaoLink } from "../../utils/ShareKakaoLink";
 
 import { GetResult, GetResultCommentIndex, ResultComment } from "../../constants/Result";
+import { shareKakaoLink } from "../../utils/ShareKakaoLink";
+
+import { RootState } from "../../store/store";
+
+import styles from "./ResultDetailPage.module.scss";
+import resultPageStyle from "./ResultPage.module.scss";
+
 // import shareIG from "@/assets/share-ig.png";
 // import shareFb from "@/assets/share-fb.png";
 

@@ -1,8 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
-
 import { UserInterfaceSlice } from "./user-interface-slice";
-import { UserSignupSlice } from "./user-signup-slice";
 import { UserQuestionSlice } from "./user-question-slice";
+import { UserSignupSlice } from "./user-signup-slice";
+
+import { configureStore } from "@reduxjs/toolkit";
 
 export const store = configureStore({
     reducer: {

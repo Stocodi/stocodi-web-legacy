@@ -1,45 +1,46 @@
-import YouTube from "react-youtube";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import YouTube from "react-youtube";
 
-import { Loader } from "../../interfaces/feedback/Loader";
-import { Badge } from "../../interfaces/display/Badge";
-import { LectureProvider } from "../../components/lecture-page/LectureProvider";
+import { useQuery } from "@tanstack/react-query";
 
-import { STATUS, useGetRequest } from "../../hooks/useRequest";
-import { IGetLectureByIdResponse } from "../../api/ResponseTypes";
+import { Badge } from "../../components/display/Badge";
+import { Loader } from "../../components/feedback/Loader";
+import { LectureCommentContainer } from "./components/LectureComment";
+import { LectureProvider } from "./components/LectureProvider";
+
 import { ParseVideoId } from "../../utils/YoutubeLinks";
 
-import { PutRequest } from "../../api/Request";
+import { GetAccessToken } from "../../api/config/cookies";
+import { lectureService } from "../../api/services/lecture.service";
+
 import styles from "./LectureViewPage.module.scss";
-import { LectureCommentContainer } from "../../components/lecture-page/LectureComment";
-import { GetAccessToken } from "../../api/Authentication";
 
 export default function LectureViewPage() {
     const { id } = useParams();
-    const { status, data } = useGetRequest<IGetLectureByIdResponse>(`/lectures/${id as string}`);
+
+    const { isPending, data } = useQuery({
+        queryKey: ["lectures", id],
+        queryFn: () => lectureService.getLectureById(Number(id)),
+        staleTime: 10000,
+    });
 
     const onHeartClick = async () => {
-        const response = await PutRequest<Record<string, never>, { response: boolean }>(
-            `/likes/${data?.response.id.toString() as string}`,
-            {},
-            GetAccessToken(),
-        );
-        if (response.response === true) alert("좋아요한 강의에 추가되었습니다");
+        const response = await lectureService.toggleLikeLecture(Number(id), GetAccessToken());
+        if (response === true) alert("좋아요한 강의에 추가되었습니다");
         else alert("좋아요가 취소되었습니다");
     };
+
     const onBookmarkClick = () => {
         alert("서비스 준비중입니다");
     };
 
     useEffect(() => {
         // 조회수 올리기
-        if (status === STATUS.SUCCESS) {
-            PutRequest(`/lectures/views/${data?.response.id.toString() as string}`, {});
-        }
-    }, [status, data?.response.id]);
+        if (!isPending) lectureService.viewLecture(Number(id));
+    }, [isPending, id]);
 
-    if (status !== STATUS.SUCCESS) return <Loader></Loader>;
+    if (isPending) return <Loader />;
 
     return (
         <>
