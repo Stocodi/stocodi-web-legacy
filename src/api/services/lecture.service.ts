@@ -1,5 +1,3 @@
-import { api } from "../config/api";
-
 import {
     IGetAllLectureResponse,
     IGetLectureByIdResponse,
@@ -9,6 +7,8 @@ import {
     IGetAllLectureCommentsResponseBody,
     IWriteLectureCommentRequestBody,
 } from "../interface/lecture.interface";
+
+import { api } from "../config/api";
 
 export const lectureService = {
     getAllLectures: async () => {

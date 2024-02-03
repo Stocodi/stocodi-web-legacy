@@ -1,8 +1,8 @@
-import { api } from "../config/api";
 import { cookies, cookieOptions } from "../config/cookies";
 import { COOKIE_ACCESS, COOKIE_NICKNAME, COOKIE_REFRESH } from "../config/env";
-
 import { ISignInResponseBody, ISignInRequestBody, ISignUpRequestBody, ISignUpResponseBody } from "../interface/auth.interface";
+
+import { api } from "../config/api";
 
 export const authService = {
     signIn: async (body: ISignInRequestBody) => {

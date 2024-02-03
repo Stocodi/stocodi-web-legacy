@@ -1,6 +1,8 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { MouseEventHandler } from "react";
+
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import styles from "./Button.module.scss";
 
 export interface IButton {

@@ -1,14 +1,15 @@
 import { useRef } from "react";
-
-import { NavMenu } from "../../constants/NavMenu";
 import { NavLink } from "react-router-dom";
-import { NavLinkStyle } from "../../utils/NavLinkStyle";
 
 import { useNavAside } from "../../hooks/useNavAside";
 
-import styles from "./NavAside.module.scss";
+import { NavMenu } from "../../constants/NavMenu";
+import { NavLinkStyle } from "../../utils/NavLinkStyle";
+
 import { GetAccessToken, GetNickName } from "../../api/config/cookies";
 import { authService } from "../../api/services/auth.service";
+
+import styles from "./NavAside.module.scss";
 
 export interface INavAsideItem {
     to: string;

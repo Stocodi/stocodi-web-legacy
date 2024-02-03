@@ -1,7 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import styles from "./LectureRedirectCard.module.scss";
 
 export interface ILectureRedirectCard {

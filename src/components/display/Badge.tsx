@@ -1,5 +1,6 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHashtag } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import styles from "./Badge.module.scss";
 
 export interface IBadge {

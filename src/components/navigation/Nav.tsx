@@ -1,17 +1,19 @@
 import { useCallback } from "react";
+import { useDispatch } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-
-import { useDispatch } from "react-redux";
-import { Dispatch } from "@reduxjs/toolkit";
-import { UserInterfaceActions } from "../../store/user-interface-slice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { NavDropDown } from "../../pages/auth-page/components/NavDropDown";
+
 import { NavMenu } from "../../constants/NavMenu";
 import { NavLinkStyle } from "../../utils/NavLinkStyle";
+
 import { GetAccessToken } from "../../api/config/cookies";
+
+import { UserInterfaceActions } from "../../store/user-interface-slice";
+import { Dispatch } from "@reduxjs/toolkit";
 
 import styles from "./Nav.module.scss";
 

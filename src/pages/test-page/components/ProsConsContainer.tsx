@@ -1,7 +1,7 @@
-import styles from "./ProsConsContainer.module.scss";
-
-import prosIcon from "@/assets/pros-icon.png";
 import consIcon from "@/assets/cons-icon.png";
+import prosIcon from "@/assets/pros-icon.png";
+
+import styles from "./ProsConsContainer.module.scss";
 
 export interface IProsConsContainer {
     type: "pros" | "cons";

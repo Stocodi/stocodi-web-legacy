@@ -1,7 +1,9 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import styles from "./BreadCrumb.module.scss";
 import { Fragment } from "react";
+
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import styles from "./BreadCrumb.module.scss";
 
 export interface IBreadCrumb {
     items: string[];

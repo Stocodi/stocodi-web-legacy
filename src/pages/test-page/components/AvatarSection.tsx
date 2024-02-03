@@ -1,6 +1,6 @@
-import styles from "./AvatarSection.module.scss";
-
 import dollarBackground from "@/assets/dollar-bg.png";
+
+import styles from "./AvatarSection.module.scss";
 
 export interface IAvatarSection {
     avatarImg: string;

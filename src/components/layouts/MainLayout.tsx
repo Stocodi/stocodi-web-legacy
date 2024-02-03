@@ -1,7 +1,8 @@
 import { Outlet } from "react-router-dom";
+
+import { Footer } from "../display/Footer";
 import { NavTop } from "../navigation/Nav";
 import { NavAside } from "../navigation/NavAside";
-import { Footer } from "../display/Footer";
 
 import styles from "./MainLayout.module.scss";
 

@@ -1,17 +1,14 @@
-import domtoimage from "dom-to-image";
-
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import domtoimage from "dom-to-image";
 
 import { AvatarSection } from "./components/AvatarSection";
 import { ResultGrid, ResultGridItem, ResultSummary } from "./components/ResultSummary";
 import { ShareContainer, ShareItem } from "./components/ShareContainer";
-
-import { shareKakaoLink } from "../../utils/ShareKakaoLink";
-
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import styles from "./ResultPage.module.scss";
 
 import resultIcon1 from "@/assets/result-icon-1.png";
 import resultIcon2 from "@/assets/result-icon-2.png";
@@ -19,16 +16,19 @@ import resultIcon3 from "@/assets/result-icon-3.png";
 import resultIcon4 from "@/assets/result-icon-4.png";
 import resultIcon5 from "@/assets/result-icon-5.png";
 import resultIcon6 from "@/assets/result-icon-6.png";
-
 import shareImg from "@/assets/share-image.png";
 import shareKakao from "@/assets/share-kakao.png";
 import shareLink from "@/assets/share-link.png";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
-import { useEffect } from "react";
-import { PostRequest } from "../../api/Request";
 
 import { GetResult } from "../../constants/Result";
+import { shareKakaoLink } from "../../utils/ShareKakaoLink";
+
+import { PostRequest } from "../../api/Request";
+
+import { RootState } from "../../store/store";
+
+import styles from "./ResultPage.module.scss";
+
 // import shareIG from "@/assets/share-ig.png";
 // import shareFb from "@/assets/share-fb.png";
 

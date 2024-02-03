@@ -1,5 +1,6 @@
-import styles from "./ResultSummary.module.scss";
 import summaryBackground from "@/assets/summary-bg.svg";
+
+import styles from "./ResultSummary.module.scss";
 
 export interface IResultGrid {
     children: React.ReactNode;

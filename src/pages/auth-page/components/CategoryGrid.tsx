@@ -1,7 +1,8 @@
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
-import { Dispatch } from "@reduxjs/toolkit";
+
 import { UserSignupActions } from "../../../store/user-signup-slice";
+import { Dispatch } from "@reduxjs/toolkit";
 
 import styles from "./CategoryGrid.module.scss";
 

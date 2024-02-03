@@ -1,4 +1,3 @@
-import { Dispatch } from "@reduxjs/toolkit";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,6 +9,7 @@ import { Title } from "./components/Title";
 import { authService } from "../../api/services/auth.service";
 
 import { UserInterfaceActions } from "../../store/user-interface-slice";
+import { Dispatch } from "@reduxjs/toolkit";
 
 import styles from "./SigninPage.module.scss";
 

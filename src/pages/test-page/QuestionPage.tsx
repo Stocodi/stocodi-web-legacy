@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { BreadCrumb } from "./components/BreadCrumb";
@@ -6,11 +7,10 @@ import { Question } from "./components/Question";
 
 import { questions, questionsPerPage } from "../../constants/Questions";
 
-import { useDispatch } from "react-redux";
+import { UserQuestionActions } from "../../store/user-question-slice";
+import { Dispatch } from "@reduxjs/toolkit";
 
 import styles from "./QuestionPage.module.scss";
-import { Dispatch } from "@reduxjs/toolkit";
-import { UserQuestionActions } from "../../store/user-question-slice";
 
 export default function QuestionPage() {
     const dispatch: Dispatch = useDispatch();

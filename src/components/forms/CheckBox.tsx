@@ -1,4 +1,5 @@
 import { MouseEventHandler, forwardRef, useId } from "react";
+
 import styles from "./CheckBox.module.scss";
 
 export interface ICheckBox {

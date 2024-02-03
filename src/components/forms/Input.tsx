@@ -1,5 +1,7 @@
 import { MouseEventHandler, forwardRef } from "react";
+
 import { Button } from "./Button";
+
 import styles from "./Input.module.scss";
 
 export interface IInput {

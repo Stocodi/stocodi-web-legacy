@@ -1,4 +1,5 @@
 import { useObserver } from "../../../hooks/useObserver";
+
 import "./FeatureSection.scss";
 
 export const FeatureExperiment = () => {
