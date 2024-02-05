@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { KAKAO_SDK } from "../api/env";
+import { KAKAO_SDK } from "../api/config/env";
 
 declare global {
     interface Window {

@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { Button } from "../../components/forms/Button";
 
-import { PostRequest } from "../../api/Request";
+import { testService } from "../../api/services/test.service";
 
 import { UserQuestionActions } from "../../store/user-question-slice";
 import { Dispatch } from "@reduxjs/toolkit";
@@ -64,8 +64,8 @@ export default function TestPage() {
                 type="primary-stroke"
                 width="250px"
                 height="50px"
-                onClick={() => {
-                    PostRequest("/statistics/start", {});
+                onClick={async () => {
+                    await testService.startTest();
                     navigate("/test/question");
                 }}
             >

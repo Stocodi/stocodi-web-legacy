@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 
-import { API_BASE_URL } from "../api/env";
+import { API_BASE_URL } from "../api/config/env";
 
 export enum STATUS {
     IDLE,

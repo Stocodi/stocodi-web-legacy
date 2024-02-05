@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../env";
+import { API_BASE_URL } from "./env";
 import { ApiError } from "./error";
 
 export const api = {

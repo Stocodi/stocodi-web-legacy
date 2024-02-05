@@ -23,7 +23,7 @@ import shareLink from "@/assets/share-link.png";
 import { GetResult } from "../../constants/Result";
 import { shareKakaoLink } from "../../utils/ShareKakaoLink";
 
-import { PostRequest } from "../../api/Request";
+import { testService } from "../../api/services/test.service";
 
 import { RootState } from "../../store/store";
 
@@ -37,7 +37,7 @@ export default function ResultPage() {
     const result = GetResult(score.reduce((prev, next) => prev + next) / 6);
 
     useEffect(() => {
-        PostRequest("/statistics/end", {});
+        testService.endTest();
     });
 
     return (
@@ -83,8 +83,6 @@ export default function ResultPage() {
                         shareKakaoLink("금융역량테스트", "금융역량테스트 바로가기", "/img/stocodi-thumbnail.png", "http://stocodi.com/test");
                     }}
                 />
-                {/* <ShareItem icon={shareIG} label="인스타그램" onClick={() => alert("서비스 준비중입니다")} /> */}
-                {/* <ShareItem icon={shareFb} label="페이스북" onClick={() => alert("서비스 준비중입니다")} /> */}
                 <ShareItem
                     icon={shareLink}
                     label="링크 복사"
